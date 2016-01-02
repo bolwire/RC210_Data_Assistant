@@ -2449,7 +2449,13 @@
 				macro = macro.Replace("598", "Outdoor Temp Low (since Midnight)");
 				//599 to 604 not used
 				macro = macro.Replace("605", "Speak Current Remote Base Freq & Offset");
-				//606 to 559 not used
+				macro = macro.Replace("606", "Start General Timer 4");
+				macro = macro.Replace("607", "Start General Timer 5");
+				macro = macro.Replace("608", "Start General Timer 6");
+				macro = macro.Replace("609", "Stop General Timer 4");
+				macro = macro.Replace("610", "Stop General Timer 5");
+				macro = macro.Replace("611", "Stop General Timer 6");
+				//612 to 659 not used
 				macro = macro.Replace("660", "Suspend Scheduler Setpoint 1");
 				macro = macro.Replace("661", "Suspend Scheduler Setpoint 2");
 				macro = macro.Replace("662", "Suspend Scheduler Setpoint 3");

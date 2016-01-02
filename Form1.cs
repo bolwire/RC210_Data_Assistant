@@ -798,7 +798,7 @@ namespace RC210_DataAssistant_V2
 					rW.WriteLine("<TR><TD align=center colspan=3><H2>General Timers</H2></TD></TR>");
 					rW.WriteLine("<TR><TD><B>Timer</B></TD><TD><B>Time (seconds)</B></TD><TD><B>Macro to run</B></TD></TR>");
 
-					for (int i = 1; i <= 3; i++)
+					for (int i = 1; i <= 6; i++)
 					{
 						var generalTimer = datFile.IniReadValue("Alarms", "GeneralTimer(" + i + ")"); // != 0
 						if (generalTimer != "0")

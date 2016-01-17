@@ -1,4 +1,4 @@
-<macros version="1.003">
+<macros version="1.004">
   <macro id="001" versions="5.281 5.285 5.360 6.000 6.040" description="Port 1 CTCSS Access" />
   <macro id="002" versions="5.281 5.285 5.360 6.000 6.040" description="Port 2 CTCSS Access" />
   <macro id="003" versions="5.281 5.285 5.360 6.000 6.040" description="Port 3 CTCSS Access" />
@@ -995,11 +995,11 @@
   <macro id="608" versions="5.360" description="Call Macro 8" />
   <macro id="608" versions="6.040" description="Start General Timer 6" />
   <macro id="609" versions="5.360" description="Call Macro 9" />
-  <macro id="606" versions="6.040" description="Stop General Timer 4" />
+  <macro id="609" versions="6.040" description="Stop General Timer 4" />
   <macro id="610" versions="5.360" description="Call Macro 10" />
-  <macro id="606" versions="6.040" description="Stop General Timer 5" />
+  <macro id="610" versions="6.040" description="Stop General Timer 5" />
   <macro id="611" versions="5.360" description="Call Macro 11" />
-  <macro id="606" versions="6.040" description="Stop General Timer 6" />
+  <macro id="611" versions="6.040" description="Stop General Timer 6" />
   <macro id="612" versions="5.360" description="Call Macro 12" />
   <macro id="613" versions="5.360" description="Call Macro 13" />
   <macro id="614" versions="5.360" description="Call Macro 14" />

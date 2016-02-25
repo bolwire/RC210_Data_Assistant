@@ -1,0 +1,1221 @@
+<macros version="1.003">
+  <macro id="001" versions="5.281 5.285 5.360 6.000 6.040" description="Port 1 CTCSS Access" />
+  <macro id="002" versions="5.281 5.285 5.360 6.000 6.040" description="Port 2 CTCSS Access" />
+  <macro id="003" versions="5.281 5.285 5.360 6.000 6.040" description="Port 3 CTCSS Access" />
+  <macro id="004" versions="5.281 5.285 5.360 6.000 6.040" description="Port 1 Carrier Access" />
+  <macro id="005" versions="5.281 5.285 5.360 6.000 6.040" description="Port 2 Carrier Access" />
+  <macro id="006" versions="5.281 5.285 5.360 6.000 6.040" description="Port 3 Carrier Access" />
+  <macro id="007" versions="5.281 5.285 5.360 6.000 6.040" description="Port 1 DTMF Covertone ON" />
+  <macro id="008" versions="5.281 5.285 5.360 6.000 6.040" description="Port 2 DTMF Covertone ON" />
+  <macro id="009" versions="5.281 5.285 5.360 6.000 6.040" description="Port 3 DTMF Covertone ON" />
+  <macro id="010" versions="5.281 5.285 5.360 6.000 6.040" description="Port 1 DTMF Covertone OFF" />
+  <macro id="011" versions="5.281 5.285 5.360 6.000 6.040" description="Port 2 DTMF Covertone OFF" />
+  <macro id="012" versions="5.281 5.285 5.360 6.000 6.040" description="Port 3 DTMF Covertone OFF" />
+  <macro id="013" versions="5.281 5.285 5.360 6.000 6.040" description="Port 1 Enable" />
+  <macro id="014" versions="5.281 5.285 5.360 6.000 6.040" description="Port 2 Enable" />
+  <macro id="015" versions="5.281 5.285 5.360 6.000 6.040" description="Port 3 Enable" />
+  <macro id="016" versions="5.281 5.285 5.360 6.000 6.040" description="Port 1 Disable" />
+  <macro id="017" versions="5.281 5.285 5.360 6.000 6.040" description="Port 2 Disable" />
+  <macro id="018" versions="5.281 5.285 5.360 6.000 6.040" description="Port 3 Disable" />
+  <macro id="019" versions="5.281 5.285 5.360 6.000 6.040" description="Monitor Port 1 from Port 2" />
+  <macro id="020" versions="5.281 5.285 5.360 6.000 6.040" description="Monitor Port 1 from Port 3" />
+  <macro id="021" versions="5.281 5.285 5.360 6.000 6.040" description="Disconnect Port 1 from Port 2" />
+  <macro id="022" versions="5.281 5.285 5.360 6.000 6.040" description="Disconnect Port 1 from Port 3" />
+  <macro id="023" versions="5.281 5.285 5.360 6.000 6.040" description="Monitor Port 2 from Port 1" />
+  <macro id="024" versions="5.281 5.285 5.360 6.000 6.040" description="Monitor Port 2 from Port 3" />
+  <macro id="025" versions="5.281 5.285 5.360 6.000 6.040" description="Disconnect Port 2 from Port 1" />
+  <macro id="026" versions="5.281 5.285 5.360 6.000 6.040" description="Disconnect Port 2 from Port 3" />
+  <macro id="027" versions="5.281 5.285 5.360 6.000 6.040" description="Monitor Port 3 from Port 1" />
+  <macro id="028" versions="5.281 5.285 5.360 6.000 6.040" description="Monitor Port 3 from Port 2" />
+  <macro id="029" versions="5.281 5.285 5.360 6.000 6.040" description="Disconnect Port 3 from Port 1" />
+  <macro id="030" versions="5.281 5.285 5.360 6.000 6.040" description="Disconnect Port 3 from Port 2" />
+  <macro id="031" versions="5.281 5.285 5.360 6.000 6.040" description="Port 1 Monitor Mute" />
+  <macro id="032" versions="5.281 5.285 5.360 6.000 6.040" description="Port 2 Monitor Mute" />
+  <macro id="033" versions="5.281 5.285 5.360 6.000 6.040" description="Port 3 Monitor Mute" />
+  <macro id="034" versions="5.281 5.285 5.360 6.000 6.040" description="Port 1 Monitor Mix" />
+  <macro id="035" versions="5.281 5.285 5.360 6.000 6.040" description="Port 2 Monitor Mix" />
+  <macro id="036" versions="5.281 5.285 5.360 6.000 6.040" description="Port 3 Monitor Mix" />
+  <macro id="037" versions="5.281 5.285 5.360 6.000 6.040" description="Port 1 Repeat ON" />
+  <macro id="038" versions="5.281 5.285 5.360 6.000 6.040" description="Port 2 Repeat ON" />
+  <macro id="039" versions="5.281 5.285 5.360 6.000 6.040" description="Port 3 Repeat ON" />
+  <macro id="040" versions="5.281 5.285 5.360 6.000 6.040" description="Port 1 Repeat OFF" />
+  <macro id="041" versions="5.281 5.285 5.360 6.000 6.040" description="Port 2 Repeat OFF" />
+  <macro id="042" versions="5.281 5.285 5.360 6.000 6.040" description="Port 3 Repeat OFF" />
+  <macro id="043" versions="5.281 5.285 5.360 6.000 6.040" description="Port 1 Speech OverrideON" />
+  <macro id="044" versions="5.281 5.285 5.360 6.000 6.040" description="Port 2 Speech OverrideON" />
+  <macro id="045" versions="5.281 5.285 5.360 6.000 6.040" description="Port 3 Speech OverrideON" />
+  <macro id="046" versions="5.281 5.285 5.360 6.000 6.040" description="Port 1 Speech Override OFF" />
+  <macro id="047" versions="5.281 5.285 5.360 6.000 6.040" description="Port 2 Speech Override OFF" />
+  <macro id="048" versions="5.281 5.285 5.360 6.000 6.040" description="Port 3 Speech Override OFF" />
+  <macro id="049" versions="5.281 5.285 5.360 6.000 6.040" description="Port 1 Courtesy Tone 1" />
+  <macro id="050" versions="5.281 5.285 5.360 6.000 6.040" description="Port 1 Courtesy Tone 2" />
+  <macro id="051" versions="5.281 5.285 5.360 6.000 6.040" description="Port 1 Courtesy Tone 3" />
+  <macro id="052" versions="5.281 5.285 5.360 6.000 6.040" description="Port 1 Courtesy Tone 4" />
+  <macro id="053" versions="5.281 5.285 5.360 6.000 6.040" description="Port 1 Courtesy Tone 5" />
+  <macro id="054" versions="5.281 5.285 5.360 6.000 6.040" description="Port 1 Courtesy Tone 6" />
+  <macro id="055" versions="5.281 5.285 5.360 6.000 6.040" description="Port 1 Courtesy Tone 7" />
+  <macro id="056" versions="5.281 5.285 5.360 6.000 6.040" description="Port 1 Courtesy Tone 8" />
+  <macro id="057" versions="5.281 5.285 5.360 6.000 6.040" description="Port 1 Courtesy Tone 9" />
+  <macro id="058" versions="5.281 5.285 5.360 6.000 6.040" description="Port 1 Courtesy Tone 10" />
+  <macro id="059" versions="5.281 5.285 5.360 6.000 6.040" description="Port 2 Courtesy Tone 1" />
+  <macro id="060" versions="5.281 5.285 5.360 6.000 6.040" description="Port 2 Courtesy Tone 2" />
+  <macro id="061" versions="5.281 5.285 5.360 6.000 6.040" description="Port 2 Courtesy Tone 3" />
+  <macro id="062" versions="5.281 5.285 5.360 6.000 6.040" description="Port 2 Courtesy Tone 4" />
+  <macro id="063" versions="5.281 5.285 5.360 6.000 6.040" description="Port 2 Courtesy Tone 5" />
+  <macro id="064" versions="5.281 5.285 5.360 6.000 6.040" description="Port 2 Courtesy Tone 6" />
+  <macro id="065" versions="5.281 5.285 5.360 6.000 6.040" description="Port 2 Courtesy Tone 7" />
+  <macro id="066" versions="5.281 5.285 5.360 6.000 6.040" description="Port 2 Courtesy Tone 8" />
+  <macro id="067" versions="5.281 5.285 5.360 6.000 6.040" description="Port 2 Courtesy Tone 9" />
+  <macro id="068" versions="5.281 5.285 5.360 6.000 6.040" description="Port 2 Courtesy Tone 10" />
+  <macro id="069" versions="5.281 5.285 5.360 6.000 6.040" description="Port 3 Courtesy Tone 1" />
+  <macro id="070" versions="5.281 5.285 5.360 6.000 6.040" description="Port 3 Courtesy Tone 2" />
+  <macro id="071" versions="5.281 5.285 5.360 6.000 6.040" description="Port 3 Courtesy Tone 3" />
+  <macro id="072" versions="5.281 5.285 5.360 6.000 6.040" description="Port 3 Courtesy Tone 4" />
+  <macro id="073" versions="5.281 5.285 5.360 6.000 6.040" description="Port 3 Courtesy Tone 5" />
+  <macro id="074" versions="5.281 5.285 5.360 6.000 6.040" description="Port 3 Courtesy Tone 6" />
+  <macro id="075" versions="5.281 5.285 5.360 6.000 6.040" description="Port 3 Courtesy Tone 7" />
+  <macro id="076" versions="5.281 5.285 5.360 6.000 6.040" description="Port 3 Courtesy Tone 8" />
+  <macro id="077" versions="5.281 5.285 5.360 6.000 6.040" description="Port 3 Courtesy Tone 9" />
+  <macro id="078" versions="5.281 5.285 5.360 6.000 6.040" description="Port 3 Courtesy Tone 10" />
+  <macro id="079" versions="5.281 5.285 5.360 6.000 6.040" description="Port 1 DTMF Muting ON" />
+  <macro id="080" versions="5.281 5.285 5.360 6.000 6.040" description="Port 2 DTMF Muting ON" />
+  <macro id="081" versions="5.281 5.285 5.360 6.000 6.040" description="Port 3 DTMF Muting ON" />
+  <macro id="082" versions="5.281 5.285 5.360 6.000 6.040" description="Port 1 DTMF Muting OFF" />
+  <macro id="083" versions="5.281 5.285 5.360 6.000 6.040" description="Port 2 DTMF Muting OFF" />
+  <macro id="084" versions="5.281 5.285 5.360 6.000 6.040" description="Port 3 DTMF Muting OFF" />
+  <macro id="085" versions="5.281 5.285 5.360 6.000 6.040" description="CTCSS Encode ON (for the duration of this Macro)" />
+  <macro id="086" versions="5.281 5.285 5.360 6.000 6.040" description="CTCSS Encode OFF (for the duration of this Macro)" />
+  <macro id="087" versions="5.281 5.285 5.360 6.000 6.040" description="Read ADC Channel 1" />
+  <macro id="088" versions="5.281 5.285 5.360 6.000 6.040" description="Read ADC Channel 2" />
+  <macro id="089" versions="5.281 5.285 5.360 6.000 6.040" description="Read ADC Channel 3" />
+  <macro id="090" versions="5.281 5.285 5.360 6.000 6.040" description="Read ADC Channel 4" />
+  <macro id="091" versions="5.281 5.285 5.360 6.000 6.040" description="Read ADC Channel 5" />
+  <macro id="092" versions="5.281 5.285 5.360 6.000 6.040" description="Read ADC Channel 6" />
+  <macro id="093" versions="5.281 5.285 5.360 6.000 6.040" description="Read ADC Channel 7" />
+  <macro id="094" versions="5.281 5.285 5.360 6.000 6.040" description="Read ADC Channel 8" />
+  <macro id="095" versions="5.281 5.285 5.360 6.000 6.040" description="UF1 ON" />
+  <macro id="096" versions="5.281 5.285 5.360 6.000 6.040" description="UF2 ON" />
+  <macro id="097" versions="5.281 5.285 5.360 6.000 6.040" description="UF3 ON" />
+  <macro id="098" versions="5.281 5.285 5.360 6.000 6.040" description="UF4 ON" />
+  <macro id="099" versions="5.281 5.285 5.360 6.000 6.040" description="UF5 ON" />
+  <macro id="100" versions="5.281 5.285 5.360 6.000 6.040" description="UF6 ON" />
+  <macro id="101" versions="5.281 5.285 5.360 6.000 6.040" description="UF7 ON" />
+  <macro id="102" versions="5.281 5.285 5.360 6.000 6.040" description="UF1 OFF" />
+  <macro id="103" versions="5.281 5.285 5.360 6.000 6.040" description="UF2 OFF" />
+  <macro id="104" versions="5.281 5.285 5.360 6.000 6.040" description="UF3 OFF" />
+  <macro id="105" versions="5.281 5.285 5.360 6.000 6.040" description="UF4 OFF" />
+  <macro id="106" versions="5.281 5.285 5.360 6.000 6.040" description="UF5 OFF" />
+  <macro id="107" versions="5.281 5.285 5.360 6.000 6.040" description="UF6 OFF" />
+  <macro id="108" versions="5.281 5.285 5.360 6.000 6.040" description="UF7 OFF" />
+  <macro id="109" versions="5.281 5.285 5.360 6.000 6.040" description="UF1 Pulse" />
+  <macro id="110" versions="5.281 5.285 5.360 6.000 6.040" description="UF2 Pulse" />
+  <macro id="111" versions="5.281 5.285 5.360 6.000 6.040" description="UF3 Pulse" />
+  <macro id="112" versions="5.281 5.285 5.360 6.000 6.040" description="UF4 Pulse" />
+  <macro id="113" versions="5.281 5.285 5.360 6.000 6.040" description="UF5 Pulse" />
+  <macro id="114" versions="5.281 5.285 5.360 6.000 6.040" description="UF6 Pulse" />
+  <macro id="115" versions="5.281 5.285 5.360 6.000 6.040" description="UF7 Pulse" />
+  <macro id="116" versions="5.281 5.285 5.360 6.000 6.040" description="Say Time" />
+  <macro id="117" versions="5.281 5.285 5.360 6.000 6.040" description="Say Date" />
+  <macro id="118" versions="5.281 5.285 5.360 6.000 6.040" description="Link Port 1 to Port 2" />
+  <macro id="119" versions="5.281 5.285 5.360 6.000 6.040" description="Link Port 1 to Port 3" />
+  <macro id="120" versions="5.281 5.285 5.360 6.000 6.040" description="Link Port 2 to Port 3" />
+  <macro id="121" versions="5.281 5.285 5.360 6.000 6.040" description="Link All Ports" />
+  <macro id="122" versions="5.281 5.285 5.360 6.000 6.040" description="Unlink Port 1 from Port 2" />
+  <macro id="123" versions="5.281 5.285 5.360 6.000 6.040" description="Unlink Port 1 from Port 3" />
+  <macro id="124" versions="5.281 5.285 5.360 6.000 6.040" description="Unlink Port 2 from Port 3" />
+  <macro id="125" versions="5.281 5.285 5.360 6.000 6.040" description="UnLink All Ports" />
+  <macro id="126" versions="5.281 5.285 5.360 6.000 6.040" description="Play DVR Track 1" />
+  <macro id="127" versions="5.281 5.285 5.360 6.000 6.040" description="Play DVR Track 2" />
+  <macro id="128" versions="5.281 5.285 5.360 6.000 6.040" description="Play DVR Track 3" />
+  <macro id="129" versions="5.281 5.285 5.360 6.000 6.040" description="Play DVR Track 4" />
+  <macro id="130" versions="5.281 5.285 5.360 6.000 6.040" description="Play DVR Track 5" />
+  <macro id="131" versions="5.281 5.285 5.360 6.000 6.040" description="Play DVR Track 6" />
+  <macro id="132" versions="5.281 5.285 5.360 6.000 6.040" description="Play DVR Track 7" />
+  <macro id="133" versions="5.281 5.285 5.360 6.000 6.040" description="Play DVR Track 8" />
+  <macro id="134" versions="5.281 5.285 5.360 6.000 6.040" description="Play DVR Track 9" />
+  <macro id="135" versions="5.281 5.285 5.360 6.000 6.040" description="Play DVR Track 10" />
+  <macro id="136" versions="5.281 5.285 5.360 6.000 6.040" description="Play DVR Track 11" />
+  <macro id="137" versions="5.281 5.285 5.360 6.000 6.040" description="Play DVR Track 12" />
+  <macro id="138" versions="5.281 5.285 5.360 6.000 6.040" description="Play DVR Track 13" />
+  <macro id="139" versions="5.281 5.285 5.360 6.000 6.040" description="Play DVR Track 14" />
+  <macro id="140" versions="5.281 5.285 5.360 6.000 6.040" description="Play DVR Track 15" />
+  <macro id="141" versions="5.281 5.285 5.360 6.000 6.040" description="Play DVR Track 16" />
+  <macro id="142" versions="5.281 5.285 5.360 6.000 6.040" description="Play DVR Track 17" />
+  <macro id="143" versions="5.281 5.285 5.360 6.000 6.040" description="Play DVR Track 18" />
+  <macro id="144" versions="5.281 5.285 5.360 6.000 6.040" description="Play DVR Track 19" />
+  <macro id="145" versions="5.281 5.285 5.360 6.000 6.040" description="Play DVR Track 20" />
+  <macro id="146" versions="5.281 5.285 5.360 6.000 6.040" description="Auxiliary Audio 1 ON" />
+  <macro id="147" versions="5.281 5.285 5.360 6.000 6.040" description="Auxiliary Audio 2 ON" />
+  <macro id="148" versions="5.281 5.285 5.360 6.000 6.040" description="Auxiliary Audio 3 ON" />
+  <macro id="149" versions="5.281 5.285 5.360 6.000 6.040" description="Auxiliary Audio 1 OFF" />
+  <macro id="150" versions="5.281 5.285 5.360 6.000 6.040" description="Auxiliary Audio 2 OFF" />
+  <macro id="151" versions="5.281 5.285 5.360 6.000 6.040" description="Auxiliary Audio 3 OFF" />
+  <macro id="152" versions="5.281 5.285 5.360 6.000 6.040" description="Alarm 1 ON" />
+  <macro id="153" versions="5.281 5.285 5.360 6.000 6.040" description="Alarm 2 ON" />
+  <macro id="154" versions="5.281 5.285 5.360 6.000 6.040" description="Alarm 3 ON" />
+  <macro id="155" versions="5.281 5.285 5.360 6.000 6.040" description="Alarm 4 ON" />
+  <macro id="156" versions="5.281 5.285 5.360 6.000 6.040" description="Alarm 5 ON" />
+  <macro id="157" versions="5.281 5.285 5.360 6.000 6.040" description="Alarm 1 OFF" />
+  <macro id="158" versions="5.281 5.285 5.360 6.000 6.040" description="Alarm 2 OFF" />
+  <macro id="159" versions="5.281 5.285 5.360 6.000 6.040" description="Alarm 3 OFF" />
+  <macro id="160" versions="5.281 5.285 5.360 6.000 6.040" description="Alarm 4 OFF" />
+  <macro id="161" versions="5.281 5.285 5.360 6.000 6.040" description="Alarm 5 OFF" />
+  <macro id="162" versions="5.281 5.285 5.360 6.000 6.040" description="Speech Out Port 1" />
+  <macro id="163" versions="5.281 5.285 5.360 6.000 6.040" description="Speech Out Port 2" />
+  <macro id="164" versions="5.281 5.285 5.360 6.000 6.040" description="Speech Out Port 3" />
+  <macro id="165" versions="5.281 5.285 5.360 6.000 6.040" description="Speech Out Ports 1 and 2" />
+  <macro id="166" versions="5.281 5.285 5.360 6.000 6.040" description="Speech Out Ports 1 and 3" />
+  <macro id="167" versions="5.281 5.285 5.360 6.000 6.040" description="Speech Out Ports 2 and 3" />
+  <macro id="168" versions="5.281 5.285 5.360 6.000 6.040" description="Speech Out All Ports" />
+  <macro id="169" versions="5.281 5.285 5.360 6.000 6.040" description="DTMF Enable Port 1" />
+  <macro id="170" versions="5.281 5.285 5.360 6.000 6.040" description="DTMF Enable Port 2" />
+  <macro id="171" versions="5.281 5.285 5.360 6.000 6.040" description="DTMF Enable Port 3" />
+  <macro id="172" versions="5.281 5.285 5.360 6.000 6.040" description="DTMF Disable Port 1" />
+  <macro id="173" versions="5.281 5.285 5.360 6.000 6.040" description="DTMF Disable Port 2" />
+  <macro id="174" versions="5.281 5.285 5.360 6.000 6.040" description="DTMF Disable Port 3" />
+  <macro id="175" versions="5.281 5.285 5.360 6.000 6.040" description="DTMF Require CTCSS Port 1" />
+  <macro id="176" versions="5.281 5.285 5.360 6.000 6.040" description="DTMF Require CTCSS Port 2" />
+  <macro id="177" versions="5.281 5.285 5.360 6.000 6.040" description="DTMF Require CTCSS Port 3" />
+  <macro id="178" versions="5.281 5.285 5.360 6.000 6.040" description="DTMF Not Require CTCSS Port 1" />
+  <macro id="179" versions="5.281 5.285 5.360 6.000 6.040" description="DTMF Not Require CTCSS Port 2" />
+  <macro id="180" versions="5.281 5.285 5.360 6.000 6.040" description="DTMF Not Require CTCSS Port 3" />
+  <macro id="181" versions="5.281 5.285 5.360 6.000 6.040" description="Force Next Voice ID In Rotation On Port 1" />
+  <macro id="182" versions="5.281 5.285 5.360 6.000 6.040" description="Force Next Voice ID In Rotation On Port 2" />
+  <macro id="183" versions="5.281 5.285 5.360 6.000 6.040" description="Force Next Voice ID In Rotation On Port 3" />
+  <macro id="184" versions="5.281 5.285 5.360 6.000 6.040" description="Force Next CW ID In Rotation On Port 1" />
+  <macro id="185" versions="5.281 5.285 5.360 6.000 6.040" description="Force Next CW ID In Rotation On Port 2" />
+  <macro id="186" versions="5.281 5.285 5.360 6.000 6.040" description="Force Next CW ID In Rotation On Port 3" />
+  <macro id="187" versions="5.281 5.285 5.360 6.000 6.040" description="Play Message Macro 1" />
+  <macro id="188" versions="5.281 5.285 5.360 6.000 6.040" description="Play Message Macro 2" />
+  <macro id="189" versions="5.281 5.285 5.360 6.000 6.040" description="Play Message Macro 3" />
+  <macro id="190" versions="5.281 5.285 5.360 6.000 6.040" description="Play Message Macro 4" />
+  <macro id="191" versions="5.281 5.285 5.360 6.000 6.040" description="Play Message Macro 5" />
+  <macro id="192" versions="5.281 5.285 5.360 6.000 6.040" description="Play Message Macro 6" />
+  <macro id="193" versions="5.281 5.285 5.360 6.000 6.040" description="Play Message Macro 7" />
+  <macro id="194" versions="5.281 5.285 5.360 6.000 6.040" description="Play Message Macro 8" />
+  <macro id="195" versions="5.281 5.285 5.360 6.000 6.040" description="Play Message Macro 9" />
+  <macro id="196" versions="5.281 5.285 5.360 6.000 6.040" description="Play Message Macro 10" />
+  <macro id="197" versions="5.281 5.285 5.360 6.000 6.040" description="Play Message Macro 11" />
+  <macro id="198" versions="5.281 5.285 5.360 6.000 6.040" description="Play Message Macro 12" />
+  <macro id="199" versions="5.281 5.285 5.360 6.000 6.040" description="Play Message Macro 13" />
+  <macro id="200" versions="5.281 5.285 5.360 6.000 6.040" description="Play Message Macro 14" />
+  <macro id="201" versions="5.281 5.285 5.360 6.000 6.040" description="Play Message Macro 15" />
+  <macro id="202" versions="5.281 5.285 5.360 6.000 6.040" description="Play Message Macro 16" />
+  <macro id="203" versions="5.281 5.285 5.360 6.000 6.040" description="Play Message Macro 17" />
+  <macro id="204" versions="5.281 5.285 5.360 6.000 6.040" description="Play Message Macro 18" />
+  <macro id="205" versions="5.281 5.285 5.360 6.000 6.040" description="Play Message Macro 19" />
+  <macro id="206" versions="5.281 5.285 5.360 6.000 6.040" description="Play Message Macro 20" />
+  <macro id="207" versions="5.281 5.285 5.360 6.000 6.040" description="Play Message Macro 21" />
+  <macro id="208" versions="5.281 5.285 5.360 6.000 6.040" description="Play Message Macro 22" />
+  <macro id="209" versions="5.281 5.285 5.360 6.000 6.040" description="Play Message Macro 23" />
+  <macro id="210" versions="5.281 5.285 5.360 6.000 6.040" description="Play Message Macro 24" />
+  <macro id="211" versions="5.281 5.285 5.360 6.000 6.040" description="Play Message Macro 25" />
+  <macro id="212" versions="5.281 5.285 5.360 6.000 6.040" description="Play Message Macro 26" />
+  <macro id="213" versions="5.281 5.285 5.360 6.000 6.040" description="Play Message Macro 27" />
+  <macro id="214" versions="5.281 5.285 5.360 6.000 6.040" description="Play Message Macro 28" />
+  <macro id="215" versions="5.281 5.285 5.360 6.000 6.040" description="Play Message Macro 29" />
+  <macro id="216" versions="5.281 5.285 5.360 6.000 6.040" description="Play Message Macro 30" />
+  <macro id="217" versions="5.281 5.285 5.360 6.000 6.040" description="Play Message Macro 31" />
+  <macro id="218" versions="5.281 5.285 5.360 6.000 6.040" description="Play Message Macro 32" />
+  <macro id="219" versions="5.281 5.285 5.360 6.000 6.040" description="Play Message Macro 33" />
+  <macro id="220" versions="5.281 5.285 5.360 6.000 6.040" description="Play Message Macro 34" />
+  <macro id="221" versions="5.281 5.285 5.360 6.000 6.040" description="Play Message Macro 35" />
+  <macro id="222" versions="5.281 5.285 5.360 6.000 6.040" description="Play Message Macro 36" />
+  <macro id="223" versions="5.281 5.285 5.360 6.000 6.040" description="Play Message Macro 37" />
+  <macro id="224" versions="5.281 5.285 5.360 6.000 6.040" description="Play Message Macro 38" />
+  <macro id="225" versions="5.281 5.285 5.360 6.000 6.040" description="Play Message Macro 39" />
+  <macro id="226" versions="5.281 5.285 5.360 6.000 6.040" description="Play Message Macro 40" />
+  <macro id="227" versions="5.281 5.285 5.360 6.000 6.040" description="Good Morning/Afternoon/Evening Runtime Variable" />
+  <macro id="228" versions="5.281 5.285 5.360 6.000 6.040" description="Macro Priority High" />
+  <macro id="229" versions="5.281 5.285 5.360 6.000 6.040" description="Macro Priority Low" />
+  <macro id="230" versions="5.281 5.285 5.360 6.000 6.040" description="Enable Kerchunk Filter Port 1" />
+  <macro id="231" versions="5.281 5.285 5.360 6.000 6.040" description="Enable Kerchunk Filter Port 2" />
+  <macro id="232" versions="5.281 5.285 5.360 6.000 6.040" description="Enable Kerchunk Filter Port 3" />
+  <macro id="233" versions="5.281 5.285 5.360 6.000 6.040" description="Disable Kerchunk Filter Port 1" />
+  <macro id="234" versions="5.281 5.285 5.360 6.000 6.040" description="Disable Kerchunk Filter Port 2" />
+  <macro id="235" versions="5.281 5.285 5.360 6.000 6.040" description="Disable Kerchunk Filter Port 3" />
+  <macro id="236" versions="5.281 5.285 5.360 6.000 6.040" description="Enable Receiver Port 1" />
+  <macro id="237" versions="5.281 5.285 5.360 6.000 6.040" description="Enable Receiver Port 2" />
+  <macro id="238" versions="5.281 5.285 5.360 6.000 6.040" description="Enable Receiver Port 3" />
+  <macro id="239" versions="5.281 5.285 5.360 6.000 6.040" description="Disable Receiver Port 1" />
+  <macro id="240" versions="5.281 5.285 5.360 6.000 6.040" description="Disable Receiver Port 2" />
+  <macro id="241" versions="5.281 5.285 5.360 6.000 6.040" description="Disable Receiver Port 3" />
+  <macro id="242" versions="5.281 5.285 5.360 6.000 6.040" description="Port 1 Speech ID Override ON" />
+  <macro id="243" versions="5.281 5.285 5.360 6.000 6.040" description="Port 2 Speech ID Override ON" />
+  <macro id="244" versions="5.281 5.285 5.360 6.000 6.040" description="Port 3 Speech ID Override ON" />
+  <macro id="245" versions="5.281 5.285 5.360 6.000 6.040" description="Port 1 Speech ID Override OFF" />
+  <macro id="246" versions="5.281 5.285 5.360 6.000 6.040" description="Port 2 Speech ID Override OFF" />
+  <macro id="247" versions="5.281 5.285 5.360 6.000 6.040" description="Port 3 Speech ID Override OFF" />
+  <macro id="248" versions="5.281 5.285 5.360 6.000 6.040" description="All Courtesy Tones OFF Port 1" />
+  <macro id="249" versions="5.281 5.285 5.360 6.000 6.040" description="All Courtesy Tones OFF Port 2" />
+  <macro id="250" versions="5.281 5.285 5.360 6.000 6.040" description="All Courtesy Tones OFF Port 3" />
+  <macro id="251" versions="5.281 5.285 5.360 6.000 6.040" description="Force Audio To Entered Port" />
+  <macro id="252" versions="5.281 5.285 5.360 6.000 6.040" description="Stop ID/Disable Timeout Timer Port 1" />
+  <macro id="253" versions="5.281 5.285 5.360 6.000 6.040" description="Stop ID/Disable Timeout Timer Port 2" />
+  <macro id="254" versions="5.281 5.285 5.360 6.000 6.040" description="Stop ID/Disable Timeout Timer Port 3" />
+  <macro id="256" versions="5.281 5.285 5.360 6.000 6.040" description="Resume ID/Enable Timeout Timer Port 1" />
+  <macro id="257" versions="5.281 5.285 5.360 6.000 6.040" description="Resume ID/Enable Timeout Timer Port 2" />
+  <macro id="258" versions="5.281 5.285 5.360 6.000 6.040" description="Resume ID/Enable Timeout Timer Port 3" />
+  <macro id="259" versions="5.281 5.285 5.360 6.000 6.040" description="Send DTMF Memory 1" />
+  <macro id="260" versions="5.281 5.285 5.360 6.000 6.040" description="Send DTMF Memory 2" />
+  <macro id="261" versions="5.281 5.285 5.360 6.000 6.040" description="Send DTMF Memory 3" />
+  <macro id="262" versions="5.281 5.285 5.360 6.000 6.040" description="Send DTMF Memory 4" />
+  <macro id="263" versions="5.281 5.285 5.360 6.000 6.040" description="Send DTMF Memory 5" />
+  <macro id="264" versions="5.281 5.285 5.360 6.000 6.040" description="Send DTMF Memory 6" />
+  <macro id="265" versions="5.281 5.285 5.360 6.000 6.040" description="Send DTMF Memory 7" />
+  <macro id="266" versions="5.281 5.285 5.360 6.000 6.040" description="Send DTMF Memory 8" />
+  <macro id="267" versions="5.281 5.285 5.360 6.000 6.040" description="Send DTMF Memory 9" />
+  <macro id="268" versions="5.281 5.285 5.360 6.000 6.040" description="Send DTMF Memory 10" />
+  <macro id="269" versions="5.281 5.285 5.360 6.000 6.040" description="Send DTMF Memory 11" />
+  <macro id="270" versions="5.281 5.285 5.360 6.000 6.040" description="Send DTMF Memory 12" />
+  <macro id="271" versions="5.281 5.285 5.360 6.000 6.040" description="Send DTMF Memory 13" />
+  <macro id="272" versions="5.281 5.285 5.360 6.000 6.040" description="Send DTMF Memory 14" />
+  <macro id="273" versions="5.281 5.285 5.360 6.000 6.040" description="Send DTMF Memory 15" />
+  <macro id="274" versions="5.281 5.285 5.360 6.000 6.040" description="Send DTMF Memory 16" />
+  <macro id="275" versions="5.281 5.285 5.360 6.000 6.040" description="Send DTMF Memory 17" />
+  <macro id="276" versions="5.281 5.285 5.360 6.000 6.040" description="Send DTMF Memory 18" />
+  <macro id="277" versions="5.281 5.285 5.360 6.000 6.040" description="Send DTMF Memory 19" />
+  <macro id="278" versions="5.281 5.285 5.360 6.000 6.040" description="Send DTMF Memory 20" />
+  <macro id="279" versions="5.281 5.285 5.360 6.000 6.040" description="Clear All Meter Hi/Low Trippoints" />
+  <macro id="280" versions="5.281 5.285 5.360 6.000 6.040" description="Clear Meter 1 Hi/Low Trippoint" />
+  <macro id="281" versions="5.281 5.285 5.360 6.000 6.040" description="Clear Meter 2 Hi/Low Trippoint" />
+  <macro id="282" versions="5.281 5.285 5.360 6.000 6.040" description="Clear Meter 3 Hi/Low Trippoint" />
+  <macro id="283" versions="5.281 5.285 5.360 6.000 6.040" description="Clear Meter 4 Hi/Low Trippoint" />
+  <macro id="284" versions="5.281 5.285 5.360 6.000 6.040" description="Clear Meter 5 Hi/Low Trippoint" />
+  <macro id="285" versions="5.281 5.285 5.360 6.000 6.040" description="Clear Meter 6 Hi/Low Trippoint" />
+  <macro id="286" versions="5.281 5.285 5.360 6.000 6.040" description="Clear Meter 7 Hi/Low Trippoint" />
+  <macro id="287" versions="5.281 5.285 5.360 6.000 6.040" description="Clear Meter 8 Hi/Low Trippoint" />
+  <macro id="288" versions="5.281 5.285 5.360 6.000 6.040" description="Enable Meter 1 Alarm" />
+  <macro id="289" versions="5.281 5.285 5.360 6.000 6.040" description="Enable Meter 2 Alarm" />
+  <macro id="290" versions="5.281 5.285 5.360 6.000 6.040" description="Enable Meter 3 Alarm" />
+  <macro id="291" versions="5.281 5.285 5.360 6.000 6.040" description="Enable Meter 4 Alarm" />
+  <macro id="292" versions="5.281 5.285 5.360 6.000 6.040" description="Enable Meter 5 Alarm" />
+  <macro id="293" versions="5.281 5.285 5.360 6.000 6.040" description="Enable Meter 6 Alarm" />
+  <macro id="294" versions="5.281 5.285 5.360 6.000 6.040" description="Enable Meter 7 Alarm" />
+  <macro id="295" versions="5.281 5.285 5.360 6.000 6.040" description="Enable Meter 8 Alarm" />
+  <macro id="296" versions="5.281 5.285 5.360 6.000 6.040" description="Disable Meter 1 Alarm" />
+  <macro id="297" versions="5.281 5.285 5.360 6.000 6.040" description="Disable Meter 2 Alarm" />
+  <macro id="298" versions="5.281 5.285 5.360 6.000 6.040" description="Disable Meter 3 Alarm" />
+  <macro id="299" versions="5.281 5.285 5.360 6.000 6.040" description="Disable Meter 4 Alarm" />
+  <macro id="300" versions="5.281 5.285 5.360 6.000 6.040" description="Disable Meter 5 Alarm" />
+  <macro id="301" versions="5.281 5.285 5.360 6.000 6.040" description="Disable Meter 6 Alarm" />
+  <macro id="302" versions="5.281 5.285 5.360 6.000 6.040" description="Disable Meter 7 Alarm" />
+  <macro id="303" versions="5.281 5.285 5.360 6.000 6.040" description="Disable Meter 8 Alarm" />
+  <macro id="304" versions="5.281 5.285 5.360 6.000 6.040" description="CTCSS Encode Force OFF" />
+  <macro id="305" versions="5.281 5.285 5.360 6.000 6.040" description="CTCSS Encode to Programmed Value" />
+  <macro id="306" versions="5.281 5.285 5.360 6.000 6.040" description="Bump Clock By Correction Factor" />
+  <macro id="307" versions="5.281 5.285 5.360 6.000 6.040" description="Say year as part of date" />
+  <macro id="308" versions="5.281 5.285 5.360 6.000 6.040" description="Don't say year as part of date" />
+  <macro id="309" versions="5.281 5.285 5.360 6.000 6.040" description="Port 1 Tail Message OFF" />
+  <macro id="310" versions="5.281 5.285 5.360 6.000 6.040" description="Port 2 Tail Message OFF" />
+  <macro id="311" versions="5.281 5.285 5.360 6.000 6.040" description="Port 3 Tail Message OFF" />
+  <macro id="312" versions="5.281 5.285 5.360 6.000 6.040" description="Port 1 Tail Message 1" />
+  <macro id="313" versions="5.281 5.285 5.360 6.000 6.040" description="Port 2 Tail Message 1" />
+  <macro id="314" versions="5.281 5.285 5.360 6.000 6.040" description="Port 3 Tail Message 1" />
+  <macro id="315" versions="5.281 5.285 5.360 6.000 6.040" description="Port 1 Tail Message 2" />
+  <macro id="316" versions="5.281 5.285 5.360 6.000 6.040" description="Port 2 Tail Message 2" />
+  <macro id="317" versions="5.281 5.285 5.360 6.000 6.040" description="Port 3 Tail Message 2" />
+  <macro id="318" versions="5.281 5.285 5.360 6.000 6.040" description="Port 1 Tail Message 3" />
+  <macro id="319" versions="5.281 5.285 5.360 6.000 6.040" description="Port 2 Tail Message 3" />
+  <macro id="320" versions="5.281 5.285 5.360 6.000 6.040" description="Port 3 Tail Message 3" />
+  <macro id="321" versions="5.281 5.285 5.360 6.000 6.040" description="Remote Base Memory 1" />
+  <macro id="322" versions="5.281 5.285 5.360 6.000 6.040" description="Remote Base Memory 2" />
+  <macro id="323" versions="5.281 5.285 5.360 6.000 6.040" description="Remote Base Memory 3" />
+  <macro id="324" versions="5.281 5.285 5.360 6.000 6.040" description="Remote Base Memory 4" />
+  <macro id="325" versions="5.281 5.285 5.360 6.000 6.040" description="Remote Base Memory 5" />
+  <macro id="326" versions="5.281 5.285 5.360 6.000 6.040" description="Remote Base Memory 6" />
+  <macro id="327" versions="5.281 5.285 5.360 6.000 6.040" description="Remote Base Memory 7" />
+  <macro id="328" versions="5.281 5.285 5.360 6.000 6.040" description="Remote Base Memory 8" />
+  <macro id="329" versions="5.281 5.285 5.360 6.000 6.040" description="Remote Base Memory 9" />
+  <macro id="330" versions="5.281 5.285 5.360 6.000 6.040" description="Remote Base Memory 10" />
+  <macro id="331" versions="5.281 5.285 5.360 6.000 6.040" description="Port 1 Zero Hang Time Select" />
+  <macro id="332" versions="5.281 5.285 5.360 6.000 6.040" description="Port 2 Zero Hang Time Select" />
+  <macro id="333" versions="5.281 5.285 5.360 6.000 6.040" description="Port 3 Zero Hang Time Select" />
+  <macro id="334" versions="5.281 5.285 5.360 6.000 6.040" description="Port 1 Hang Time Revert to Programmed Value" />
+  <macro id="335" versions="5.281 5.285 5.360 6.000 6.040" description="Port 2 Hang Time Revert to Programmed Value" />
+  <macro id="336" versions="5.281 5.285 5.360 6.000 6.040" description="Port 3 Hang Time Revert to Programmed Value" />
+  <macro id="337" versions="5.281 5.285 5.360 6.000 6.040" description="Allow Autopatch from programmed Ports" />
+  <macro id="338" versions="5.281 5.285 5.360 6.000 6.040" description="Disable Autopatch" />
+  <macro id="339" versions="5.281 5.285 5.360 6.000 6.040" description="Enable Speech ID's Port 1" />
+  <macro id="340" versions="5.281 5.285 5.360 6.000 6.040" description="Enable Speech ID's Port 2" />
+  <macro id="341" versions="5.281 5.285 5.360 6.000 6.040" description="Enable Speech ID's Port 3" />
+  <macro id="342" versions="5.281 5.285 5.360 6.000 6.040" description="Disable Speech ID's Port 1" />
+  <macro id="343" versions="5.281 5.285 5.360 6.000 6.040" description="Disable Speech ID's Port 2" />
+  <macro id="344" versions="5.281 5.285 5.360 6.000 6.040" description="Disable Speech ID's Port 3" />
+  <macro id="345" versions="5.281 5.285 5.360 6.000 6.040" description="User DVR Record test, erase after auto playback" />
+  <macro id="346" versions="5.281 5.285 5.360 6.000 6.040" description="User DVR Record test, don't erase after auto playback" />
+  <macro id="347" versions="5.281 5.285 5.360 6.000 6.040" description="Start General Timer 1" />
+  <macro id="348" versions="5.281 5.285 5.360 6.000 6.040" description="Start General Timer 2" />
+  <macro id="349" versions="5.281 5.285 5.360 6.000 6.040" description="Start General Timer 3" />
+  <macro id="350" versions="5.285 5.360 6.000 6.040" description="Stop General Timer 1" />
+  <macro id="351" versions="5.281" description="Suspend Scheduler Setpoint 1" />
+  <macro id="351" versions="5.285 5.360 6.000 6.040" description="Stop General Timer 2" />
+  <macro id="352" versions="5.281" description="Suspend Scheduler Setpoint 2" />
+  <macro id="352" versions="5.285 5.360 6.000 6.040" description="Stop General Timer 3" />
+  <macro id="353" versions="5.281" description="Suspend Scheduler Setpoint 3" />
+  <macro id="353" versions="5.285 5.360 6.000 6.040" description="Remote Base Power Select 1" />
+  <macro id="354" versions="5.281" description="Suspend Scheduler Setpoint 4" />
+  <macro id="354" versions="5.285 5.360 6.000 6.040" description="Remote Base Power Select 2" />
+  <macro id="355" versions="5.281" description="Suspend Scheduler Setpoint 5" />
+  <macro id="355" versions="5.285 5.360 6.000 6.040" description="Remote Base Power Select 3" />
+  <macro id="356" versions="5.281" description="Suspend Scheduler Setpoint 6" />
+  <macro id="356" versions="5.285 5.360 6.000 6.040" description="Guest Macros Enabled" />
+  <macro id="357" versions="5.281" description="Suspend Scheduler Setpoint 7" />
+  <macro id="357" versions="5.285 5.360 6.000 6.040" description="Guest Macros Disabled" />
+  <macro id="358" versions="5.281" description="Suspend Scheduler Setpoint 8" />
+  <macro id="358" versions="5.285" description="Reveiver Is Active Port 1" />
+  <macro id="358" versions="5.360 6.000 6.040" description="Reveiver 1 Macros On" />
+  <macro id="359" versions="5.281" description="Suspend Scheduler Setpoint 9" />
+  <macro id="359" versions="5.285" description="Reveiver Is Active Port 2" />
+  <macro id="359" versions="5.360 6.000 6.040" description="Reveiver 2 Macros On" />
+  <macro id="360" versions="5.281" description="Suspend Scheduler Setpoint 10" />
+  <macro id="360" versions="5.285" description="Reveiver Is Active Port 3" />
+  <macro id="360" versions="5.360 6.000 6.040" description="Reveiver 3 Macros On" />
+  <macro id="361" versions="5.281" description="Suspend Scheduler Setpoint 11" />
+  <macro id="361" versions="5.285" description="Reveiver Is Inactive Port 1" />
+  <macro id="361" versions="5.360 6.000 6.040" description="Reveiver 3 Macros Off" />
+  <macro id="362" versions="5.281" description="Suspend Scheduler Setpoint 12" />
+  <macro id="362" versions="5.285" description="Reveiver Is Inactive Port 2" />
+  <macro id="362" versions="5.360 6.000 6.040" description="Reveiver 3 Macros Off" />
+  <macro id="363" versions="5.281" description="Suspend Scheduler Setpoint 13" />
+  <macro id="363" versions="5.285" description="Reveiver Is Inactive Port 3" />
+  <macro id="363" versions="5.360 6.000 6.040" description="Reveiver 3 Macros Off" />
+  <macro id="364" versions="5.281" description="Suspend Scheduler Setpoint 14" />
+  <macro id="364" versions="5.285" description="Play Message Macro 41" />
+  <macro id="364" versions="5.360 6.000 6.040" description="Extended Logic 1 Output ON" />
+  <macro id="365" versions="5.281" description="Suspend Scheduler Setpoint 15" />
+  <macro id="365" versions="5.285" description="Play Message Macro 42" />
+  <macro id="365" versions="5.360 6.000 6.040" description="Extended Logic 2 Output ON" />
+  <macro id="366" versions="5.281" description="Suspend Scheduler Setpoint 16" />
+  <macro id="366" versions="5.285" description="Play Message Macro 43" />
+  <macro id="366" versions="5.360 6.000 6.040" description="Extended Logic 3 Output ON" />
+  <macro id="367" versions="5.281" description="Suspend Scheduler Setpoint 17" />
+  <macro id="367" versions="5.285" description="Play Message Macro 44" />
+  <macro id="367" versions="5.360 6.000 6.040" description="Extended Logic 4 Output ON" />
+  <macro id="368" versions="5.281" description="Suspend Scheduler Setpoint 18" />
+  <macro id="368" versions="5.285" description="Play Message Macro 45" />
+  <macro id="368" versions="5.360 6.000 6.040" description="Extended Logic 5 Output ON" />
+  <macro id="369" versions="5.281" description="Suspend Scheduler Setpoint 19" />
+  <macro id="369" versions="5.285" description="Play Message Macro 46" />
+  <macro id="369" versions="5.360 6.000 6.040" description="Extended Logic 6 Output ON" />
+  <macro id="370" versions="5.281" description="Suspend Scheduler Setpoint 20" />
+  <macro id="370" versions="5.285" description="Play Message Macro 47" />
+  <macro id="370" versions="5.360 6.000 6.040" description="Extended Logic 7 Output ON" />
+  <macro id="371" versions="5.281" description="Resume Scheduler Setpoint 1" />
+  <macro id="371" versions="5.285" description="Play Message Macro 48" />
+  <macro id="371" versions="5.360 6.000 6.040" description="Extended Logic 8 Output ON" />
+  <macro id="372" versions="5.281" description="Resume Scheduler Setpoint 2" />
+  <macro id="372" versions="5.285" description="Play Message Macro 49" />
+  <macro id="372" versions="5.360 6.000 6.040" description="Extended Logic 9 Output ON" />
+  <macro id="373" versions="5.281" description="Resume Scheduler Setpoint 3" />
+  <macro id="373" versions="5.285" description="Play Message Macro 50" />
+  <macro id="373" versions="5.360 6.000 6.040" description="Extended Logic 10 Output ON" />
+  <macro id="374" versions="5.281" description="Resume Scheduler Setpoint 4" />
+  <macro id="374" versions="5.285" description="Play Message Macro 51" />
+  <macro id="374" versions="5.360 6.000 6.040" description="Extended Logic 11 Output ON" />
+  <macro id="375" versions="5.281" description="Resume Scheduler Setpoint 5" />
+  <macro id="375" versions="5.285" description="Play Message Macro 52" />
+  <macro id="375" versions="5.360 6.000 6.040" description="Extended Logic 12 Output ON" />
+  <macro id="376" versions="5.281" description="Resume Scheduler Setpoint 6" />
+  <macro id="376" versions="5.285" description="Play Message Macro 53" />
+  <macro id="376" versions="5.360 6.000 6.040" description="Extended Logic 13 Output ON" />
+  <macro id="377" versions="5.281" description="Resume Scheduler Setpoint 7" />
+  <macro id="377" versions="5.285" description="Play Message Macro 54" />
+  <macro id="377" versions="5.360 6.000 6.040" description="Extended Logic 14 Output ON" />
+  <macro id="378" versions="5.281" description="Resume Scheduler Setpoint 8" />
+  <macro id="378" versions="5.285" description="Play Message Macro 55" />
+  <macro id="378" versions="5.360 6.000 6.040" description="Extended Logic 15 Output ON" />
+  <macro id="379" versions="5.281" description="Resume Scheduler Setpoint 9" />
+  <macro id="379" versions="5.285" description="Play Message Macro 56" />
+  <macro id="379" versions="5.360 6.000 6.040" description="Extended Logic 16 Output ON" />
+  <macro id="380" versions="5.281" description="Resume Scheduler Setpoint 10" />
+  <macro id="380" versions="5.285" description="Play Message Macro 57" />
+  <macro id="380" versions="5.360 6.000 6.040" description="Extended Logic 17 Output ON" />
+  <macro id="381" versions="5.281" description="Resume Scheduler Setpoint 11" />
+  <macro id="381" versions="5.285" description="Play Message Macro 58" />
+  <macro id="381" versions="5.360 6.000 6.040" description="Extended Logic 18 Output ON" />
+  <macro id="382" versions="5.281" description="Resume Scheduler Setpoint 12" />
+  <macro id="382" versions="5.285" description="Play Message Macro 59" />
+  <macro id="382" versions="5.360 6.000 6.040" description="Extended Logic 19 Output ON" />
+  <macro id="383" versions="5.281" description="Resume Scheduler Setpoint 13" />
+  <macro id="383" versions="5.285" description="Play Message Macro 60" />
+  <macro id="383" versions="5.360 6.000 6.040" description="Extended Logic 20 Output ON" />
+  <macro id="384" versions="5.281" description="Resume Scheduler Setpoint 14" />
+  <macro id="384" versions="5.285" description="Play Message Macro 61" />
+  <macro id="384" versions="5.360 6.000 6.040" description="Extended Logic 21 Output ON" />
+  <macro id="385" versions="5.281" description="Resume Scheduler Setpoint 15" />
+  <macro id="385" versions="5.285" description="Play Message Macro 62" />
+  <macro id="385" versions="5.360 6.000 6.040" description="Extended Logic 22 Output ON" />
+  <macro id="386" versions="5.281" description="Resume Scheduler Setpoint 16" />
+  <macro id="386" versions="5.285" description="Play Message Macro 63" />
+  <macro id="386" versions="5.360 6.000 6.040" description="Extended Logic 23 Output ON" />
+  <macro id="387" versions="5.281" description="Resume Scheduler Setpoint 17" />
+  <macro id="387" versions="5.285" description="Play Message Macro 64" />
+  <macro id="387" versions="5.360 6.000 6.040" description="Extended Logic 24 Output ON" />
+  <macro id="388" versions="5.281" description="Resume Scheduler Setpoint 18" />
+  <macro id="388" versions="5.285" description="Play Message Macro 65" />
+  <macro id="388" versions="5.360 6.000 6.040" description="Extended Logic 25 Output ON" />
+  <macro id="389" versions="5.281" description="Resume Scheduler Setpoint 19" />
+  <macro id="389" versions="5.285" description="Play Message Macro 66" />
+  <macro id="389" versions="5.360 6.000 6.040" description="Extended Logic 26 Output ON" />
+  <macro id="390" versions="5.281" description="Resume Scheduler Setpoint 20" />
+  <macro id="390" versions="5.285" description="Play Message Macro 67" />
+  <macro id="390" versions="5.360 6.000 6.040" description="Extended Logic 27 Output ON" />
+  <macro id="391" versions="5.281" description="Stop General Timer 1" />
+  <macro id="391" versions="5.285" description="Play Message Macro 68" />
+  <macro id="391" versions="5.360 6.000 6.040" description="Extended Logic 28 Output ON" />
+  <macro id="392" versions="5.281" description="Stop General Timer 2" />
+  <macro id="392" versions="5.285" description="Play Message Macro 69" />
+  <macro id="392" versions="5.360 6.000 6.040" description="Extended Logic 29 Output ON" />
+  <macro id="393" versions="5.281" description="Stop General Timer 3" />
+  <macro id="393" versions="5.285" description="Play Message Macro 70" />
+  <macro id="393" versions="5.360 6.000 6.040" description="Extended Logic 30 Output ON" />
+  <macro id="394" versions="5.285" description="Remote Base Memory 11" />
+  <macro id="394" versions="5.360 6.000 6.040" description="Extended Logic 31 Output ON" />
+  <macro id="395" versions="5.285" description="Remote Base Memory 12" />
+  <macro id="395" versions="5.360 6.000 6.040" description="Extended Logic 32 Output ON" />
+  <macro id="396" versions="5.285" description="Remote Base Memory 13" />
+  <macro id="396" versions="5.360 6.000 6.040" description="Extended Logic 1 Output Pulse" />
+  <macro id="397" versions="5.281" description="Macro Subset Disable" />
+  <macro id="397" versions="5.285" description="Remote Base Memory 14" />
+  <macro id="397" versions="5.360 6.000 6.040" description="Extended Logic 2 Output Pulse" />
+  <macro id="398" versions="5.281" description="Macro Subset Enable" />
+  <macro id="398" versions="5.285" description="Remote Base Memory 15" />
+  <macro id="398" versions="5.360 6.000 6.040" description="Extended Logic 3 Output Pulse" />
+  <macro id="399" versions="5.285" description="Remote Base Memory 16" />
+  <macro id="399" versions="5.360 6.000 6.040" description="Extended Logic 4 Output Pulse" />
+  <macro id="400" versions="5.285" description="Remote Base Memory 17" />
+  <macro id="400" versions="5.360 6.000 6.040" description="Extended Logic 5 Output Pulse" />
+  <macro id="401" versions="5.281" description="Macro 1" />
+  <macro id="401" versions="5.285" description="Remote Base Memory 18" />
+  <macro id="401" versions="5.360 6.000 6.040" description="Extended Logic 6 Output Pulse" />
+  <macro id="402" versions="5.281" description="Macro 2" />
+  <macro id="402" versions="5.285" description="Remote Base Memory 19" />
+  <macro id="402" versions="5.360 6.000 6.040" description="Extended Logic 7 Output Pulse" />
+  <macro id="403" versions="5.281" description="Macro 3" />
+  <macro id="403" versions="5.285" description="Remote Base Memory 20" />
+  <macro id="403" versions="5.360 6.000 6.040" description="Extended Logic 8 Output Pulse" />
+  <macro id="404" versions="5.281" description="Macro 4" />
+  <macro id="404" versions="5.285" description="Remote Base Memory 21" />
+  <macro id="404" versions="5.360 6.000 6.040" description="Extended Logic 9 Output Pulse" />
+  <macro id="405" versions="5.281" description="Macro 5" />
+  <macro id="405" versions="5.285" description="Remote Base Memory 22" />
+  <macro id="405" versions="5.360 6.000 6.040" description="Extended Logic 10 Output Pulse" />
+  <macro id="406" versions="5.281" description="Macro 6" />
+  <macro id="406" versions="5.285" description="Remote Base Memory 23" />
+  <macro id="406" versions="5.360 6.000 6.040" description="Extended Logic 11 Output Pulse" />
+  <macro id="407" versions="5.281" description="Macro 7" />
+  <macro id="407" versions="5.285" description="Remote Base Memory 24" />
+  <macro id="407" versions="5.360 6.000 6.040" description="Extended Logic 12 Output Pulse" />
+  <macro id="408" versions="5.281" description="Macro 8" />
+  <macro id="408" versions="5.285" description="Remote Base Memory 25" />
+  <macro id="408" versions="5.360 6.000 6.040" description="Extended Logic 13 Output Pulse" />
+  <macro id="409" versions="5.281" description="Macro 9" />
+  <macro id="409" versions="5.285" description="Remote Base Memory 26" />
+  <macro id="409" versions="5.360 6.000 6.040" description="Extended Logic 14 Output Pulse" />
+  <macro id="410" versions="5.281" description="Macro 10" />
+  <macro id="410" versions="5.285" description="Remote Base Memory 27" />
+  <macro id="410" versions="5.360 6.000 6.040" description="Extended Logic 15 Output Pulse" />
+  <macro id="411" versions="5.281" description="Macro 11" />
+  <macro id="411" versions="5.285" description="Remote Base Memory 28" />
+  <macro id="411" versions="5.360 6.000 6.040" description="Extended Logic 16 Output Pulse" />
+  <macro id="412" versions="5.281" description="Macro 12" />
+  <macro id="412" versions="5.285" description="Remote Base Memory 29" />
+  <macro id="412" versions="5.360 6.000 6.040" description="Extended Logic 17 Output Pulse" />
+  <macro id="413" versions="5.281" description="Macro 13" />
+  <macro id="413" versions="5.285" description="Remote Base Memory 30" />
+  <macro id="413" versions="5.360 6.000 6.040" description="Extended Logic 18 Output Pulse" />
+  <macro id="414" versions="5.281" description="Macro 14" />
+  <macro id="414" versions="5.285" description="Remote Base Memory 31" />
+  <macro id="414" versions="5.360 6.000 6.040" description="Extended Logic 19 Output Pulse" />
+  <macro id="415" versions="5.281" description="Macro 15" />
+  <macro id="415" versions="5.285" description="Remote Base Memory 32" />
+  <macro id="415" versions="5.360 6.000 6.040" description="Extended Logic 20 Output Pulse" />
+  <macro id="416" versions="5.281" description="Macro 16" />
+  <macro id="416" versions="5.285" description="Remote Base Memory 33" />
+  <macro id="416" versions="5.360 6.000 6.040" description="Extended Logic 21 Output Pulse" />
+  <macro id="417" versions="5.281" description="Macro 17" />
+  <macro id="417" versions="5.285" description="Remote Base Memory 34" />
+  <macro id="417" versions="5.360 6.000 6.040" description="Extended Logic 22 Output Pulse" />
+  <macro id="418" versions="5.281" description="Macro 18" />
+  <macro id="418" versions="5.285" description="Remote Base Memory 35" />
+  <macro id="418" versions="5.360 6.000 6.040" description="Extended Logic 23 Output Pulse" />
+  <macro id="419" versions="5.281" description="Macro 19" />
+  <macro id="419" versions="5.285" description="Remote Base Memory 36" />
+  <macro id="419" versions="5.360 6.000 6.040" description="Extended Logic 24 Output Pulse" />
+  <macro id="420" versions="5.281" description="Macro 20" />
+  <macro id="420" versions="5.285" description="Remote Base Memory 37" />
+  <macro id="420" versions="5.360 6.000 6.040" description="Extended Logic 25 Output Pulse" />
+  <macro id="421" versions="5.281" description="Macro 21" />
+  <macro id="421" versions="5.285" description="Remote Base Memory 38" />
+  <macro id="421" versions="5.360 6.000 6.040" description="Extended Logic 26 Output Pulse" />
+  <macro id="422" versions="5.281" description="Macro 22" />
+  <macro id="422" versions="5.285" description="Remote Base Memory 39" />
+  <macro id="422" versions="5.360 6.000 6.040" description="Extended Logic 27 Output Pulse" />
+  <macro id="423" versions="5.281" description="Macro 23" />
+  <macro id="423" versions="5.285" description="Remote Base Memory 40" />
+  <macro id="423" versions="5.360 6.000 6.040" description="Extended Logic 28 Output Pulse" />
+  <macro id="424" versions="5.281" description="Macro 24" />
+  <macro id="424" versions="5.285" description="Send DTMF Memory 21" />
+  <macro id="424" versions="5.360 6.000 6.040" description="Extended Logic 29 Output Pulse" />
+  <macro id="425" versions="5.281" description="Macro 25" />
+  <macro id="425" versions="5.285" description="Send DTMF Memory 22" />
+  <macro id="425" versions="5.360 6.000 6.040" description="Extended Logic 30 Output Pulse" />
+  <macro id="426" versions="5.281" description="Macro 26" />
+  <macro id="426" versions="5.285" description="Send DTMF Memory 23" />
+  <macro id="426" versions="5.360 6.000 6.040" description="Extended Logic 31 Output Pulse" />
+  <macro id="427" versions="5.281" description="Macro 27" />
+  <macro id="427" versions="5.285" description="Send DTMF Memory 24" />
+  <macro id="427" versions="5.360 6.000 6.040" description="Extended Logic 32 Output Pulse" />
+  <macro id="428" versions="5.281" description="Macro 28" />
+  <macro id="428" versions="5.285" description="Send DTMF Memory 25" />
+  <macro id="428" versions="5.360 6.000 6.040" description="Extended Logic 1 Output OFF" />
+  <macro id="429" versions="5.281" description="Macro 29" />
+  <macro id="429" versions="5.285" description="Send DTMF Memory 26" />
+  <macro id="429" versions="5.360 6.000 6.040" description="Extended Logic 2 Output OFF" />
+  <macro id="430" versions="5.281" description="Macro 30" />
+  <macro id="430" versions="5.285" description="Send DTMF Memory 27" />
+  <macro id="430" versions="5.360 6.000 6.040" description="Extended Logic 3 Output OFF" />
+  <macro id="431" versions="5.281" description="Macro 31" />
+  <macro id="431" versions="5.285" description="Send DTMF Memory 28" />
+  <macro id="431" versions="5.360 6.000 6.040" description="Extended Logic 4 Output OFF" />
+  <macro id="432" versions="5.281" description="Macro 32" />
+  <macro id="432" versions="5.285" description="Send DTMF Memory 29" />
+  <macro id="432" versions="5.360 6.000 6.040" description="Extended Logic 5 Output OFF" />
+  <macro id="433" versions="5.281" description="Macro 33" />
+  <macro id="433" versions="5.285" description="Send DTMF Memory 30" />
+  <macro id="433" versions="5.360 6.000 6.040" description="Extended Logic 6 Output OFF" />
+  <macro id="434" versions="5.281" description="Macro 34" />
+  <macro id="434" versions="5.285" description="Send DTMF Memory 31" />
+  <macro id="434" versions="5.360 6.000 6.040" description="Extended Logic 7 Output OFF" />
+  <macro id="435" versions="5.281" description="Macro 35" />
+  <macro id="435" versions="5.285" description="Send DTMF Memory 32" />
+  <macro id="435" versions="5.360 6.000 6.040" description="Extended Logic 8 Output OFF" />
+  <macro id="436" versions="5.281" description="Macro 36" />
+  <macro id="436" versions="5.285" description="Send DTMF Memory 33" />
+  <macro id="436" versions="5.360 6.000 6.040" description="Extended Logic 9 Output OFF" />
+  <macro id="437" versions="5.281" description="Macro 37" />
+  <macro id="437" versions="5.285" description="Send DTMF Memory 34" />
+  <macro id="437" versions="5.360 6.000 6.040" description="Extended Logic 10 Output OFF" />
+  <macro id="438" versions="5.281" description="Macro 38" />
+  <macro id="438" versions="5.285" description="Send DTMF Memory 35" />
+  <macro id="438" versions="5.360 6.000 6.040" description="Extended Logic 11 Output OFF" />
+  <macro id="439" versions="5.281" description="Macro 39" />
+  <macro id="439" versions="5.285" description="Send DTMF Memory 36" />
+  <macro id="439" versions="5.360 6.000 6.040" description="Extended Logic 12 Output OFF" />
+  <macro id="440" versions="5.281" description="Macro 40" />
+  <macro id="440" versions="5.285" description="Send DTMF Memory 37" />
+  <macro id="440" versions="5.360 6.000 6.040" description="Extended Logic 13 Output OFF" />
+  <macro id="441" versions="5.281" description="Macro 41" />
+  <macro id="441" versions="5.285" description="Send DTMF Memory 38" />
+  <macro id="441" versions="5.360 6.000 6.040" description="Extended Logic 14 Output OFF" />
+  <macro id="442" versions="5.281" description="Macro 42" />
+  <macro id="442" versions="5.285" description="Send DTMF Memory 39" />
+  <macro id="442" versions="5.360 6.000 6.040" description="Extended Logic 15 Output OFF" />
+  <macro id="443" versions="5.281" description="Macro 43" />
+  <macro id="443" versions="5.285" description="Send DTMF Memory 40" />
+  <macro id="443" versions="5.360 6.000 6.040" description="Extended Logic 16 Output OFF" />
+  <macro id="444" versions="5.281" description="Macro 44" />
+  <macro id="444" versions="5.285" description="Send DTMF Memory 41" />
+  <macro id="444" versions="5.360 6.000 6.040" description="Extended Logic 17 Output OFF" />
+  <macro id="445" versions="5.281" description="Macro 45" />
+  <macro id="445" versions="5.285" description="Send DTMF Memory 42" />
+  <macro id="445" versions="5.360 6.000 6.040" description="Extended Logic 18 Output OFF" />
+  <macro id="446" versions="5.281" description="Macro 46" />
+  <macro id="446" versions="5.285" description="Send DTMF Memory 43" />
+  <macro id="446" versions="5.360 6.000 6.040" description="Extended Logic 19 Output OFF" />
+  <macro id="447" versions="5.281" description="Macro 47" />
+  <macro id="447" versions="5.285" description="Send DTMF Memory 44" />
+  <macro id="447" versions="5.360 6.000 6.040" description="Extended Logic 20 Output OFF" />
+  <macro id="448" versions="5.281" description="Macro 48" />
+  <macro id="448" versions="5.285" description="Send DTMF Memory 45" />
+  <macro id="448" versions="5.360 6.000 6.040" description="Extended Logic 21 Output OFF" />
+  <macro id="449" versions="5.281" description="Macro 49" />
+  <macro id="449" versions="5.285" description="Send DTMF Memory 46" />
+  <macro id="449" versions="5.360 6.000 6.040" description="Extended Logic 22 Output OFF" />
+  <macro id="450" versions="5.281" description="Macro 50" />
+  <macro id="450" versions="5.285" description="Send DTMF Memory 47" />
+  <macro id="450" versions="5.360 6.000 6.040" description="Extended Logic 23 Output OFF" />
+  <macro id="451" versions="5.281" description="Macro 51" />
+  <macro id="451" versions="5.285" description="Send DTMF Memory 48" />
+  <macro id="451" versions="5.360 6.000 6.040" description="Extended Logic 24 Output OFF" />
+  <macro id="452" versions="5.281" description="Macro 52" />
+  <macro id="452" versions="5.285" description="Send DTMF Memory 49" />
+  <macro id="452" versions="5.360 6.000 6.040" description="Extended Logic 25 Output OFF" />
+  <macro id="453" versions="5.281" description="Macro 53" />
+  <macro id="453" versions="5.285" description="Send DTMF Memory 50" />
+  <macro id="453" versions="5.360 6.000 6.040" description="Extended Logic 26 Output OFF" />
+  <macro id="454" versions="5.281" description="Macro 54" />
+  <macro id="454" versions="5.285" description="Load RTC Time/Date" />
+  <macro id="454" versions="5.360 6.000 6.040" description="Extended Logic 27 Output OFF" />
+  <macro id="455" versions="5.281" description="Macro 55" />
+  <macro id="455" versions="5.360 6.000 6.040" description="Extended Logic 28 Output OFF" />
+  <macro id="456" versions="5.281" description="Macro 56" />
+  <macro id="456" versions="5.360 6.000 6.040" description="Extended Logic 29 Output OFF" />
+  <macro id="457" versions="5.281" description="Macro 57" />
+  <macro id="457" versions="5.360 6.000 6.040" description="Extended Logic 30 Output OFF" />
+  <macro id="458" versions="5.281" description="Macro 58" />
+  <macro id="458" versions="5.360 6.000 6.040" description="Extended Logic 31 Output OFF" />
+  <macro id="459" versions="5.281" description="Macro 59" />
+  <macro id="459" versions="5.360 6.000 6.040" description="Extended Logic 32 Output OFF" />
+  <macro id="460" versions="5.281" description="Macro 60" />
+  <macro id="460" versions="5.285" description="Suspend Scheduler Setpoint 1" />
+  <macro id="460" versions="5.360 6.000 6.040" description="Play Message Macro 41" />
+  <macro id="461" versions="5.281" description="Macro 61" />
+  <macro id="461" versions="5.285" description="Suspend Scheduler Setpoint 2" />
+  <macro id="461" versions="5.360 6.000 6.040" description="Play Message Macro 42" />
+  <macro id="462" versions="5.281" description="Macro 62" />
+  <macro id="462" versions="5.285" description="Suspend Scheduler Setpoint 3" />
+  <macro id="462" versions="5.360 6.000 6.040" description="Play Message Macro 43" />
+  <macro id="463" versions="5.281" description="Macro 63" />
+  <macro id="463" versions="5.285" description="Suspend Scheduler Setpoint 4" />
+  <macro id="463" versions="5.360 6.000 6.040" description="Play Message Macro 44" />
+  <macro id="464" versions="5.281" description="Macro 64" />
+  <macro id="464" versions="5.285" description="Suspend Scheduler Setpoint 5" />
+  <macro id="464" versions="5.360 6.000 6.040" description="Play Message Macro 45" />
+  <macro id="465" versions="5.281" description="Macro 65" />
+  <macro id="465" versions="5.285" description="Suspend Scheduler Setpoint 6" />
+  <macro id="465" versions="5.360 6.000 6.040" description="Play Message Macro 46" />
+  <macro id="466" versions="5.281" description="Macro 66" />
+  <macro id="466" versions="5.285" description="Suspend Scheduler Setpoint 7" />
+  <macro id="466" versions="5.360 6.000 6.040" description="Play Message Macro 47" />
+  <macro id="467" versions="5.281" description="Macro 67" />
+  <macro id="467" versions="5.285" description="Suspend Scheduler Setpoint 8" />
+  <macro id="467" versions="5.360 6.000 6.040" description="Play Message Macro 48" />
+  <macro id="468" versions="5.281" description="Macro 68" />
+  <macro id="468" versions="5.285" description="Suspend Scheduler Setpoint 9" />
+  <macro id="468" versions="5.360 6.000 6.040" description="Play Message Macro 49" />
+  <macro id="469" versions="5.281" description="Macro 69" />
+  <macro id="469" versions="5.285" description="Suspend Scheduler Setpoint 10" />
+  <macro id="469" versions="5.360 6.000 6.040" description="Play Message Macro 50" />
+  <macro id="470" versions="5.281" description="Macro 70" />
+  <macro id="470" versions="5.285" description="Suspend Scheduler Setpoint 11" />
+  <macro id="470" versions="5.360 6.000 6.040" description="Play Message Macro 51" />
+  <macro id="471" versions="5.281" description="Macro 71" />
+  <macro id="471" versions="5.285" description="Suspend Scheduler Setpoint 12" />
+  <macro id="471" versions="5.360 6.000 6.040" description="Play Message Macro 52" />
+  <macro id="472" versions="5.281" description="Macro 72" />
+  <macro id="472" versions="5.285" description="Suspend Scheduler Setpoint 13" />
+  <macro id="472" versions="5.360 6.000 6.040" description="Play Message Macro 53" />
+  <macro id="473" versions="5.281" description="Macro 73" />
+  <macro id="473" versions="5.285" description="Suspend Scheduler Setpoint 14" />
+  <macro id="473" versions="5.360 6.000 6.040" description="Play Message Macro 54" />
+  <macro id="474" versions="5.281" description="Macro 74" />
+  <macro id="474" versions="5.285" description="Suspend Scheduler Setpoint 15" />
+  <macro id="474" versions="5.360 6.000 6.040" description="Play Message Macro 55" />
+  <macro id="475" versions="5.281" description="Macro 75" />
+  <macro id="475" versions="5.285" description="Suspend Scheduler Setpoint 16" />
+  <macro id="475" versions="5.360 6.000 6.040" description="Play Message Macro 56" />
+  <macro id="476" versions="5.281" description="Macro 76" />
+  <macro id="476" versions="5.285" description="Suspend Scheduler Setpoint 17" />
+  <macro id="476" versions="5.360 6.000 6.040" description="Play Message Macro 57" />
+  <macro id="477" versions="5.281" description="Macro 77" />
+  <macro id="477" versions="5.285" description="Suspend Scheduler Setpoint 18" />
+  <macro id="477" versions="5.360 6.000 6.040" description="Play Message Macro 58" />
+  <macro id="478" versions="5.281" description="Macro 78" />
+  <macro id="478" versions="5.285" description="Suspend Scheduler Setpoint 19" />
+  <macro id="478" versions="5.360 6.000 6.040" description="Play Message Macro 59" />
+  <macro id="479" versions="5.281" description="Macro 79" />
+  <macro id="479" versions="5.285" description="Suspend Scheduler Setpoint 20" />
+  <macro id="479" versions="5.360 6.000 6.040" description="Play Message Macro 60" />
+  <macro id="480" versions="5.281" description="Macro 80" />
+  <macro id="480" versions="5.285" description="Resume Scheduler Setpoint 1" />
+  <macro id="480" versions="5.360 6.000 6.040" description="Play Message Macro 61" />
+  <macro id="481" versions="5.281" description="Macro 81" />
+  <macro id="481" versions="5.285" description="Resume Scheduler Setpoint 2" />
+  <macro id="481" versions="5.360 6.000 6.040" description="Play Message Macro 62" />
+  <macro id="482" versions="5.281" description="Macro 82" />
+  <macro id="482" versions="5.285" description="Resume Scheduler Setpoint 3" />
+  <macro id="482" versions="5.360 6.000 6.040" description="Play Message Macro 63" />
+  <macro id="483" versions="5.281" description="Macro 83" />
+  <macro id="483" versions="5.285" description="Resume Scheduler Setpoint 4" />
+  <macro id="483" versions="5.360 6.000 6.040" description="Play Message Macro 64" />
+  <macro id="484" versions="5.281" description="Macro 84" />
+  <macro id="484" versions="5.285" description="Resume Scheduler Setpoint 5" />
+  <macro id="484" versions="5.360 6.000 6.040" description="Play Message Macro 65" />
+  <macro id="485" versions="5.281" description="Macro 85" />
+  <macro id="485" versions="5.285" description="Resume Scheduler Setpoint 6" />
+  <macro id="485" versions="5.360 6.000 6.040" description="Play Message Macro 66" />
+  <macro id="486" versions="5.281" description="Macro 86" />
+  <macro id="486" versions="5.285" description="Resume Scheduler Setpoint 7" />
+  <macro id="486" versions="5.360 6.000 6.040" description="Play Message Macro 67" />
+  <macro id="487" versions="5.281" description="Macro 87" />
+  <macro id="487" versions="5.285" description="Resume Scheduler Setpoint 8" />
+  <macro id="487" versions="5.360 6.000 6.040" description="Play Message Macro 68" />
+  <macro id="488" versions="5.281" description="Macro 88" />
+  <macro id="488" versions="5.285" description="Resume Scheduler Setpoint 9" />
+  <macro id="488" versions="5.360 6.000 6.040" description="Play Message Macro 69" />
+  <macro id="489" versions="5.281" description="Macro 89" />
+  <macro id="489" versions="5.285" description="Resume Scheduler Setpoint 10" />
+  <macro id="489" versions="5.360 6.000 6.040" description="Play Message Macro 70" />
+  <macro id="490" versions="5.281" description="Macro 90" />
+  <macro id="490" versions="5.285" description="Resume Scheduler Setpoint 11" />
+  <macro id="490" versions="5.360 6.000 6.040" description="Remote Base Memory 11" />
+  <macro id="491" versions="5.285" description="Resume Scheduler Setpoint 12" />
+  <macro id="491" versions="5.360 6.000 6.040" description="Remote Base Memory 12" />
+  <macro id="492" versions="5.285" description="Resume Scheduler Setpoint 13" />
+  <macro id="492" versions="5.360 6.000 6.040" description="Remote Base Memory 13" />
+  <macro id="493" versions="5.285" description="Resume Scheduler Setpoint 14" />
+  <macro id="493" versions="5.360 6.000 6.040" description="Remote Base Memory 14" />
+  <macro id="494" versions="5.285" description="Resume Scheduler Setpoint 15" />
+  <macro id="494" versions="5.360 6.000 6.040" description="Remote Base Memory 15" />
+  <macro id="495" versions="5.285" description="Resume Scheduler Setpoint 16" />
+  <macro id="495" versions="5.360 6.000 6.040" description="Remote Base Memory 16" />
+  <macro id="496" versions="5.285" description="Resume Scheduler Setpoint 17" />
+  <macro id="496" versions="5.360 6.000 6.040" description="Remote Base Memory 17" />
+  <macro id="497" versions="5.285" description="Resume Scheduler Setpoint 18" />
+  <macro id="497" versions="5.360 6.000 6.040" description="Remote Base Memory 18" />
+  <macro id="498" versions="5.285" description="Resume Scheduler Setpoint 19" />
+  <macro id="498" versions="5.360 6.000 6.040" description="Remote Base Memory 19" />
+  <macro id="499" versions="5.285" description="Resume Scheduler Setpoint 20" />
+  <macro id="499" versions="5.360 6.000 6.040" description="Remote Base Memory 20" />
+  <macro id="500" versions="5.360 6.000 6.040" description="Remote Base Memory 21" />
+  <macro id="501" versions="5.285" description="Call Macro 1" />
+  <macro id="501" versions="5.360 6.000 6.040" description="Remote Base Memory 22" />
+  <macro id="502" versions="5.285" description="Call Macro 2" />
+  <macro id="502" versions="5.360 6.000 6.040" description="Remote Base Memory 23" />
+  <macro id="503" versions="5.285" description="Call Macro 3" />
+  <macro id="503" versions="5.360 6.000 6.040" description="Remote Base Memory 24" />
+  <macro id="504" versions="5.285" description="Call Macro 4" />
+  <macro id="504" versions="5.360 6.000 6.040" description="Remote Base Memory 25" />
+  <macro id="505" versions="5.285" description="Call Macro 5" />
+  <macro id="505" versions="5.360 6.000 6.040" description="Remote Base Memory 26" />
+  <macro id="506" versions="5.285" description="Call Macro 6" />
+  <macro id="506" versions="5.360 6.000 6.040" description="Remote Base Memory 27" />
+  <macro id="507" versions="5.285" description="Call Macro 7" />
+  <macro id="507" versions="5.360 6.000 6.040" description="Remote Base Memory 28" />
+  <macro id="508" versions="5.285" description="Call Macro 8" />
+  <macro id="508" versions="5.360 6.000 6.040" description="Remote Base Memory 29" />
+  <macro id="509" versions="5.285" description="Call Macro 9" />
+  <macro id="509" versions="5.360 6.000 6.040" description="Remote Base Memory 30" />
+  <macro id="510" versions="5.285" description="Call Macro 10" />
+  <macro id="511" versions="5.285" description="Call Macro 11" />
+  <macro id="511" versions="5.360 6.000 6.040" description="Remote Base Memory 31" />
+  <macro id="512" versions="5.285" description="Call Macro 12" />
+  <macro id="512" versions="5.360 6.000 6.040" description="Remote Base Memory 32" />
+  <macro id="513" versions="5.285" description="Call Macro 13" />
+  <macro id="513" versions="5.360 6.000 6.040" description="Remote Base Memory 33" />
+  <macro id="514" versions="5.285" description="Call Macro 14" />
+  <macro id="514" versions="5.360 6.000 6.040" description="Remote Base Memory 34" />
+  <macro id="515" versions="5.285" description="Call Macro 15" />
+  <macro id="515" versions="5.360 6.000 6.040" description="Remote Base Memory 35" />
+  <macro id="516" versions="5.285" description="Call Macro 16" />
+  <macro id="516" versions="5.360 6.000 6.040" description="Remote Base Memory 36" />
+  <macro id="517" versions="5.285" description="Call Macro 17" />
+  <macro id="517" versions="5.360 6.000 6.040" description="Remote Base Memory 37" />
+  <macro id="518" versions="5.285" description="Call Macro 18" />
+  <macro id="518" versions="5.360 6.000 6.040" description="Remote Base Memory 38" />
+  <macro id="519" versions="5.285" description="Call Macro 19" />
+  <macro id="519" versions="5.360 6.000 6.040" description="Remote Base Memory 39" />
+  <macro id="520" versions="5.285" description="Call Macro 20" />
+  <macro id="520" versions="5.360 6.000 6.040" description="Remote Base Memory 40" />
+  <macro id="521" versions="5.285" description="Call Macro 21" />
+  <macro id="521" versions="5.360 6.000 6.040" description="Send DTMF Memory 21" />
+  <macro id="522" versions="5.285" description="Call Macro 22" />
+  <macro id="522" versions="5.360 6.000 6.040" description="Send DTMF Memory 22" />
+  <macro id="523" versions="5.285" description="Call Macro 23" />
+  <macro id="523" versions="5.360 6.000 6.040" description="Send DTMF Memory 23" />
+  <macro id="524" versions="5.285" description="Call Macro 24" />
+  <macro id="524" versions="5.360 6.000 6.040" description="Send DTMF Memory 24" />
+  <macro id="525" versions="5.285" description="Call Macro 25" />
+  <macro id="525" versions="5.360 6.000 6.040" description="Send DTMF Memory 25" />
+  <macro id="526" versions="5.285" description="Call Macro 26" />
+  <macro id="526" versions="5.360 6.000 6.040" description="Send DTMF Memory 26" />
+  <macro id="527" versions="5.285" description="Call Macro 27" />
+  <macro id="527" versions="5.360 6.000 6.040" description="Send DTMF Memory 27" />
+  <macro id="528" versions="5.285" description="Call Macro 28" />
+  <macro id="528" versions="5.360 6.000 6.040" description="Send DTMF Memory 28" />
+  <macro id="529" versions="5.285" description="Call Macro 29" />
+  <macro id="529" versions="5.360 6.000 6.040" description="Send DTMF Memory 29" />
+  <macro id="530" versions="5.285" description="Call Macro 30" />
+  <macro id="530" versions="5.360 6.000 6.040" description="Send DTMF Memory 30" />
+  <macro id="531" versions="5.285" description="Call Macro 31" />
+  <macro id="531" versions="5.360 6.000 6.040" description="Send DTMF Memory 31" />
+  <macro id="532" versions="5.285" description="Call Macro 32" />
+  <macro id="532" versions="5.360 6.000 6.040" description="Send DTMF Memory 32" />
+  <macro id="533" versions="5.285" description="Call Macro 33" />
+  <macro id="533" versions="5.360 6.000 6.040" description="Send DTMF Memory 33" />
+  <macro id="534" versions="5.285" description="Call Macro 34" />
+  <macro id="534" versions="5.360 6.000 6.040" description="Send DTMF Memory 34" />
+  <macro id="535" versions="5.285" description="Call Macro 35" />
+  <macro id="535" versions="5.360 6.000 6.040" description="Send DTMF Memory 35" />
+  <macro id="536" versions="5.285" description="Call Macro 36" />
+  <macro id="536" versions="5.360 6.000 6.040" description="Send DTMF Memory 36" />
+  <macro id="537" versions="5.285" description="Call Macro 37" />
+  <macro id="537" versions="5.360 6.000 6.040" description="Send DTMF Memory 37" />
+  <macro id="538" versions="5.285" description="Call Macro 38" />
+  <macro id="538" versions="5.360 6.000 6.040" description="Send DTMF Memory 38" />
+  <macro id="539" versions="5.285" description="Call Macro 39" />
+  <macro id="539" versions="5.360 6.000 6.040" description="Send DTMF Memory 39" />
+  <macro id="540" versions="5.285" description="Call Macro 40" />
+  <macro id="540" versions="5.360 6.000 6.040" description="Send DTMF Memory 40" />
+  <macro id="541" versions="5.285" description="Call Macro 41" />
+  <macro id="541" versions="5.360 6.000 6.040" description="Send DTMF Memory 41" />
+  <macro id="542" versions="5.285" description="Call Macro 42" />
+  <macro id="542" versions="5.360 6.000 6.040" description="Send DTMF Memory 42" />
+  <macro id="543" versions="5.285" description="Call Macro 43" />
+  <macro id="543" versions="5.360 6.000 6.040" description="Send DTMF Memory 43" />
+  <macro id="544" versions="5.285" description="Call Macro 44" />
+  <macro id="544" versions="5.360 6.000 6.040" description="Send DTMF Memory 44" />
+  <macro id="545" versions="5.285" description="Call Macro 45" />
+  <macro id="545" versions="5.360 6.000 6.040" description="Send DTMF Memory 45" />
+  <macro id="546" versions="5.285" description="Call Macro 46" />
+  <macro id="546" versions="5.360 6.000 6.040" description="Send DTMF Memory 46" />
+  <macro id="547" versions="5.285" description="Call Macro 47" />
+  <macro id="547" versions="5.360 6.000 6.040" description="Send DTMF Memory 47" />
+  <macro id="548" versions="5.285" description="Call Macro 48" />
+  <macro id="548" versions="5.360 6.000 6.040" description="Send DTMF Memory 48" />
+  <macro id="549" versions="5.285" description="Call Macro 49" />
+  <macro id="549" versions="5.360 6.000 6.040" description="Send DTMF Memory 49" />
+  <macro id="550" versions="5.285" description="Call Macro 50" />
+  <macro id="550" versions="5.360 6.000 6.040" description="Send DTMF Memory 50" />
+  <macro id="551" versions="5.285" description="Call Macro 51" />
+  <macro id="551" versions="5.360 6.000 6.040" description="Get RTC Time and Date" />
+  <macro id="552" versions="5.285" description="Call Macro 52" />
+  <macro id="552" versions="6.000 6.040" description="CTCSS During ID ON" />
+  <macro id="553" versions="5.285" description="Call Macro 53" />
+  <macro id="553" versions="6.000 6.040" description="CTCSS During ID OFF" />
+  <macro id="554" versions="5.285" description="Call Macro 54" />
+  <macro id="555" versions="5.285" description="Call Macro 55" />
+  <macro id="556" versions="5.285" description="Call Macro 56" />
+  <macro id="557" versions="5.285" description="Call Macro 57" />
+  <macro id="558" versions="5.285" description="Call Macro 58" />
+  <macro id="559" versions="5.285" description="Call Macro 59" />
+  <macro id="560" versions="5.285" description="Call Macro 60" />
+  <macro id="560" versions="5.360" description="Suspend Scheduler Setpoint 1" />
+  <macro id="561" versions="5.285" description="Call Macro 61" />
+  <macro id="561" versions="5.360" description="Suspend Scheduler Setpoint 2" />
+  <macro id="561" versions="6.000 6.040" description="Restart Controller" />
+  <macro id="562" versions="5.285" description="Call Macro 62" />
+  <macro id="562" versions="5.360" description="Suspend Scheduler Setpoint 3" />
+  <macro id="563" versions="5.285" description="Call Macro 63" />
+  <macro id="563" versions="5.360" description="Suspend Scheduler Setpoint 4" />
+  <macro id="564" versions="5.285" description="Call Macro 64" />
+  <macro id="564" versions="5.360" description="Suspend Scheduler Setpoint 5" />
+  <macro id="565" versions="5.285" description="Call Macro 65" />
+  <macro id="565" versions="5.360" description="Suspend Scheduler Setpoint 6" />
+  <macro id="566" versions="5.285" description="Call Macro 66" />
+  <macro id="566" versions="5.360" description="Suspend Scheduler Setpoint 7" />
+  <macro id="567" versions="5.285" description="Call Macro 67" />
+  <macro id="567" versions="5.360" description="Suspend Scheduler Setpoint 8" />
+  <macro id="568" versions="5.285" description="Call Macro 68" />
+  <macro id="568" versions="5.360" description="Suspend Scheduler Setpoint 9" />
+  <macro id="569" versions="5.285" description="Call Macro 69" />
+  <macro id="569" versions="5.360" description="Suspend Scheduler Setpoint 10" />
+  <macro id="570" versions="5.285" description="Call Macro 70" />
+  <macro id="570" versions="5.360" description="Suspend Scheduler Setpoint 11" />
+  <macro id="570" versions="6.000 6.040" description="Readback A/D Channel 1 Stored Low" />
+  <macro id="571" versions="5.285" description="Call Macro 71" />
+  <macro id="571" versions="5.360" description="Suspend Scheduler Setpoint 12" />
+  <macro id="571" versions="6.000 6.040" description="Readback A/D Channel 2 Stored Low" />
+  <macro id="572" versions="5.285" description="Call Macro 72" />
+  <macro id="572" versions="5.360" description="Suspend Scheduler Setpoint 13" />
+  <macro id="572" versions="6.000 6.040" description="Readback A/D Channel 3 Stored Low" />
+  <macro id="573" versions="5.285" description="Call Macro 73" />
+  <macro id="573" versions="5.360" description="Suspend Scheduler Setpoint 14" />
+  <macro id="573" versions="6.000 6.040" description="Readback A/D Channel 4 Stored Low" />
+  <macro id="574" versions="5.285" description="Call Macro 74" />
+  <macro id="574" versions="5.360" description="Suspend Scheduler Setpoint 15" />
+  <macro id="574" versions="6.000 6.040" description="Readback A/D Channel 5 Stored Low" />
+  <macro id="575" versions="5.285" description="Call Macro 75" />
+  <macro id="575" versions="5.360" description="Suspend Scheduler Setpoint 16" />
+  <macro id="575" versions="6.000 6.040" description="Readback A/D Channel 6 Stored Low" />
+  <macro id="576" versions="5.285" description="Call Macro 76" />
+  <macro id="576" versions="5.360" description="Suspend Scheduler Setpoint 17" />
+  <macro id="576" versions="6.000 6.040" description="Readback A/D Channel 7 Stored Low" />
+  <macro id="577" versions="5.285" description="Call Macro 77" />
+  <macro id="577" versions="5.360" description="Suspend Scheduler Setpoint 18" />
+  <macro id="577" versions="6.000 6.040" description="Readback A/D Channel 8 Stored Low" />
+  <macro id="578" versions="5.285" description="Call Macro 78" />
+  <macro id="578" versions="5.360" description="Suspend Scheduler Setpoint 19" />
+  <macro id="578" versions="6.000 6.040" description="Readback A/D Channel 1 Stored High" />
+  <macro id="579" versions="5.285" description="Call Macro 79" />
+  <macro id="579" versions="5.360" description="Suspend Scheduler Setpoint 20" />
+  <macro id="579" versions="6.000 6.040" description="Readback A/D Channel 2 Stored High" />
+  <macro id="580" versions="5.285" description="Call Macro 80" />
+  <macro id="580" versions="5.360" description="Resume Scheduler Setpoint 1" />
+  <macro id="580" versions="6.000 6.040" description="Readback A/D Channel 3 Stored High" />
+  <macro id="581" versions="5.285" description="Call Macro 81" />
+  <macro id="581" versions="5.360" description="Resume Scheduler Setpoint 2" />
+  <macro id="581" versions="6.000 6.040" description="Readback A/D Channel 4 Stored High" />
+  <macro id="582" versions="5.285" description="Call Macro 82" />
+  <macro id="582" versions="5.360" description="Resume Scheduler Setpoint 3" />
+  <macro id="582" versions="6.000 6.040" description="Readback A/D Channel 5 Stored High" />
+  <macro id="583" versions="5.285" description="Call Macro 83" />
+  <macro id="583" versions="5.360" description="Resume Scheduler Setpoint 4" />
+  <macro id="583" versions="6.000 6.040" description="Readback A/D Channel 6 Stored High" />
+  <macro id="584" versions="5.285" description="Call Macro 84" />
+  <macro id="584" versions="5.360" description="Resume Scheduler Setpoint 5" />
+  <macro id="584" versions="6.000 6.040" description="Readback A/D Channel 7 Stored High" />
+  <macro id="585" versions="5.285" description="Call Macro 85" />
+  <macro id="585" versions="5.360" description="Resume Scheduler Setpoint 6" />
+  <macro id="585" versions="6.000 6.040" description="Readback A/D Channel 8 Stored High" />
+  <macro id="586" versions="5.285" description="Call Macro 86" />
+  <macro id="586" versions="5.360" description="Resume Scheduler Setpoint 7" />
+  <macro id="586" versions="6.000 6.040" description="Disable Port 1 Timeout Timer ONLY for 60 min." />
+  <macro id="587" versions="5.285" description="Call Macro 87" />
+  <macro id="587" versions="5.360" description="Resume Scheduler Setpoint 8" />
+  <macro id="587" versions="6.000 6.040" description="Disable Port 2 Timeout Timer ONLY for 60 min." />
+  <macro id="588" versions="5.285" description="Call Macro 88" />
+  <macro id="588" versions="5.360" description="Resume Scheduler Setpoint 9" />
+  <macro id="588" versions="6.000 6.040" description="Disable Port 3 Timeout Timer ONLY for 60 min." />
+  <macro id="589" versions="5.285" description="Call Macro 89" />
+  <macro id="589" versions="5.360" description="Resume Scheduler Setpoint 10" />
+  <macro id="589" versions="6.000 6.040" description="Enable Port 1 Timeout Timer ONLY for 60 min." />
+  <macro id="590" versions="5.285" description="Call Macro 90" />
+  <macro id="590" versions="5.360" description="Resume Scheduler Setpoint 11" />
+  <macro id="590" versions="6.000 6.040" description="Enable Port 2 Timeout Timer ONLY for 60 min." />
+  <macro id="591" versions="5.360" description="Resume Scheduler Setpoint 12" />
+  <macro id="591" versions="6.000 6.040" description="Enable Port 3 Timeout Timer ONLY for 60 min." />
+  <macro id="592" versions="5.360" description="Resume Scheduler Setpoint 13" />
+  <macro id="592" versions="6.000 6.040" description="Current wind speed and direction" />
+  <macro id="593" versions="5.360" description="Resume Scheduler Setpoint 14" />
+  <macro id="593" versions="6.000 6.040" description="Current Outdoor temperature" />
+  <macro id="594" versions="5.360" description="Resume Scheduler Setpoint 15" />
+  <macro id="594" versions="6.000 6.040" description="Indoor humidity" />
+  <macro id="595" versions="5.360" description="Resume Scheduler Setpoint 16" />
+  <macro id="595" versions="6.000 6.040" description="Outdoor humidity" />
+  <macro id="596" versions="5.360" description="Resume Scheduler Setpoint 17" />
+  <macro id="596" versions="6.000 6.040" description="Wind Speed high and direction (since Midnight)" />
+  <macro id="597" versions="5.360" description="Resume Scheduler Setpoint 18" />
+  <macro id="597" versions="6.000 6.040" description="Outdoor Temp High (since Midnight)" />
+  <macro id="598" versions="5.360" description="Resume Scheduler Setpoint 19" />
+  <macro id="598" versions="6.000 6.040" description="Outdoor Temp Low (since Midnight)" />
+  <macro id="599" versions="5.360" description="Resume Scheduler Setpoint 20" />
+  <macro id="601" versions="5.360" description="Call Macro 1" />
+  <macro id="602" versions="5.360" description="Call Macro 2" />
+  <macro id="603" versions="5.360" description="Call Macro 3" />
+  <macro id="604" versions="5.360" description="Call Macro 4" />
+  <macro id="605" versions="5.360" description="Call Macro 5" />
+  <macro id="605" versions="6.000 6.040" description="Speak Current Remote Base Freq and Offset" />
+  <macro id="606" versions="5.360" description="Call Macro 6" />
+  <macro id="606" versions="6.040" description="Start General Timer 4" />
+  <macro id="607" versions="5.360" description="Call Macro 7" />
+  <macro id="607" versions="6.040" description="Start General Timer 5" />
+  <macro id="608" versions="5.360" description="Call Macro 8" />
+  <macro id="608" versions="6.040" description="Start General Timer 6" />
+  <macro id="609" versions="5.360" description="Call Macro 9" />
+  <macro id="609" versions="6.040" description="Stop General Timer 4" />
+  <macro id="610" versions="5.360" description="Call Macro 10" />
+  <macro id="610" versions="6.040" description="Stop General Timer 5" />
+  <macro id="611" versions="5.360" description="Call Macro 11" />
+  <macro id="611" versions="6.040" description="Stop General Timer 6" />
+  <macro id="612" versions="5.360" description="Call Macro 12" />
+  <macro id="612" versions="6.040" description="Disable Port 1 Inactivity Timer" />
+  <macro id="613" versions="5.360" description="Call Macro 13" />
+  <macro id="613" versions="6.040" description="Disable Port 2 Inactivity Timer" />
+  <macro id="614" versions="5.360" description="Call Macro 14" />
+  <macro id="614" versions="6.040" description="Disable Port 3 Inactivity Timer" />
+  <macro id="615" versions="5.360" description="Call Macro 15" />
+  <macro id="615" versions="6.040" description="Enable Port 1 Inactivity Timer to Programmed Value" />
+  <macro id="616" versions="5.360" description="Call Macro 16" />
+  <macro id="616" versions="6.040" description="Enable Port 2 Inactivity Timer to Programmed Value" />
+  <macro id="617" versions="5.360" description="Call Macro 17" />
+  <macro id="617" versions="6.040" description="Enable Port 3 Inactivity Timer to Programmed Value" />
+  <macro id="618" versions="5.360" description="Call Macro 18" />
+  <macro id="618" versions="6.040" description="1 Second Execution Delay" />
+  <macro id="619" versions="5.360" description="Call Macro 19" />
+  <macro id="619" versions="6.040" description="2 Second Execution Delay" />
+  <macro id="620" versions="5.360" description="Call Macro 20" />
+  <macro id="620" versions="6.040" description="4 Second Execution Delay" />
+  <macro id="621" versions="5.360" description="Call Macro 21" />
+  <macro id="622" versions="5.360" description="Call Macro 22" />
+  <macro id="623" versions="5.360" description="Call Macro 23" />
+  <macro id="624" versions="5.360" description="Call Macro 24" />
+  <macro id="625" versions="5.360" description="Call Macro 25" />
+  <macro id="626" versions="5.360" description="Call Macro 26" />
+  <macro id="627" versions="5.360" description="Call Macro 27" />
+  <macro id="628" versions="5.360" description="Call Macro 28" />
+  <macro id="629" versions="5.360" description="Call Macro 29" />
+  <macro id="630" versions="5.360" description="Call Macro 30" />
+  <macro id="631" versions="5.360" description="Call Macro 31" />
+  <macro id="632" versions="5.360" description="Call Macro 32" />
+  <macro id="633" versions="5.360" description="Call Macro 33" />
+  <macro id="634" versions="5.360" description="Call Macro 34" />
+  <macro id="635" versions="5.360" description="Call Macro 35" />
+  <macro id="636" versions="5.360" description="Call Macro 36" />
+  <macro id="637" versions="5.360" description="Call Macro 37" />
+  <macro id="638" versions="5.360" description="Call Macro 38" />
+  <macro id="639" versions="5.360" description="Call Macro 39" />
+  <macro id="640" versions="5.360" description="Call Macro 40" />
+  <macro id="641" versions="5.360" description="Call Macro 41" />
+  <macro id="642" versions="5.360" description="Call Macro 42" />
+  <macro id="643" versions="5.360" description="Call Macro 43" />
+  <macro id="644" versions="5.360" description="Call Macro 44" />
+  <macro id="645" versions="5.360" description="Call Macro 45" />
+  <macro id="646" versions="5.360" description="Call Macro 46" />
+  <macro id="647" versions="5.360" description="Call Macro 47" />
+  <macro id="648" versions="5.360" description="Call Macro 48" />
+  <macro id="649" versions="5.360" description="Call Macro 49" />
+  <macro id="650" versions="5.360" description="Call Macro 50" />
+  <macro id="651" versions="5.360" description="Call Macro 51" />
+  <macro id="652" versions="5.360" description="Call Macro 52" />
+  <macro id="653" versions="5.360" description="Call Macro 53" />
+  <macro id="654" versions="5.360" description="Call Macro 54" />
+  <macro id="655" versions="5.360" description="Call Macro 55" />
+  <macro id="656" versions="5.360" description="Call Macro 56" />
+  <macro id="657" versions="5.360" description="Call Macro 57" />
+  <macro id="658" versions="5.360" description="Call Macro 58" />
+  <macro id="659" versions="5.360" description="Call Macro 59" />
+  <macro id="660" versions="5.360" description="Call Macro 60" />
+  <macro id="660" versions="6.000 6.040" description="Suspend Scheduler Setpoint 1" />
+  <macro id="661" versions="5.360" description="Call Macro 61" />
+  <macro id="661" versions="6.000 6.040" description="Suspend Scheduler Setpoint 2" />
+  <macro id="662" versions="5.360" description="Call Macro 62" />
+  <macro id="662" versions="6.000 6.040" description="Suspend Scheduler Setpoint 3" />
+  <macro id="663" versions="5.360" description="Call Macro 63" />
+  <macro id="663" versions="6.000 6.040" description="Suspend Scheduler Setpoint 4" />
+  <macro id="664" versions="5.360" description="Call Macro 64" />
+  <macro id="664" versions="6.000 6.040" description="Suspend Scheduler Setpoint 5" />
+  <macro id="665" versions="5.360" description="Call Macro 65" />
+  <macro id="665" versions="6.000 6.040" description="Suspend Scheduler Setpoint 6" />
+  <macro id="666" versions="5.360" description="Call Macro 66" />
+  <macro id="666" versions="6.000 6.040" description="Suspend Scheduler Setpoint 7" />
+  <macro id="667" versions="5.360" description="Call Macro 67" />
+  <macro id="667" versions="6.000 6.040" description="Suspend Scheduler Setpoint 8" />
+  <macro id="668" versions="5.360" description="Call Macro 68" />
+  <macro id="668" versions="6.000 6.040" description="Suspend Scheduler Setpoint 9" />
+  <macro id="669" versions="5.360" description="Call Macro 69" />
+  <macro id="669" versions="6.000 6.040" description="Suspend Scheduler Setpoint 10" />
+  <macro id="670" versions="5.360" description="Call Macro 70" />
+  <macro id="670" versions="6.000 6.040" description="Suspend Scheduler Setpoint 11" />
+  <macro id="671" versions="5.360" description="Call Macro 71" />
+  <macro id="671" versions="6.000 6.040" description="Suspend Scheduler Setpoint 12" />
+  <macro id="672" versions="5.360" description="Call Macro 72" />
+  <macro id="672" versions="6.000 6.040" description="Suspend Scheduler Setpoint 13" />
+  <macro id="673" versions="5.360" description="Call Macro 73" />
+  <macro id="673" versions="6.000 6.040" description="Suspend Scheduler Setpoint 14" />
+  <macro id="674" versions="5.360" description="Call Macro 74" />
+  <macro id="674" versions="6.000 6.040" description="Suspend Scheduler Setpoint 15" />
+  <macro id="675" versions="5.360" description="Call Macro 75" />
+  <macro id="675" versions="6.000 6.040" description="Suspend Scheduler Setpoint 16" />
+  <macro id="676" versions="5.360" description="Call Macro 76" />
+  <macro id="676" versions="6.000 6.040" description="Suspend Scheduler Setpoint 17" />
+  <macro id="677" versions="5.360" description="Call Macro 77" />
+  <macro id="677" versions="6.000 6.040" description="Suspend Scheduler Setpoint 18" />
+  <macro id="678" versions="5.360" description="Call Macro 78" />
+  <macro id="678" versions="6.000 6.040" description="Suspend Scheduler Setpoint 19" />
+  <macro id="679" versions="5.360" description="Call Macro 79" />
+  <macro id="679" versions="6.000 6.040" description="Suspend Scheduler Setpoint 20" />
+  <macro id="680" versions="5.360" description="Call Macro 80" />
+  <macro id="680" versions="6.000 6.040" description="Resume Scheduler Setpoint 1" />
+  <macro id="681" versions="5.360" description="Call Macro 81" />
+  <macro id="681" versions="6.000 6.040" description="Resume Scheduler Setpoint 2" />
+  <macro id="682" versions="5.360" description="Call Macro 82" />
+  <macro id="682" versions="6.000 6.040" description="Resume Scheduler Setpoint 3" />
+  <macro id="683" versions="5.360" description="Call Macro 83" />
+  <macro id="683" versions="6.000 6.040" description="Resume Scheduler Setpoint 4" />
+  <macro id="684" versions="5.360" description="Call Macro 84" />
+  <macro id="684" versions="6.000 6.040" description="Resume Scheduler Setpoint 5" />
+  <macro id="685" versions="5.360" description="Call Macro 85" />
+  <macro id="685" versions="6.000 6.040" description="Resume Scheduler Setpoint 6" />
+  <macro id="686" versions="5.360" description="Call Macro 86" />
+  <macro id="686" versions="6.000 6.040" description="Resume Scheduler Setpoint 7" />
+  <macro id="687" versions="5.360" description="Call Macro 87" />
+  <macro id="687" versions="6.000 6.040" description="Resume Scheduler Setpoint 8" />
+  <macro id="688" versions="5.360" description="Call Macro 88" />
+  <macro id="688" versions="6.000 6.040" description="Resume Scheduler Setpoint 9" />
+  <macro id="689" versions="5.360" description="Call Macro 89" />
+  <macro id="689" versions="6.000 6.040" description="Resume Scheduler Setpoint 10" />
+  <macro id="690" versions="5.360" description="Call Macro 90" />
+  <macro id="690" versions="6.000 6.040" description="Resume Scheduler Setpoint 11" />
+  <macro id="691" versions="6.000 6.040" description="Resume Scheduler Setpoint 12" />
+  <macro id="692" versions="6.000 6.040" description="Resume Scheduler Setpoint 13" />
+  <macro id="693" versions="6.000 6.040" description="Resume Scheduler Setpoint 14" />
+  <macro id="694" versions="6.000 6.040" description="Resume Scheduler Setpoint 15" />
+  <macro id="695" versions="6.000 6.040" description="Resume Scheduler Setpoint 16" />
+  <macro id="696" versions="6.000 6.040" description="Resume Scheduler Setpoint 17" />
+  <macro id="697" versions="6.000 6.040" description="Resume Scheduler Setpoint 18" />
+  <macro id="698" versions="6.000 6.040" description="Resume Scheduler Setpoint 19" />
+  <macro id="699" versions="6.000 6.040" description="Resume Scheduler Setpoint 20" />
+  <macro id="701" versions="6.000 6.040" description="Call Macro 1" />
+  <macro id="702" versions="6.000 6.040" description="Call Macro 2" />
+  <macro id="703" versions="6.000 6.040" description="Call Macro 3" />
+  <macro id="704" versions="6.000 6.040" description="Call Macro 4" />
+  <macro id="705" versions="6.000 6.040" description="Call Macro 5" />
+  <macro id="706" versions="6.000 6.040" description="Call Macro 6" />
+  <macro id="707" versions="6.000 6.040" description="Call Macro 7" />
+  <macro id="708" versions="6.000 6.040" description="Call Macro 8" />
+  <macro id="709" versions="6.000 6.040" description="Call Macro 9" />
+  <macro id="710" versions="6.000 6.040" description="Call Macro 10" />
+  <macro id="711" versions="6.000 6.040" description="Call Macro 11" />
+  <macro id="712" versions="6.000 6.040" description="Call Macro 12" />
+  <macro id="713" versions="6.000 6.040" description="Call Macro 13" />
+  <macro id="714" versions="6.000 6.040" description="Call Macro 14" />
+  <macro id="715" versions="6.000 6.040" description="Call Macro 15" />
+  <macro id="716" versions="6.000 6.040" description="Call Macro 16" />
+  <macro id="717" versions="6.000 6.040" description="Call Macro 17" />
+  <macro id="718" versions="6.000 6.040" description="Call Macro 18" />
+  <macro id="719" versions="6.000 6.040" description="Call Macro 19" />
+  <macro id="720" versions="6.000 6.040" description="Call Macro 20" />
+  <macro id="721" versions="6.000 6.040" description="Call Macro 21" />
+  <macro id="722" versions="6.000 6.040" description="Call Macro 22" />
+  <macro id="723" versions="6.000 6.040" description="Call Macro 23" />
+  <macro id="724" versions="6.000 6.040" description="Call Macro 24" />
+  <macro id="725" versions="6.000 6.040" description="Call Macro 25" />
+  <macro id="726" versions="6.000 6.040" description="Call Macro 26" />
+  <macro id="727" versions="6.000 6.040" description="Call Macro 27" />
+  <macro id="728" versions="6.000 6.040" description="Call Macro 28" />
+  <macro id="729" versions="6.000 6.040" description="Call Macro 29" />
+  <macro id="730" versions="6.000 6.040" description="Call Macro 30" />
+  <macro id="731" versions="6.000 6.040" description="Call Macro 31" />
+  <macro id="732" versions="6.000 6.040" description="Call Macro 32" />
+  <macro id="733" versions="6.000 6.040" description="Call Macro 33" />
+  <macro id="734" versions="6.000 6.040" description="Call Macro 34" />
+  <macro id="735" versions="6.000 6.040" description="Call Macro 35" />
+  <macro id="736" versions="6.000 6.040" description="Call Macro 36" />
+  <macro id="737" versions="6.000 6.040" description="Call Macro 37" />
+  <macro id="738" versions="6.000 6.040" description="Call Macro 38" />
+  <macro id="739" versions="6.000 6.040" description="Call Macro 39" />
+  <macro id="740" versions="6.000 6.040" description="Call Macro 40" />
+  <macro id="741" versions="6.000 6.040" description="Call Macro 41" />
+  <macro id="742" versions="6.000 6.040" description="Call Macro 42" />
+  <macro id="743" versions="6.000 6.040" description="Call Macro 43" />
+  <macro id="744" versions="6.000 6.040" description="Call Macro 44" />
+  <macro id="745" versions="6.000 6.040" description="Call Macro 45" />
+  <macro id="746" versions="6.000 6.040" description="Call Macro 46" />
+  <macro id="747" versions="6.000 6.040" description="Call Macro 47" />
+  <macro id="748" versions="6.000 6.040" description="Call Macro 48" />
+  <macro id="749" versions="6.000 6.040" description="Call Macro 49" />
+  <macro id="750" versions="6.000 6.040" description="Call Macro 50" />
+  <macro id="751" versions="6.000 6.040" description="Call Macro 51" />
+  <macro id="752" versions="6.000 6.040" description="Call Macro 52" />
+  <macro id="753" versions="6.000 6.040" description="Call Macro 53" />
+  <macro id="754" versions="6.000 6.040" description="Call Macro 54" />
+  <macro id="755" versions="6.000 6.040" description="Call Macro 55" />
+  <macro id="756" versions="6.000 6.040" description="Call Macro 56" />
+  <macro id="757" versions="6.000 6.040" description="Call Macro 57" />
+  <macro id="758" versions="6.000 6.040" description="Call Macro 58" />
+  <macro id="759" versions="6.000 6.040" description="Call Macro 59" />
+  <macro id="760" versions="6.000 6.040" description="Call Macro 60" />
+  <macro id="761" versions="6.000 6.040" description="Call Macro 61" />
+  <macro id="762" versions="6.000 6.040" description="Call Macro 62" />
+  <macro id="763" versions="6.000 6.040" description="Call Macro 63" />
+  <macro id="764" versions="6.000 6.040" description="Call Macro 64" />
+  <macro id="766" versions="6.000 6.040" description="Call Macro 65" />
+  <macro id="767" versions="6.000 6.040" description="Call Macro 66" />
+  <macro id="768" versions="6.000 6.040" description="Call Macro 67" />
+  <macro id="769" versions="6.000 6.040" description="Call Macro 68" />
+  <macro id="770" versions="6.000 6.040" description="Call Macro 69" />
+  <macro id="771" versions="6.000 6.040" description="Call Macro 70" />
+  <macro id="772" versions="6.000 6.040" description="Call Macro 71" />
+  <macro id="773" versions="6.000 6.040" description="Call Macro 72" />
+  <macro id="774" versions="6.000 6.040" description="Call Macro 73" />
+  <macro id="775" versions="6.000 6.040" description="Call Macro 74" />
+  <macro id="776" versions="6.000 6.040" description="Call Macro 75" />
+  <macro id="777" versions="6.000 6.040" description="Call Macro 76" />
+  <macro id="778" versions="6.000 6.040" description="Call Macro 77" />
+  <macro id="779" versions="6.000 6.040" description="Call Macro 78" />
+  <macro id="780" versions="6.000 6.040" description="Call Macro 79" />
+  <macro id="781" versions="6.000 6.040" description="Call Macro 80" />
+  <macro id="782" versions="6.000 6.040" description="Call Macro 81" />
+  <macro id="783" versions="6.000 6.040" description="Call Macro 82" />
+  <macro id="784" versions="6.000 6.040" description="Call Macro 83" />
+  <macro id="785" versions="6.000 6.040" description="Call Macro 84" />
+  <macro id="786" versions="6.000 6.040" description="Call Macro 85" />
+  <macro id="787" versions="6.000 6.040" description="Call Macro 86" />
+  <macro id="788" versions="6.000 6.040" description="Call Macro 87" />
+  <macro id="789" versions="6.000 6.040" description="Call Macro 88" />
+  <macro id="790" versions="6.000 6.040" description="Call Macro 89" />
+  <macro id="791" versions="6.000 6.040" description="Call Macro 90" />
+</macros>

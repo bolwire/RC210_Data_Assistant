@@ -237,11 +237,23 @@ namespace RC210_DataAssistant_V2
 
 		}
 
+		
 		private void FetchDefXml()
 		{
-			if (File.Exists(_localXmlDocumentFile))
+			string filepath = AppDomain.CurrentDomain.BaseDirectory + "xml\\";
+			DirectoryInfo d = new DirectoryInfo(filepath);
+
+			foreach (var file in d.GetFiles("*.xml"))
 			{
-				_localXmlDocument.Load(_localXmlDocumentFile);
+				LoadXMLFile(filepath + file.Name);
+			}
+		}
+
+		private void LoadXMLFile(string file)
+		{
+			if (File.Exists(file))
+			{
+				_localXmlDocument.Load(file);
 
 				var localXmlElement = _localXmlDocument["macros"];
 				if (localXmlElement != null)
@@ -255,7 +267,7 @@ namespace RC210_DataAssistant_V2
 				UpdateXml();
 			}
 
-			if (!File.Exists(_localXmlDocumentFile))
+			if (!File.Exists(file))
 			{
 				MessageBox.Show(
 					@"Something has gone terribly wrong, unable to locate an xml file for Macro definitions, please consult the support group for help.",
@@ -265,7 +277,7 @@ namespace RC210_DataAssistant_V2
 			}
 
 			//Load the regulat macro definitions
-			_localXmlDocument.Load(_localXmlDocumentFile);
+			_localXmlDocument.Load(file);
 
 			foreach (XmlNode node in _localXmlDocument.ChildNodes)
 			{
@@ -1386,6 +1398,13 @@ namespace RC210_DataAssistant_V2
 		}
 
 		#endregion InputBox
+
+		private void xMLFilePathToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			string filepath = AppDomain.CurrentDomain.BaseDirectory + "xml\\";
+
+			MessageBox.Show("I look for .xml files at the following location:\n\n" + filepath);
+		}
 
 		
 	}

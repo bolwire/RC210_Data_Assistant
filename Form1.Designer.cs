@@ -97,6 +97,7 @@
 			this.groupBox2 = new System.Windows.Forms.GroupBox();
 			this.checkBox_RTCOption = new System.Windows.Forms.CheckBox();
 			this.comboBox_FwVersion = new System.Windows.Forms.ComboBox();
+			this.xMLFilePathToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.groupBox_Port1.SuspendLayout();
 			this.groupBox_Port2.SuspendLayout();
 			this.groupBox_Port3.SuspendLayout();
@@ -658,7 +659,8 @@
             this.recallToolStripMenuItem,
             this.toolStripMenuItem1,
             this.portNamesToolStripMenuItem,
-            this.macroDefinitionsToolStripMenuItem});
+            this.macroDefinitionsToolStripMenuItem,
+            this.xMLFilePathToolStripMenuItem});
 			this.optionsToolStripMenuItem.Name = "optionsToolStripMenuItem";
 			this.optionsToolStripMenuItem.Size = new System.Drawing.Size(61, 20);
 			this.optionsToolStripMenuItem.Text = "&Options";
@@ -732,14 +734,14 @@
 			// versionToolStripMenuItem
 			// 
 			this.versionToolStripMenuItem.Name = "versionToolStripMenuItem";
-			this.versionToolStripMenuItem.Size = new System.Drawing.Size(113, 22);
+			this.versionToolStripMenuItem.Size = new System.Drawing.Size(112, 22);
 			this.versionToolStripMenuItem.Text = "Version";
 			this.versionToolStripMenuItem.Click += new System.EventHandler(this.versionToolStripMenuItem_Click);
 			// 
 			// updateToolStripMenuItem
 			// 
 			this.updateToolStripMenuItem.Name = "updateToolStripMenuItem";
-			this.updateToolStripMenuItem.Size = new System.Drawing.Size(113, 22);
+			this.updateToolStripMenuItem.Size = new System.Drawing.Size(112, 22);
 			this.updateToolStripMenuItem.Text = "Update";
 			this.updateToolStripMenuItem.Click += new System.EventHandler(this.updateToolStripMenuItem_Click);
 			// 
@@ -863,6 +865,13 @@
 			this.comboBox_FwVersion.Size = new System.Drawing.Size(176, 21);
 			this.comboBox_FwVersion.TabIndex = 5;
 			// 
+			// xMLFilePathToolStripMenuItem
+			// 
+			this.xMLFilePathToolStripMenuItem.Name = "xMLFilePathToolStripMenuItem";
+			this.xMLFilePathToolStripMenuItem.Size = new System.Drawing.Size(168, 22);
+			this.xMLFilePathToolStripMenuItem.Text = "XML File Path";
+			this.xMLFilePathToolStripMenuItem.Click += new System.EventHandler(this.xMLFilePathToolStripMenuItem_Click);
+			// 
 			// Form1
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -981,6 +990,7 @@
 		private System.Windows.Forms.ToolStripMenuItem macroDefinitionsToolStripMenuItem;
 		private System.Windows.Forms.ToolStripMenuItem versionToolStripMenuItem;
 		private System.Windows.Forms.ToolStripMenuItem updateToolStripMenuItem;
+		private System.Windows.Forms.ToolStripMenuItem xMLFilePathToolStripMenuItem;
 	}
 }
 

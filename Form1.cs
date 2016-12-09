@@ -741,7 +741,7 @@ namespace RC210_DataAssistant_V2
 						rW.WriteLine("<TD>" + datFile.IniReadValue("Scheduler", "Week(" + i + ")") + "</TD>");
 						rW.WriteLine("<TD>" + ParseHours(datFile.IniReadValue("Scheduler", "Hours(" + i + ")")) + "</TD>");
 						rW.WriteLine("<TD>" + datFile.IniReadValue("Scheduler", "Minutes(" + i + ")") + "</TD>");
-						rW.WriteLine("<TD>" + datFile.IniReadValue("Scheduler", "MacroToRun(" + i + ")") + "</TD></TR>");
+							rW.WriteLine("<TD>" + datFile.IniReadValue("Scheduler", "MacroToRun(" + i + ")") + "</TD></TR>");
 
 						//if they want to
 						var macroNum = Convert.ToInt32(datFile.IniReadValue("Scheduler", "MacroToRun(" + i + ")"));
@@ -762,23 +762,46 @@ namespace RC210_DataAssistant_V2
 					rW.WriteLine("<TR><TD align=center colspan=4><H2>Courtesty Tone Message Macros</H2></TD></TR>");
 					rW.WriteLine("<TR><TD><B>Port</B></TD><TD><B>Tone</B></TD><TD><B>Message Macro</B></TD><TD><B>Macro Contents</B></TD></TR>");
 
-					for (int i = 1; i <= 3; i++)
-					{
-						for (int j = 1; j <= 10; j++)
+					double fwVersion = Convert.ToDouble(comboBox_FwVersion.SelectedItem);
+
+                    			if (fwVersion == 7.02)
+                    			{
+                        			int i = 1;
+
+                        			for (int j = 1; j <= 10; j++)
+                       				{
+                            				var tone1 = datFile.IniReadValue("Courtesy", "P" + i + "Tone1(" + j + ")");
+
+                            				if ((Convert.ToInt32(tone1) > 40) || (Convert.ToInt32(tone1) == 0))
+                                			continue;
+
+                            					rW.WriteLine("<TR><TD>" + i + "</TD>");
+                            					rW.WriteLine("<TD>" + j + "</TD>");
+                            					rW.WriteLine("<TD>" + tone1 + "</TD>");
+                            					rW.WriteLine("<TD>" + datFile.IniReadValue("MessageMacros", "MessageMacro(" + tone1 + ")") + "</TD></TR>");
+                        			}
+
+                        			rW.WriteLine("</TABLE><HR>");
+                    			}
+                    			else
+
+						for (int i = 1; i <= 3; i++)
 						{
-							var tone1 = datFile.IniReadValue("Courtesy", "P" + i + "Tone1(" + j + ")");
+							for (int j = 1; j <= 10; j++)
+							{
+								var tone1 = datFile.IniReadValue("Courtesy", "P" + i + "Tone1(" + j + ")");
 								
-							if ((Convert.ToInt32(tone1) > 40) || (Convert.ToInt32(tone1) == 0))
+								if ((Convert.ToInt32(tone1) > 40) || (Convert.ToInt32(tone1) == 0))
 								continue;
 
-							rW.WriteLine("<TR><TD>" + i + "</TD>");
-							rW.WriteLine("<TD>" + j + "</TD>");
-							rW.WriteLine("<TD>" + tone1 + "</TD>");
-							rW.WriteLine("<TD>" + datFile.IniReadValue("MessageMacros", "MessageMacro(" + tone1 + ")") + "</TD></TR>");
+								rW.WriteLine("<TR><TD>" + i + "</TD>");
+								rW.WriteLine("<TD>" + j + "</TD>");
+								rW.WriteLine("<TD>" + tone1 + "</TD>");
+								rW.WriteLine("<TD>" + datFile.IniReadValue("MessageMacros", "MessageMacro(" + tone1 + ")") + "</TD></TR>");
+							}
 						}
-					}
 
-					rW.WriteLine("</TABLE><HR>");
+						rW.WriteLine("</TABLE><HR>");
 				}
 
 				//Messages

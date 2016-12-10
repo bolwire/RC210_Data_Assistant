@@ -325,8 +325,13 @@ namespace RC210_DataAssistant_V2
 
 		private void Generate_Report()
 		{
+			double fwVersion = Convert.ToDouble(comboBox_FwVersion.SelectedItem);
+
 			if (!File.Exists(_datFilename))
+			{
+				MessageBox.Show(@"Unable to locate .dat file: " + _datFilename);
 				return;
+			}
 
 			SaveFileDialog result = new SaveFileDialog
 			{
@@ -776,6 +781,9 @@ namespace RC210_DataAssistant_V2
 							rW.WriteLine("<TD>" + tone1 + "</TD>");
 							rW.WriteLine("<TD>" + datFile.IniReadValue("MessageMacros", "MessageMacro(" + tone1 + ")") + "</TD></TR>");
 						}
+
+						if (fwVersion >= 7.02) //From version 7.02 there is a single pool of Courtesy Tones @ P1Tone1 - P1Tone10
+							break;
 					}
 
 					rW.WriteLine("</TABLE><HR>");

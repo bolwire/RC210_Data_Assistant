@@ -31,7 +31,9 @@ namespace RC210_DataAssistant_V2
 		{
 			public string PortName;
 			public string PortCode;
-			public string HangTimer;
+			public string HangTimer1;
+			public string HangTimer2;
+			public string HangTimer3;
 			public string TimeoutTimer;
 			public string InitialIdTimer;
 			public string PendingIdTimer;
@@ -312,7 +314,6 @@ namespace RC210_DataAssistant_V2
 		{
 			if (_datFilename == string.Empty || !File.Exists(_datFilename))
 				return;
-			Load_Ports();
 			Load_MessageMacros();
 			Load_Macros();
 			Load_ShortMacros();
@@ -326,6 +327,7 @@ namespace RC210_DataAssistant_V2
 		private void Generate_Report()
 		{
 			double fwVersion = Convert.ToDouble(comboBox_FwVersion.SelectedItem);
+			Load_Ports(fwVersion);
 
 			if (!File.Exists(_datFilename))
 			{
@@ -444,7 +446,18 @@ namespace RC210_DataAssistant_V2
 					if (checkBox_P1Timers.Checked)
 					{
 						rW.WriteLine("<TABLE border=0>");
-						rW.WriteLine("<TR><TD><B>Hang:</B></TD><TD>" + _ports[1].HangTimer + "</TD></TR>");
+
+						if (fwVersion < 7.02)
+						{
+							rW.WriteLine("<TR><TD><B>Hang:</B></TD><TD>" + _ports[1].HangTimer1 + "</TD></TR>");
+						}
+						else
+						{
+							rW.WriteLine("<TR><TD><B>Hang 1:</B></TD><TD>" + _ports[1].HangTimer1 + "</TD></TR>");
+							rW.WriteLine("<TR><TD><B>Hang 2:</B></TD><TD>" + _ports[1].HangTimer2 + "</TD></TR>");
+							rW.WriteLine("<TR><TD><B>Hang 3:</B></TD><TD>" + _ports[1].HangTimer3 + "</TD></TR>");
+						}
+
 						rW.WriteLine("<TR><TD><B>Timeout:</B></TD><TD>" + _ports[1].TimeoutTimer + "</TD></TR>");
 						rW.WriteLine("<TR><TD><B>Initial ID:</B></TD><TD>" + _ports[1].InitialIdTimer + "</TD></TR>");
 						rW.WriteLine("<TR><TD><B>Pending ID:</B></TD><TD>" + _ports[1].PendingIdTimer + "</TD></TR>");
@@ -547,7 +560,18 @@ namespace RC210_DataAssistant_V2
 					if (checkBox_P2Timers.Checked)
 					{
 						rW.WriteLine("<TABLE border=0>");
-						rW.WriteLine("<TR><TD><B>Hang:</B></TD><TD>" + _ports[2].HangTimer + "</TD></TR>");
+
+						if (fwVersion < 7.02)
+						{
+							rW.WriteLine("<TR><TD><B>Hang:</B></TD><TD>" + _ports[2].HangTimer1 + "</TD></TR>");
+						}
+						else
+						{
+							rW.WriteLine("<TR><TD><B>Hang 1:</B></TD><TD>" + _ports[2].HangTimer1 + "</TD></TR>");
+							rW.WriteLine("<TR><TD><B>Hang 2:</B></TD><TD>" + _ports[2].HangTimer2 + "</TD></TR>");
+							rW.WriteLine("<TR><TD><B>Hang 3:</B></TD><TD>" + _ports[2].HangTimer3 + "</TD></TR>");
+						}
+
 						rW.WriteLine("<TR><TD><B>Timeout:</B></TD><TD>" + _ports[2].TimeoutTimer + "</TD></TR>");
 						rW.WriteLine("<TR><TD><B>Initial ID:</B></TD><TD>" + _ports[2].InitialIdTimer + "</TD></TR>");
 						rW.WriteLine("<TR><TD><B>Pending ID:</B></TD><TD>" + _ports[2].PendingIdTimer + "</TD></TR>");
@@ -652,7 +676,18 @@ namespace RC210_DataAssistant_V2
 					if (checkBox_P3Timers.Checked)
 					{
 						rW.WriteLine("<TABLE border=0>");
-						rW.WriteLine("<TR><TD><B>Hang:</B></TD><TD>" + _ports[3].HangTimer + "</TD></TR>");
+
+						if (fwVersion < 7.02)
+						{
+							rW.WriteLine("<TR><TD><B>Hang:</B></TD><TD>" + _ports[3].HangTimer1 + "</TD></TR>");
+						}
+						else
+						{
+							rW.WriteLine("<TR><TD><B>Hang 1:</B></TD><TD>" + _ports[3].HangTimer1 + "</TD></TR>");
+							rW.WriteLine("<TR><TD><B>Hang 2:</B></TD><TD>" + _ports[3].HangTimer2 + "</TD></TR>");
+							rW.WriteLine("<TR><TD><B>Hang 3:</B></TD><TD>" + _ports[3].HangTimer3 + "</TD></TR>");
+						}
+
 						rW.WriteLine("<TR><TD><B>Timeout:</B></TD><TD>" + _ports[3].TimeoutTimer + "</TD></TR>");
 						rW.WriteLine("<TR><TD><B>Initial ID:</B></TD><TD>" + _ports[3].InitialIdTimer + "</TD></TR>");
 						rW.WriteLine("<TR><TD><B>Pending ID:</B></TD><TD>" + _ports[3].PendingIdTimer + "</TD></TR>");
@@ -1050,7 +1085,7 @@ namespace RC210_DataAssistant_V2
 
 		#region Load Ports
 
-		private void Load_Ports()
+		private void Load_Ports(double fwVersion)
 		{
 			IniFile datFile = new IniFile(_datFilename);
 
@@ -1070,7 +1105,6 @@ namespace RC210_DataAssistant_V2
 				Port portItem = new Port
 				{
 					PortCode = datFile.IniReadValue("Unlock", string.Format("CurrentPortUnlock({0})", i)),
-					HangTimer  = datFile.IniReadValue("Timers", string.Format("HangTime({0})", i)),
 					TimeoutTimer = datFile.IniReadValue("Timers", string.Format("TimeOut({0})", i)),
 					InitialIdTimer = datFile.IniReadValue("Timers", string.Format("IIDTime({0})", i)),
 					PendingIdTimer = datFile.IniReadValue("Timers", string.Format("PIDTime({0})", i)),
@@ -1109,6 +1143,18 @@ namespace RC210_DataAssistant_V2
 					KerchunkFilter = (datFile.IniReadValue("PortSwitches", string.Format("Kerchunk({0})", i)) == "0") ? "Disabled" : "Enabled",
 
 				};
+
+				if (fwVersion < 7.02)
+				{
+					portItem.HangTimer1 = datFile.IniReadValue("Timers", string.Format("HangTime({0})", i));
+				}
+				else
+				{
+					portItem.HangTimer1 = datFile.IniReadValue("Timers", string.Format("HangTime1({0})", i));
+					portItem.HangTimer2 = datFile.IniReadValue("Timers", string.Format("HangTime2({0})", i));
+					portItem.HangTimer3 = datFile.IniReadValue("Timers", string.Format("HangTime3({0})", i));
+				}
+
 
 				if (portName != string.Empty)
 					portItem.PortName = portName;

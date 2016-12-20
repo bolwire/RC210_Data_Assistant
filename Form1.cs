@@ -278,7 +278,7 @@ namespace RC210_DataAssistant_V2
 				return;
 			}
 
-			//Load the regulat macro definitions
+			//Load the regular macro definitions
 			_localXmlDocument.Load(file);
 
 			foreach (XmlNode node in _localXmlDocument.ChildNodes)
@@ -770,13 +770,27 @@ namespace RC210_DataAssistant_V2
 				if (checkBox_SetpointsScheduler.Checked)
 				{
 					rW.WriteLine("<TABLE border=1 align=center width=75%>");
-					rW.WriteLine("<TR><TD align=center colspan=7><H2>Scheduler Setpoints</H2></TD></TR>");
-					rW.WriteLine("<TR><TD><B>Setpoint #</B></TD><TD><B>Day of week</B></TD><TD><B>Monthly</B></TD><TD><B>Week of month</B>(if monthly)</TD><TD><B>Start Hour</B></TD><TD><B>Start Minutes</B></TD><TD><B>Macro to run</B></TD></TR>");
-
+					
+					if (fwVersion < 7.01)
+                    			{
+						rW.WriteLine("<TR><TD align=center colspan=7><H2>Scheduler Setpoints</H2></TD></TR>");
+						rW.WriteLine("<TR><TD><B>Setpoint #</B></TD><TD><B>Day of week</B></TD><TD><B>Monthly</B></TD><TD><B>Week of month</B>(if monthly)</TD><TD><B>Start Hour</B></TD><TD><B>Start Minutes</B></TD><TD><B>Macro to run</B></TD></TR>");
+					}
+                    			else
+                    			{
+                        			rW.WriteLine("<TR><TD align=center colspan=8><H2>Scheduler Setpoints</H2></TD></TR>");
+						rW.WriteLine("<TR><TD><B>Setpoint #</B></TD><TD><B>Day of week</B></TD><TD><B>Month To Run</B></TD><TD><B>Monthly</B></TD><TD><B>Week of month</B>(if monthly)</TD><TD><B>Start Hour</B></TD><TD><B>Start Minutes</B></TD><TD><B>Macro to run</B></TD></TR>");
+                    			}
 					for (int i = 1; i <= 20; i++)
 					{
 						rW.WriteLine("<TR><TD>" + i + "</TD>");
 						rW.WriteLine("<TD>" + ParseDow(datFile.IniReadValue("Scheduler", "DOW(" + i + ")")) + "</TD>");
+						
+						if (fwVersion > 7.00)
+                        			{
+                            				rW.WriteLine("<TD>" + datFile.IniReadValue("Scheduler", "MonthToRun(" + i + ")") + "</TD>");
+                        			}
+						
 						rW.WriteLine("<TD>" + ParseMonthly(datFile.IniReadValue("Scheduler", "Monthly(" + i + ")")) + "</TD>");
 						rW.WriteLine("<TD>" + datFile.IniReadValue("Scheduler", "Week(" + i + ")") + "</TD>");
 						rW.WriteLine("<TD>" + ParseHours(datFile.IniReadValue("Scheduler", "Hours(" + i + ")")) + "</TD>");

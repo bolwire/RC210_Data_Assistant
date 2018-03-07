@@ -3,5 +3,5 @@ This project supports the Arcom Controllers model RC210 repeater controller by p
 with english decoded data from the numerical output of the download from the controller. The output
 is in two forms. First is an html file and second is the printed output of that file. 
 
-James Bolding, KC5 is the originator of this project and Bob Norris has been updates as changes in
-firmware have been released over the years.
+James Bolding, KC5TDG, is the originator of this project and Bob Norris, AK5U, has been doing 
+updates as changes in firmware have been released 2015.

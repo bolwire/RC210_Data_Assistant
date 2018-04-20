@@ -85,6 +85,7 @@
 			this.macroDefinitionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.versionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.updateToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.xMLFilePathToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.reportToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.generateReportToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
 			this.viewReportToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -617,10 +618,10 @@
 			// menuStrip1
 			// 
 			this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.fileToolStripMenuItem,
-            this.optionsToolStripMenuItem,
-            this.reportToolStripMenuItem,
-            this.aboutToolStripMenuItem});
+            		this.fileToolStripMenuItem,
+            		this.optionsToolStripMenuItem,
+            		this.reportToolStripMenuItem,
+            		this.aboutToolStripMenuItem});
 			this.menuStrip1.Location = new System.Drawing.Point(0, 0);
 			this.menuStrip1.Name = "menuStrip1";
 			this.menuStrip1.Size = new System.Drawing.Size(650, 24);
@@ -630,8 +631,8 @@
 			// fileToolStripMenuItem
 			// 
 			this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.openToolStripMenuItem,
-            this.closeToolStripMenuItem});
+            		this.openToolStripMenuItem,
+            		this.closeToolStripMenuItem});
 			this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
 			this.fileToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
 			this.fileToolStripMenuItem.Text = "&File";
@@ -653,12 +654,13 @@
 			// optionsToolStripMenuItem
 			// 
 			this.optionsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.saveToolStripMenuItem,
-            this.resetToolStripMenuItem,
-            this.recallToolStripMenuItem,
-            this.toolStripMenuItem1,
-            this.portNamesToolStripMenuItem,
-            this.macroDefinitionsToolStripMenuItem});
+            		this.saveToolStripMenuItem,
+            		this.resetToolStripMenuItem,
+            		this.recallToolStripMenuItem,
+            		this.toolStripMenuItem1,
+            		this.portNamesToolStripMenuItem,
+            		this.macroDefinitionsToolStripMenuItem,
+			this.xMLFilePathToolStripMenuItem});
 			this.optionsToolStripMenuItem.Name = "optionsToolStripMenuItem";
 			this.optionsToolStripMenuItem.Size = new System.Drawing.Size(61, 20);
 			this.optionsToolStripMenuItem.Text = "&Options";
@@ -692,9 +694,9 @@
 			// portNamesToolStripMenuItem
 			// 
 			this.portNamesToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.port1ToolStripMenuItem,
-            this.port2ToolStripMenuItem,
-            this.port3ToolStripMenuItem});
+            		this.port1ToolStripMenuItem,
+            		this.port2ToolStripMenuItem,
+            		this.port3ToolStripMenuItem});
 			this.portNamesToolStripMenuItem.Name = "portNamesToolStripMenuItem";
 			this.portNamesToolStripMenuItem.Size = new System.Drawing.Size(168, 22);
 			this.portNamesToolStripMenuItem.Text = "Port Names";
@@ -723,8 +725,8 @@
 			// macroDefinitionsToolStripMenuItem
 			// 
 			this.macroDefinitionsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.versionToolStripMenuItem,
-            this.updateToolStripMenuItem});
+            		this.versionToolStripMenuItem,
+            		this.updateToolStripMenuItem});
 			this.macroDefinitionsToolStripMenuItem.Name = "macroDefinitionsToolStripMenuItem";
 			this.macroDefinitionsToolStripMenuItem.Size = new System.Drawing.Size(168, 22);
 			this.macroDefinitionsToolStripMenuItem.Text = "Macro Definitions";
@@ -743,12 +745,19 @@
 			this.updateToolStripMenuItem.Text = "Update";
 			this.updateToolStripMenuItem.Click += new System.EventHandler(this.UpdateToolStripMenuItem_Click);
 			// 
+			// xMLFilePathToolStripMenuItem
+			// 
+			this.xMLFilePathToolStripMenuItem.Name = "xMLFilePathToolStripMenuItem";
+			this.xMLFilePathToolStripMenuItem.Size = new System.Drawing.Size(168, 22);
+			this.xMLFilePathToolStripMenuItem.Text = "xMLFilePath";
+			this.xMLFilePathToolStripMenuItem.Click += new System.EventHandler(this.UpdateToolStripMenuItem_Click);
+			//
 			// reportToolStripMenuItem
 			// 
 			this.reportToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.generateReportToolStripMenuItem1,
-            this.viewReportToolStripMenuItem,
-            this.openReportFolderToolStripMenuItem});
+            		this.generateReportToolStripMenuItem1,
+            		this.viewReportToolStripMenuItem,
+            		this.openReportFolderToolStripMenuItem});
 			this.reportToolStripMenuItem.Name = "reportToolStripMenuItem";
 			this.reportToolStripMenuItem.Size = new System.Drawing.Size(54, 20);
 			this.reportToolStripMenuItem.Text = "&Report";
@@ -844,9 +853,7 @@
 			// 
 			this.checkBox_RTCOption.AutoSize = true;
 			this.checkBox_RTCOption.Checked = global::RC210_DataAssistant_V2.Properties.Settings.Default.RTCOption;
-			this.checkBox_RTCOption.CheckState = System.Windows.Forms.CheckState.Unchecked;
 			this.checkBox_RTCOption.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::RC210_DataAssistant_V2.Properties.Settings.Default, "RTCOption", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-			this.checkBox_RTCOption.Enabled = true;
 			this.checkBox_RTCOption.Location = new System.Drawing.Point(192, 21);
 			this.checkBox_RTCOption.Name = "checkBox_RTCOption";
 			this.checkBox_RTCOption.Size = new System.Drawing.Size(133, 17);
@@ -981,6 +988,7 @@
 		private System.Windows.Forms.ToolStripMenuItem macroDefinitionsToolStripMenuItem;
 		private System.Windows.Forms.ToolStripMenuItem versionToolStripMenuItem;
 		private System.Windows.Forms.ToolStripMenuItem updateToolStripMenuItem;
+		private System.Windows.Forms.ToolStripMenuItem xzMLFilePathToolStripMenuItem;
 	}
 }
 

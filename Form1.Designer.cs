@@ -988,7 +988,7 @@
 		private System.Windows.Forms.ToolStripMenuItem macroDefinitionsToolStripMenuItem;
 		private System.Windows.Forms.ToolStripMenuItem versionToolStripMenuItem;
 		private System.Windows.Forms.ToolStripMenuItem updateToolStripMenuItem;
-		private System.Windows.Forms.ToolStripMenuItem xzMLFilePathToolStripMenuItem;
+		private System.Windows.Forms.ToolStripMenuItem xMLFilePathToolStripMenuItem;
 	}
 }
 

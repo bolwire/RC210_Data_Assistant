@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
@@ -31,10 +31,10 @@ namespace RC210_DataAssistant_V2
 		{
 			public string PortName;
 			public string PortCode;
-			public string HangTimer1;                   //Added by v7.00
-            		public string HangTimer2;                   //Added by v7.00
-            		public string HangTimer3;                   //Added by v7.00
-			public string TimeoutTimer;
+			public string HangTimer1;               //3 hangtimers per port with v7.00
+			public string HangTimer2;               //3 hangtimers per port with v7.00
+            public string HangTimer3;               //3 hangtimers per port with v7.00
+            public string TimeoutTimer;
 			public string InitialIdTimer;
 			public string PendingIdTimer;
 			public string InactivityTimer;
@@ -103,12 +103,12 @@ namespace RC210_DataAssistant_V2
 		private string _datFilename;
 		private string _reportFilename;
 
-        	private readonly AutoPatch _autoPatch = new AutoPatch();
+		private readonly AutoPatch _autoPatch = new AutoPatch();
 		private readonly Dictionary<int, Port> _ports = new Dictionary<int, Port>();
 		private readonly Dictionary<int, Macro> _macros = new Dictionary<int, Macro>();
 		private readonly Dictionary<int, Macro> _shortMacros = new Dictionary<int, Macro>();
-        	private readonly Dictionary<int, Macro> _extendedMacros = new Dictionary<int, Macro>();     //Added by v7.39
-		private readonly Dictionary<int, string> _messageMacros = new Dictionary<int, string>();
+        private readonly Dictionary<int, Macro> _extendedMacros = new Dictionary<int, Macro>();
+        private readonly Dictionary<int, string> _messageMacros = new Dictionary<int, string>();
 
 		#endregion Private Members
 
@@ -242,18 +242,18 @@ namespace RC210_DataAssistant_V2
 
 		private void FetchDefXml()
 		{
-            		string filepath = AppDomain.CurrentDomain.BaseDirectory + "xml\\";      //Added to acommadate multiple XML version files
-            		DirectoryInfo d = new DirectoryInfo(filepath);
+			string filepath = AppDomain.CurrentDomain.BaseDirectory + "xml\\";
+			DirectoryInfo d = new DirectoryInfo(filepath);
 
-            		foreach (var file in d.GetFiles("*.xml"))
-            		{
-                		LoadXMLFile(filepath + file.Name);
-            		}
-        	}
+			foreach (var file in d.GetFiles("*.xml"))
+			{
+				LoadXMLFile(filepath + file.Name);
+			}
+		}
 
-        	private void LoadXMLFile(string file)
-        	{
-            		if (File.Exists(file))
+		private void LoadXMLFile(string file)
+		{
+			if (File.Exists(file))
 			{
 				_localXmlDocument.Load(file);
 
@@ -317,26 +317,26 @@ namespace RC210_DataAssistant_V2
 			Load_MessageMacros();
 			Load_Macros();
 			Load_ShortMacros();
-            		Load_ExtendedMacros();
+            Load_ExtendedMacros();
 			Load_AutoPatch();
 		}
-                
-        	#endregion Load .dat file
+		
+		#endregion Load .dat file
 
-        	#region Generate Report
+		#region Generate Report
 
-        	private void Generate_Report()
+		private void Generate_Report()
 		{
-            		double fwVersion = Convert.ToDouble(comboBox_FwVersion.SelectedItem);   //Added to acommodate option changes per version
-            		Load_Ports(fwVersion);
+			double fwVersion = Convert.ToDouble(comboBox_FwVersion.SelectedItem);
+			Load_Ports(fwVersion);
 
-            		if (!File.Exists(_datFilename))
-            		{
-               			MessageBox.Show(@"Unable to locate .dat file: " + _datFilename);
-                		return;
-            		}
+			if (!File.Exists(_datFilename))
+			{
+				MessageBox.Show(@"Unable to locate .dat file: " + _datFilename);
+				return;
+			}
 
-           		SaveFileDialog result = new SaveFileDialog
+			SaveFileDialog result = new SaveFileDialog
 			{
 				Filter = @"HTML File (*.html)|*.html",
 				InitialDirectory = Path.GetDirectoryName(_reportFilename)
@@ -448,18 +448,18 @@ namespace RC210_DataAssistant_V2
 					{
 						rW.WriteLine("<TABLE border=0>");
 
-                        			if (fwVersion < 7.00)           //Added 3 HangTimers per port with v7.00
-                        			{
-						    rW.WriteLine("<TR><TD><B>Hang:</B></TD><TD>" + _ports[1].HangTimer1 + "</TD></TR>");
-                        			}
-                        			else
-                        			{
-                            				rW.WriteLine("<TR><TD><B>Hang 1:</B></TD><TD>" + _ports[1].HangTimer1 + "</TD></TR>");
-                            				rW.WriteLine("<TR><TD><B>Hang 2:</B></TD><TD>" + _ports[1].HangTimer2 + "</TD></TR>");
-                            				rW.WriteLine("<TR><TD><B>Hang 3:</B></TD><TD>" + _ports[1].HangTimer3 + "</TD></TR>");
-                        			}
-                        
-                        			rW.WriteLine("<TR><TD><B>Timeout:</B></TD><TD>" + _ports[1].TimeoutTimer + "</TD></TR>");
+						if (fwVersion < 7.00)       //Added 3 hangtimers per port with v7.00
+						{
+							rW.WriteLine("<TR><TD><B>Hang:</B></TD><TD>" + _ports[1].HangTimer1 + "</TD></TR>");
+						}
+						else
+						{
+							rW.WriteLine("<TR><TD><B>Hang 1:</B></TD><TD>" + _ports[1].HangTimer1 + "</TD></TR>");
+							rW.WriteLine("<TR><TD><B>Hang 2:</B></TD><TD>" + _ports[1].HangTimer2 + "</TD></TR>");
+							rW.WriteLine("<TR><TD><B>Hang 3:</B></TD><TD>" + _ports[1].HangTimer3 + "</TD></TR>");
+						}
+
+						rW.WriteLine("<TR><TD><B>Timeout:</B></TD><TD>" + _ports[1].TimeoutTimer + "</TD></TR>");
 						rW.WriteLine("<TR><TD><B>Initial ID:</B></TD><TD>" + _ports[1].InitialIdTimer + "</TD></TR>");
 						rW.WriteLine("<TR><TD><B>Pending ID:</B></TD><TD>" + _ports[1].PendingIdTimer + "</TD></TR>");
 						rW.WriteLine("<TR><TD><B>Pending Speech ID:</B></TD><TD>" + _ports[1].PendingIdSpeechTimer + "</TD></TR>");
@@ -562,18 +562,18 @@ namespace RC210_DataAssistant_V2
 					{
 						rW.WriteLine("<TABLE border=0>");
 
-                        			if (fwVersion < 7.00)           //Added 3 HangTimers per port with v7.00
-                        			{
-							rW.WriteLine("<TR><TD><B>Hang:</B></TD><TD>" + _ports[1].HangTimer1 + "</TD></TR>");
-                        			}
-                        			else
-                        			{
-                            				rW.WriteLine("<TR><TD><B>Hang 1:</B></TD><TD>" + _ports[1].HangTimer1 + "</TD></TR>");
-                            				rW.WriteLine("<TR><TD><B>Hang 2:</B></TD><TD>" + _ports[1].HangTimer2 + "</TD></TR>");
-                            				rW.WriteLine("<TR><TD><B>Hang 3:</B></TD><TD>" + _ports[1].HangTimer3 + "</TD></TR>");
-                        			}
+						if (fwVersion < 7.00)       //Added 3 hangtimers per port with v7.00
+                        {
+							rW.WriteLine("<TR><TD><B>Hang:</B></TD><TD>" + _ports[2].HangTimer1 + "</TD></TR>");
+						}
+						else
+						{
+							rW.WriteLine("<TR><TD><B>Hang 1:</B></TD><TD>" + _ports[2].HangTimer1 + "</TD></TR>");
+							rW.WriteLine("<TR><TD><B>Hang 2:</B></TD><TD>" + _ports[2].HangTimer2 + "</TD></TR>");
+							rW.WriteLine("<TR><TD><B>Hang 3:</B></TD><TD>" + _ports[2].HangTimer3 + "</TD></TR>");
+						}
 
-                        			rW.WriteLine("<TR><TD><B>Timeout:</B></TD><TD>" + _ports[2].TimeoutTimer + "</TD></TR>");
+						rW.WriteLine("<TR><TD><B>Timeout:</B></TD><TD>" + _ports[2].TimeoutTimer + "</TD></TR>");
 						rW.WriteLine("<TR><TD><B>Initial ID:</B></TD><TD>" + _ports[2].InitialIdTimer + "</TD></TR>");
 						rW.WriteLine("<TR><TD><B>Pending ID:</B></TD><TD>" + _ports[2].PendingIdTimer + "</TD></TR>");
 						rW.WriteLine("<TR><TD><B>Pending Speech ID:</B></TD><TD>" + _ports[2].PendingIdSpeechTimer + "</TD></TR>");
@@ -678,18 +678,18 @@ namespace RC210_DataAssistant_V2
 					{
 						rW.WriteLine("<TABLE border=0>");
 
-                        			if (fwVersion < 7.00)           //Added 3 HangTimers per port with v7.00
-                        			{
-			    				rW.WriteLine("<TR><TD><B>Hang:</B></TD><TD>" + _ports[1].HangTimer1 + "</TD></TR>");
-                        			}
-                        			else
-                        			{
-                            				rW.WriteLine("<TR><TD><B>Hang 1:</B></TD><TD>" + _ports[1].HangTimer1 + "</TD></TR>");
-                            				rW.WriteLine("<TR><TD><B>Hang 2:</B></TD><TD>" + _ports[1].HangTimer2 + "</TD></TR>");
-                            				rW.WriteLine("<TR><TD><B>Hang 3:</B></TD><TD>" + _ports[1].HangTimer3 + "</TD></TR>");
-                        			}
+						if (fwVersion < 7.00)       //Added 3 hangtimers per port with v7.00
+                        {
+							rW.WriteLine("<TR><TD><B>Hang:</B></TD><TD>" + _ports[3].HangTimer1 + "</TD></TR>");
+						}
+						else
+						{
+							rW.WriteLine("<TR><TD><B>Hang 1:</B></TD><TD>" + _ports[3].HangTimer1 + "</TD></TR>");
+							rW.WriteLine("<TR><TD><B>Hang 2:</B></TD><TD>" + _ports[3].HangTimer2 + "</TD></TR>");
+							rW.WriteLine("<TR><TD><B>Hang 3:</B></TD><TD>" + _ports[3].HangTimer3 + "</TD></TR>");
+						}
 
-                       				rW.WriteLine("<TR><TD><B>Timeout:</B></TD><TD>" + _ports[3].TimeoutTimer + "</TD></TR>");
+						rW.WriteLine("<TR><TD><B>Timeout:</B></TD><TD>" + _ports[3].TimeoutTimer + "</TD></TR>");
 						rW.WriteLine("<TR><TD><B>Initial ID:</B></TD><TD>" + _ports[3].InitialIdTimer + "</TD></TR>");
 						rW.WriteLine("<TR><TD><B>Pending ID:</B></TD><TD>" + _ports[3].PendingIdTimer + "</TD></TR>");
 						rW.WriteLine("<TR><TD><B>Pending Speech ID:</B></TD><TD>" + _ports[3].PendingIdSpeechTimer + "</TD></TR>");
@@ -764,360 +764,360 @@ namespace RC210_DataAssistant_V2
 						rW.WriteLine("</TD></TR>");
 					}
 
-                    			//ExtendedMacros            Added 15 Macro positions 91 - 105 with 20 slots in each position with v7.39
+                    //ExtendedMacros
 
-					foreach (KeyValuePair<int, Macro> macro in _extendedMacros)
+                    foreach (KeyValuePair<int, Macro> macro in _extendedMacros)
+                    {
+                        rW.WriteLine("<TR><TD valign=top>" + (macro.Key + 90).ToString(CultureInfo.InvariantCulture) + "</TD>");
+                        rW.WriteLine("<TD valign=top>" + macro.Value.AccessCode + "</TD>");
+                        rW.WriteLine("<TD valign=top>" + macro.Value.AllowedPorts + "</TD>");
+                        //rW.WriteLine("<TD>" + ((checkBox_MacroCodes.Checked) ? macro.Value.MacroCodes : macro.Value.ParsedMacro) + "</TD></TR>");
+                        rW.WriteLine("<TD>");
+                        rW.WriteLine(((checkBox_Macros.Checked) ? macro.Value.ParsedMacro : ""));
+                        rW.WriteLine((checkBox_Macros.Checked && checkBox_MacroCodes.Checked) ? "<HR>" : "");
+                        rW.WriteLine(((checkBox_MacroCodes.Checked) ? macro.Value.MacroCodes : ""));
+                        rW.WriteLine("</TD></TR>");
+                    }
+
+                    rW.WriteLine("</TABLE><HR>");
+				}
+
+				//Setpoints
+				if (checkBox_SetpointsScheduler.Checked)
+				{
+					rW.WriteLine("<TABLE border=1 align=center width=75%>");
+					
+					if (fwVersion < 7.32)       //Reinstated Month of Year with v7.32
+                    			{
+						rW.WriteLine("<TR><TD align=center colspan=7><H2>Scheduler Setpoints</H2></TD></TR>");
+						rW.WriteLine("<TR><TD><B>Setpoint #</B></TD><TD><B>Day of week</B></TD><TD><B>Monthly</B></TD><TD><B>Week of month</B>(if monthly)</TD><TD><B>Start Hour</B></TD><TD><B>Start Minutes</B></TD><TD><B>Macro to run</B></TD></TR>");
+					}
+                    else
+                    {
+                    	rW.WriteLine("<TR><TD align=center colspan=8><H2>Scheduler Setpoints</H2></TD></TR>");
+						rW.WriteLine("<TR><TD><B>Setpoint #</B></TD><TD><B>Day of week</B></TD><TD><B>Month To Run</B></TD><TD><B>Monthly</B></TD><TD><B>Week of month</B>(if monthly)</TD><TD><B>Start Hour</B></TD><TD><B>Start Minutes</B></TD><TD><B>Macro to run</B></TD></TR>");
+                    }
+
+                    if (fwVersion < 7.36)       //Added 20 additiional SetPoints with v7.36
+                    { 
+					    for (int i = 1; i <= 20; i++)
+					    {
+						    rW.WriteLine("<TR><TD>" + i + "</TD>");
+						    rW.WriteLine("<TD>" + ParseDow(datFile.IniReadValue("Scheduler", "DOW(" + i + ")")) + "</TD>");
+						
+						    if (fwVersion > 7.00)
+                        	{
+                            	rW.WriteLine("<TD>" + datFile.IniReadValue("Scheduler", "MonthToRun(" + i + ")") + "</TD>");
+                        	}
+						
+						    rW.WriteLine("<TD>" + ParseMonthly(datFile.IniReadValue("Scheduler", "Monthly(" + i + ")")) + "</TD>");
+						    rW.WriteLine("<TD>" + datFile.IniReadValue("Scheduler", "Week(" + i + ")") + "</TD>");
+						    rW.WriteLine("<TD>" + ParseHours(datFile.IniReadValue("Scheduler", "Hours(" + i + ")")) + "</TD>");
+						    rW.WriteLine("<TD>" + datFile.IniReadValue("Scheduler", "Minutes(" + i + ")") + "</TD>");
+						    rW.WriteLine("<TD>" + datFile.IniReadValue("Scheduler", "MacroToRun(" + i + ")") + "</TD></TR>");
+
+						    //if they want to
+						    var macroNum = Convert.ToInt32(datFile.IniReadValue("Scheduler", "MacroToRun(" + i + ")"));
+						    rW.WriteLine("<TR><TD colspan=7>");
+
+						    rW.WriteLine(macroNum < 41 ? _macros[macroNum].ParsedMacro + "<HR>" + _macros[macroNum].MacroCodes : _shortMacros[macroNum - 40].ParsedMacro + "<HR>" + _shortMacros[macroNum - 40].MacroCodes);
+
+						    rW.WriteLine("</TD></TR>");
+					    }
+					    rW.WriteLine("</TABLE><HR>");
+                    }
+                    else
+                    {
+                        for (int i = 1; i <= 40; i++)
+                        {
+                            rW.WriteLine("<TR><TD>" + i + "</TD>");
+                            rW.WriteLine("<TD>" + ParseDow(datFile.IniReadValue("Scheduler", "DOW(" + i + ")")) + "</TD>");
+
+                            if (fwVersion > 7.00)
+                            {
+                                rW.WriteLine("<TD>" + datFile.IniReadValue("Scheduler", "MonthToRun(" + i + ")") + "</TD>");
+                            }
+
+                            rW.WriteLine("<TD>" + ParseMonthly(datFile.IniReadValue("Scheduler", "Monthly(" + i + ")")) + "</TD>");
+                            rW.WriteLine("<TD>" + datFile.IniReadValue("Scheduler", "Week(" + i + ")") + "</TD>");
+                            rW.WriteLine("<TD>" + ParseHours(datFile.IniReadValue("Scheduler", "Hours(" + i + ")")) + "</TD>");
+                            rW.WriteLine("<TD>" + datFile.IniReadValue("Scheduler", "Minutes(" + i + ")") + "</TD>");
+                            rW.WriteLine("<TD>" + datFile.IniReadValue("Scheduler", "MacroToRun(" + i + ")") + "</TD></TR>");
+
+                            //if they want to
+                            var macroNum = Convert.ToInt32(datFile.IniReadValue("Scheduler", "MacroToRun(" + i + ")"));
+                            rW.WriteLine("<TR><TD colspan=7>");
+
+                            rW.WriteLine(macroNum < 41 ? _macros[macroNum].ParsedMacro + "<HR>" + _macros[macroNum].MacroCodes : _shortMacros[macroNum - 40].ParsedMacro + "<HR>" + _shortMacros[macroNum - 40].MacroCodes);
+
+                            rW.WriteLine("</TD></TR>");
+                        }
+
+                        rW.WriteLine("</TABLE><HR>");
+                    }
+                }
+
+				//CT MSG Macros
+				if (checkBox_CTMessageMacros.Checked)
+				{
+					rW.WriteLine("<TABLE border=1 align=center>");
+					rW.WriteLine("<TR><TD align=center colspan=4><H2>Courtesty Tone Message Macros</H2></TD></TR>");
+					rW.WriteLine("<TR><TD><B>Port</B></TD><TD><B>Tone</B></TD><TD><B>Message Macro</B></TD><TD><B>Macro Contents</B></TD></TR>");
+
+					for (int i = 1; i <= 3; i++)
 					{
-						rW.WriteLine("<TR><TD valign=top>" + (macro.Key + 90).ToString(CultureInfo.InvariantCulture) + "</TD>");
-						rW.WriteLine("<TD valign=top>" + macro.Value.AccessCode + "</TD>");
-						rW.WriteLine("<TD valign=top>" + macro.Value.AllowedPorts + "</TD>");
-						//rW.WriteLine("<TD>" + ((checkBox_MacroCodes.Checked) ? macro.Value.MacroCodes : macro.Value.ParsedMacro) + "</TD></TR>");
-						rW.WriteLine("<TD>");
-						rW.WriteLine(((checkBox_Macros.Checked) ? macro.Value.ParsedMacro : ""));
-						rW.WriteLine((checkBox_Macros.Checked && checkBox_MacroCodes.Checked) ? "<HR>" : "");
-						rW.WriteLine(((checkBox_MacroCodes.Checked) ? macro.Value.MacroCodes : ""));
-						rW.WriteLine("</TD></TR>");
+						for (int j = 1; j <= 10; j++)
+						{
+							var tone1 = datFile.IniReadValue("Courtesy", "P" + i + "Tone1(" + j + ")");
+								
+							if ((Convert.ToInt32(tone1) > 40) || (Convert.ToInt32(tone1) == 0))
+								continue;
+
+							rW.WriteLine("<TR><TD>" + i + "</TD>");
+							rW.WriteLine("<TD>" + j + "</TD>");
+							rW.WriteLine("<TD>" + tone1 + "</TD>");
+							rW.WriteLine("<TD>" + datFile.IniReadValue("MessageMacros", "MessageMacro(" + tone1 + ")") + "</TD></TR>");
+						}
+
+						if (fwVersion >= 7.02) //From version 7.02 there is a single pool of Courtesy Tones @ P1Tone1 - P1Tone10
+							break;
 					}
 
 					rW.WriteLine("</TABLE><HR>");
 				}
 
-                		//Setpoints
-                		if (checkBox_SetpointsScheduler.Checked)
-                		{
-                    			rW.WriteLine("<TABLE border=1 align=center width=75%>");
+				//Messages
+				if (checkBox_MessageMacros.Checked)
+				{
 
-                    			if (fwVersion < 7.32)       //Reinstated Month of Run with v7.32. Added 8th column
-                    			{
-                        			rW.WriteLine("<TR><TD align=center colspan=7><H2>Scheduler Setpoints</H2></TD></TR>");
-                        			rW.WriteLine("<TR><TD><B>Setpoint #</B></TD><TD><B>Day of week</B></TD><TD><B>Monthly</B></TD><TD><B>Week of month</B>(if monthly)</TD><TD><B>Start Hour</B></TD><TD><B>Start Minutes</B></TD><TD><B>Macro to run</B></TD></TR>");
-                    			}
-                    			else
-                    			{
-                        			rW.WriteLine("<TR><TD align=center colspan=8><H2>Scheduler Setpoints</H2></TD></TR>");
-                       				rW.WriteLine("<TR><TD><B>Setpoint #</B></TD><TD><B>Day of week</B></TD><TD><B>Month To Run</B></TD><TD><B>Monthly</B></TD><TD><B>Week of month</B>(if monthly)</TD><TD><B>Start Hour</B></TD><TD><B>Start Minutes</B></TD><TD><B>Macro to run</B></TD></TR>");
-                    			}
+					rW.WriteLine("<TABLE border=1 align=center>");
+					rW.WriteLine("<TR><TD align=center colspan=2><H2>Message Macros</H2></TD></TR>");
+					rW.WriteLine("<TR><TD><B>Message Macro</B></TD><TD><B>Words spoken</B></TD></TR>");
 
-                    			if (fwVersion < 7.36)      //added 20 more Setpoints with v7.36
-                    			{
-                        			for (int i = 1; i <= 20; i++)
-                        			{
-                            				rW.WriteLine("<TR><TD>" + i + "</TD>");
-                            				rW.WriteLine("<TD>" + ParseDow(datFile.IniReadValue("Scheduler", "DOW(" + i + ")")) + "</TD>");
-
-                            				if (fwVersion > 7.00)   //Month To Run actually added at v7.01
-                            				{
-                                				rW.WriteLine("<TD>" + datFile.IniReadValue("Scheduler", "MonthToRun(" + i + ")") + "</TD>");
-                            				}
-
-                            				rW.WriteLine("<TD>" + ParseMonthly(datFile.IniReadValue("Scheduler", "Monthly(" + i + ")")) + "</TD>");
-                            				rW.WriteLine("<TD>" + datFile.IniReadValue("Scheduler", "Week(" + i + ")") + "</TD>");
-                            				rW.WriteLine("<TD>" + ParseHours(datFile.IniReadValue("Scheduler", "Hours(" + i + ")")) + "</TD>");
-                            				rW.WriteLine("<TD>" + datFile.IniReadValue("Scheduler", "Minutes(" + i + ")") + "</TD>");
-                            				rW.WriteLine("<TD>" + datFile.IniReadValue("Scheduler", "MacroToRun(" + i + ")") + "</TD></TR>");
-
-                            				//if they want to
-                            				var macroNum = Convert.ToInt32(datFile.IniReadValue("Scheduler", "MacroToRun(" + i + ")"));
-                            				rW.WriteLine("<TR><TD colspan=7>");
-
-                            				rW.WriteLine(macroNum < 41 ? _macros[macroNum].ParsedMacro + "<HR>" + _macros[macroNum].MacroCodes : _shortMacros[macroNum - 40].ParsedMacro + "<HR>" + _shortMacros[macroNum - 40].MacroCodes);
-
-                            				rW.WriteLine("</TD></TR>");
-                        			}
-                        			rW.WriteLine("</TABLE><HR>");
-                    			}
-                    			else
-                    			{
-		        			for (int i = 1; i <= 40; i++)       //added 20 additional Setpoints with v.7.361
-
-                        			{
-                           				rW.WriteLine("<TR><TD>" + i + "</TD>");
-                            				rW.WriteLine("<TD>" + ParseDow(datFile.IniReadValue("Scheduler", "DOW(" + i + ")")) + "</TD>");
-
-                            				if (fwVersion > 7.00)
-                            				{
-                                				rW.WriteLine("<TD>" + datFile.IniReadValue("Scheduler", "MonthToRun(" + i + ")") + "</TD>");
-                            				}
-
-                            				rW.WriteLine("<TD>" + ParseMonthly(datFile.IniReadValue("Scheduler", "Monthly(" + i + ")")) + "</TD>");
-                            				rW.WriteLine("<TD>" + datFile.IniReadValue("Scheduler", "Week(" + i + ")") + "</TD>");
-                            				rW.WriteLine("<TD>" + ParseHours(datFile.IniReadValue("Scheduler", "Hours(" + i + ")")) + "</TD>");
-                           				rW.WriteLine("<TD>" + datFile.IniReadValue("Scheduler", "Minutes(" + i + ")") + "</TD>");
-                            				rW.WriteLine("<TD>" + datFile.IniReadValue("Scheduler", "MacroToRun(" + i + ")") + "</TD></TR>");
-
-                            				//if they want to
-                            				var macroNum = Convert.ToInt32(datFile.IniReadValue("Scheduler", "MacroToRun(" + i + ")"));
-                            				rW.WriteLine("<TR><TD colspan=7>");
-
-                            				rW.WriteLine(macroNum < 41 ? _macros[macroNum].ParsedMacro + "<HR>" + _macros[macroNum].MacroCodes : _shortMacros[macroNum - 40].ParsedMacro + "<HR>" + _shortMacros[macroNum - 40].MacroCodes);
-
-                            				rW.WriteLine("</TD></TR>");
-                        			}
-
-                        			rW.WriteLine("</TABLE><HR>");
-                    			}
-                    			//CT MSG Macros
-                    			if (checkBox_CTMessageMacros.Checked)
+					int lastMessage = checkBox_RTCOption.Checked ? 70 : 40;
+					for (int i = 1; i <= lastMessage; i++)
 					{
-						rW.WriteLine("<TABLE border=1 align=center>");
-						rW.WriteLine("<TR><TD align=center colspan=4><H2>Courtesty Tone Message Macros</H2></TD></TR>");
-						rW.WriteLine("<TR><TD><B>Port</B></TD><TD><B>Tone</B></TD><TD><B>Message Macro</B></TD><TD><B>Macro Contents</B></TD></TR>");
-
-						for (int i = 1; i <= 3; i++)
-						{
-							for (int j = 1; j <= 10; j++)
-							{
-								var tone1 = datFile.IniReadValue("Courtesy", "P" + i + "Tone1(" + j + ")");
-								
-								if ((Convert.ToInt32(tone1) > 40) || (Convert.ToInt32(tone1) == 0))
-									continue;
-
-								rW.WriteLine("<TR><TD>" + i + "</TD>");
-								rW.WriteLine("<TD>" + j + "</TD>");
-								rW.WriteLine("<TD>" + tone1 + "</TD>");
-								rW.WriteLine("<TD>" + datFile.IniReadValue("MessageMacros", "MessageMacro(" + tone1 + ")") + "</TD></TR>");
-							}
-
-                            				if (fwVersion >= 7.02) //From version 7.02 there is a single pool of Courtesy Tones @ P1Tone1 - P1Tone10
-                               			 		break;
-                    				}
-
-						rW.WriteLine("</TABLE><HR>");
-					}
-
-					//Messages
-					if (checkBox_MessageMacros.Checked)
-					{
-
-						rW.WriteLine("<TABLE border=1 align=center>");
-						rW.WriteLine("<TR><TD align=center colspan=2><H2>Message Macros</H2></TD></TR>");
-						rW.WriteLine("<TR><TD><B>Message Macro</B></TD><TD><B>Words spoken</B></TD></TR>");
-
-						int lastMessage = checkBox_RTCOption.Checked ? 70 : 40;
-						for (int i = 1; i <= lastMessage; i++)
-						{
-							var messageMacro = datFile.IniReadValue("MessageMacros", "MessageMacro(" + i + ")");
-							if (messageMacro != "" && messageMacro != "NONE STORED")
-							{
-								rW.WriteLine("<TR><TD>" + i + "</TD>");
-								rW.WriteLine("<TD>" + messageMacro +"</TD></TR>");
-							}
-						}
-					
-						rW.WriteLine("</TABLE><HR>");
-					}
-
-					//General Timers
-					if (checkBox_GeneralTimers.Checked)
-					{
-						rW.WriteLine("<TABLE border=1 align=center>");
-						rW.WriteLine("<TR><TD align=center colspan=3><H2>General Timers</H2></TD></TR>");
-						rW.WriteLine("<TR><TD><B>Timer</B></TD><TD><B>Time (seconds)</B></TD><TD><B>Macro to run</B></TD></TR>");
-
-						for (int i = 1; i <= 6; i++)        //Added 3 additional General Times at v6.044
-						{
-							var generalTimer = datFile.IniReadValue("Alarms", "GeneralTimer(" + i + ")"); // != 0
-							if (generalTimer != "0")
-							{
-								rW.WriteLine("<TR><TD>" + i + "</TD>");
-								rW.WriteLine("<TD>" + generalTimer + "</TD>");
-								rW.WriteLine("<TD>" + datFile.IniReadValue("Alarms", "GeneralTimerMacro(" + i + ")") + "</TD></TR>");
-							}	
-						}
-
-						rW.WriteLine("</TABLE>");
-						rW.WriteLine("<HR>");
-					}
-
-					//Analog Meters
-					if (checkBox_AnalogMeters.Checked)
-					{
-						rW.WriteLine("<TABLE border=1 align=center>");
-						rW.WriteLine("<TR><TD align=center colspan=6><H2>Analog Meters</H2></TD></TR>");
-						rW.WriteLine("<TR><TD><B>Meter #</B></TD><TD><B>Meter Type</B></TD><TD><B>Actual Low</B></TD><TD><B>Meter Low</B></TD><TD><B>Actual High</B></TD><TD><B>Meter High</B></TD></TR>");
-
-						for (int i = 1; i <= 8; i++)
-						{
-							var meter = datFile.IniReadValue("Analog", "Meter(" + i + ")");
-
-							if (meter != "0")
-							{
-								rW.WriteLine("<TR><TD>" + i + "</TD>");
-								rW.WriteLine("<TD>" + ParseMeter(meter) + "</TD>");
-								rW.WriteLine("<TD>" + datFile.IniReadValue("Analog", "RealLow(" + i + ")") + "</TD>");
-								rW.WriteLine("<TD>" + datFile.IniReadValue("Analog", "MeterLow(" + i + ")") + "</TD>");
-								rW.WriteLine("<TD>" + datFile.IniReadValue("Analog", "RealHigh(" + i + ")") + "</TD>");
-								rW.WriteLine("<TD>" + datFile.IniReadValue("Analog", "MeterHigh(" + i + ")") + "</TD></TR>");
-							}
-
-						}
-						rW.WriteLine("</TABLE>");
-
-						rW.WriteLine("<TABLE border=1 align=center>");
-						rW.WriteLine("<TR><TD align=center colspan=5><H2>Analog Meter Alarms</H2></TD></TR>");
-						rW.WriteLine("<TR><TD><B>Alarm #</B></TD><TD><B>Alarm Type</B></TD><TD><B>Meter #</B></TD><TD><B>Meter Set Point</B></TD><TD><B>Macro to run</B></TD></TR>");
-
-						for (int i = 1; i <= 8; i++)
-						{
-							var meterAlarm = datFile.IniReadValue("Analog", "MeterAlarmType(" + i + ")");
-							if (meterAlarm != "0")
-							{
-								rW.WriteLine("<TR><TD>" + i + "</TD>");
-								rW.WriteLine("<TD>" +ParseMeterAlarmType(datFile.IniReadValue("Analog", "MeterAlarmType(" + i + ")")) + "</TD>");
-								rW.WriteLine("<TD>" + datFile.IniReadValue("Analog", "MeterNum(" + i + ")") + "</TD>");
-								rW.WriteLine("<TD>" + datFile.IniReadValue("Analog", "MeterSetPoint(" + i + ")") + "</TD>");
-								rW.WriteLine("<TD>" + datFile.IniReadValue("Analog", "MeterMacro(" + i + ")") + "</TD></TR>");
-							}
-						}
-						rW.WriteLine("</TABLE><HR>");
-					}
-
-					//Alarms
-					if (checkBox_Alarms.Checked)
-					{
-						rW.WriteLine("<TABLE border=1 align=center>");
-						rW.WriteLine("<TR><TD align=center colspan=4><H2>Alarms</H2></TD></TR>");
-						rW.WriteLine("<TR><TD><B>Alarm #</B></TD><TD><B>Status</B></TD><TD><B>High to Low macro</B></TD><TD><B>Low to High macro</B></TD></TR>");
-
-						for (int i = 1; i <= 5; i++)
+						var messageMacro = datFile.IniReadValue("MessageMacros", "MessageMacro(" + i + ")");
+						if (messageMacro != "" && messageMacro != "NONE STORED")
 						{
 							rW.WriteLine("<TR><TD>" + i + "</TD>");
-							rW.WriteLine("<TD>" + ParseAlarm(datFile.IniReadValue("PortSwitches", "Alarm(" + i + ")")) +"</TD>");
-							rW.WriteLine("<TD>" + datFile.IniReadValue("Alarms", "AlarmLowMacroNum(" + i + ")") + "</TD>");
-							rW.WriteLine("<TD>" + datFile.IniReadValue("Alarms", "AlarmHighMacroNum(" + i + ")") + "</TD></TR>");
+							rW.WriteLine("<TD>" + messageMacro +"</TD></TR>");
 						}
+					}
+					
+					rW.WriteLine("</TABLE><HR>");
+				}
 
-						rW.WriteLine("</TABLE><HR>");
+				//General Timers
+				if (checkBox_GeneralTimers.Checked)
+				{
+					rW.WriteLine("<TABLE border=1 align=center>");
+					rW.WriteLine("<TR><TD align=center colspan=3><H2>General Timers</H2></TD></TR>");
+					rW.WriteLine("<TR><TD><B>Timer</B></TD><TD><B>Time (seconds)</B></TD><TD><B>Macro to run</B></TD></TR>");
+
+					for (int i = 1; i <= 6; i++)
+					{
+						var generalTimer = datFile.IniReadValue("Alarms", "GeneralTimer(" + i + ")"); // != 0
+						if (generalTimer != "0")
+						{
+							rW.WriteLine("<TR><TD>" + i + "</TD>");
+							rW.WriteLine("<TD>" + generalTimer + "</TD>");
+							rW.WriteLine("<TD>" + datFile.IniReadValue("Alarms", "GeneralTimerMacro(" + i + ")") + "</TD></TR>");
+						}	
 					}
 
-					//DTMF Memories
-					if (checkBox_DTMFMemories.Checked)
+					rW.WriteLine("</TABLE>");
+					rW.WriteLine("<HR>");
+				}
+
+				//Analog Meters
+				if (checkBox_AnalogMeters.Checked)
+				{
+					rW.WriteLine("<TABLE border=1 align=center>");
+					rW.WriteLine("<TR><TD align=center colspan=6><H2>Analog Meters</H2></TD></TR>");
+					rW.WriteLine("<TR><TD><B>Meter #</B></TD><TD><B>Meter Type</B></TD><TD><B>Actual Low</B></TD><TD><B>Meter Low</B></TD><TD><B>Actual High</B></TD><TD><B>Meter High</B></TD></TR>");
+
+					for (int i = 1; i <= 8; i++)
+					{
+						var meter = datFile.IniReadValue("Analog", "Meter(" + i + ")");
+
+						if (meter != "0")
+						{
+							rW.WriteLine("<TR><TD>" + i + "</TD>");
+							rW.WriteLine("<TD>" + ParseMeter(meter) + "</TD>");
+							rW.WriteLine("<TD>" + datFile.IniReadValue("Analog", "RealLow(" + i + ")") + "</TD>");
+							rW.WriteLine("<TD>" + datFile.IniReadValue("Analog", "MeterLow(" + i + ")") + "</TD>");
+							rW.WriteLine("<TD>" + datFile.IniReadValue("Analog", "RealHigh(" + i + ")") + "</TD>");
+							rW.WriteLine("<TD>" + datFile.IniReadValue("Analog", "MeterHigh(" + i + ")") + "</TD></TR>");
+						}
+
+					}
+					rW.WriteLine("</TABLE>");
+
+					rW.WriteLine("<TABLE border=1 align=center>");
+					rW.WriteLine("<TR><TD align=center colspan=5><H2>Analog Meter Alarms</H2></TD></TR>");
+					rW.WriteLine("<TR><TD><B>Alarm #</B></TD><TD><B>Alarm Type</B></TD><TD><B>Meter #</B></TD><TD><B>Meter Set Point</B></TD><TD><B>Macro to run</B></TD></TR>");
+
+					for (int i = 1; i <= 8; i++)
+					{
+						var meterAlarm = datFile.IniReadValue("Analog", "MeterAlarmType(" + i + ")");
+						if (meterAlarm != "0")
+						{
+							rW.WriteLine("<TR><TD>" + i + "</TD>");
+							rW.WriteLine("<TD>" +ParseMeterAlarmType(datFile.IniReadValue("Analog", "MeterAlarmType(" + i + ")")) + "</TD>");
+							rW.WriteLine("<TD>" + datFile.IniReadValue("Analog", "MeterNum(" + i + ")") + "</TD>");
+							rW.WriteLine("<TD>" + datFile.IniReadValue("Analog", "MeterSetPoint(" + i + ")") + "</TD>");
+							rW.WriteLine("<TD>" + datFile.IniReadValue("Analog", "MeterMacro(" + i + ")") + "</TD></TR>");
+						}
+					}
+					rW.WriteLine("</TABLE><HR>");
+				}
+
+				//Alarms
+				if (checkBox_Alarms.Checked)
+				{
+					rW.WriteLine("<TABLE border=1 align=center>");
+					rW.WriteLine("<TR><TD align=center colspan=4><H2>Alarms</H2></TD></TR>");
+					rW.WriteLine("<TR><TD><B>Alarm #</B></TD><TD><B>Status</B></TD><TD><B>High to Low macro</B></TD><TD><B>Low to High macro</B></TD></TR>");
+
+					for (int i = 1; i <= 5; i++)
+					{
+						rW.WriteLine("<TR><TD>" + i + "</TD>");
+						rW.WriteLine("<TD>" + ParseAlarm(datFile.IniReadValue("PortSwitches", "Alarm(" + i + ")")) +"</TD>");
+						rW.WriteLine("<TD>" + datFile.IniReadValue("Alarms", "AlarmLowMacroNum(" + i + ")") + "</TD>");
+						rW.WriteLine("<TD>" + datFile.IniReadValue("Alarms", "AlarmHighMacroNum(" + i + ")") + "</TD></TR>");
+					}
+
+					rW.WriteLine("</TABLE><HR>");
+				}
+
+				//DTMF Memories
+				if (checkBox_DTMFMemories.Checked)
+				{
+					rW.WriteLine("<TABLE border=1 align=center>");
+					rW.WriteLine("<TR><TD align=center colspan=2><H2>DTMF Memories</H2></TD></TR>");
+					rW.WriteLine("<TR><TD><B>Memory</B></TD><TD><B>DTMF String</B></TD></TR>");
+
+					int dtmfMemoryCount = (checkBox_RTCOption.Checked) ? 50 : 20;
+					for (int i = 1; i <= dtmfMemoryCount; i++)
+					{
+						var dtmfMemory = datFile.IniReadValue("DTMF", "DTMF(" + i + ")");
+						if (dtmfMemory != "" && dtmfMemory != "NONE STORED")
+						{
+							rW.WriteLine("<TR><TD>" + i + "</TD>");
+							rW.WriteLine("<TD>" + datFile.IniReadValue("DTMF", "DTMF(" + i + ")") + "</TD></TR>");
+						}
+					}
+
+					rW.WriteLine("</TABLE><HR>");
+				}
+
+				//Remote Base Memories
+				if (checkBox_RemoteBaseMemories.Checked)
+				{
+					rW.WriteLine("<TABLE border=1 align=center>");
+					rW.WriteLine("<TR><TD align=center colspan=6><H2>Remote Base Memories</H2></TD></TR>");
+					rW.WriteLine("<TR><TD><B>Memory</B></TD><TD><B>Frequency</B></TD><TD><B>Offset</B></TD><TD><B>CTCSS</B></TD><TD><B>CTCSS Mode</B></TD><TD><B>Radio Mode</B></TD></TR>");
+					int remoteBaseMemories = (checkBox_RTCOption.Checked) ? 40 : 10;
+					for (int i = 1; i <= remoteBaseMemories; i++)
+					{
+						var freqString = datFile.IniReadValue("Remote", "FreqString(" + i + ")");
+						if (freqString != "" && freqString != "0" && freqString != "NONE")
+						{
+							rW.WriteLine("<TR><TD>" + i + "</TD>");
+							rW.WriteLine("<TD>" + freqString.Substring(0, freqString.Length - 1) + "</TD>");
+							rW.WriteLine("<TD>" + ParseRemoteOffset(freqString.Substring(freqString.Length - 1, 1)) + "</TD>");
+							rW.WriteLine("<TD>" + datFile.IniReadValue("Remote", "CTCSS(" + i + ")") + "</TD>");
+							rW.WriteLine("<TD>" + ParseCtcssMode(datFile.IniReadValue("Remote", "CTCSSMode(" + i + ")")) + "</TD>");
+							rW.WriteLine("<TD>" + ParseRadioMode(datFile.IniReadValue("Remote", "RadioMode(" + i + ")")) + "</TD></TR>");
+						}
+					}
+					rW.WriteLine("</TABLE><HR>");
+				}
+
+				//AutoPatch Settings
+				if (checkBox_APSettings.Checked)
+				{
+					rW.WriteLine("<TABLE border=1 aling=center");
+					rW.WriteLine("<TR><TD align=center colspan=2><H2>AutoPatch Settings</H2></TD></TR>");
+					rW.WriteLine("<TR><TD><B>Prefix:</B> " + ((checkBox_APPrefix.Checked) ? _autoPatch.Prefix : "Not Displayed") +
+						            "</TD>");
+					rW.WriteLine("<TD><B>Answer Code:</B> " +
+						            ((checkBox_APAnswerCode.Checked) ? _autoPatch.AnswerCode : "Not Displayed") + "</TD></TR>");
+					rW.WriteLine("<TR><TD><B>Ring Count:</B> " + _autoPatch.RingCount + "</TD>");
+					rW.WriteLine("<TD><B>Timeout:</B> " + _autoPatch.TimeOut + "</TD></TR>");
+					rW.WriteLine("<TR><TD><B>Allowed Ports:</B> " + _autoPatch.Ports + "</TD>");
+					rW.WriteLine("<TD><B>Patch Mute:</B> " + _autoPatch.PatchMute + "</TD></TR>");
+						
+					rW.WriteLine("<TR><TD valign=top>");
+
+					//AutoPatch Memories
+					if (checkBox_APMemories.Checked)
 					{
 						rW.WriteLine("<TABLE border=1 align=center>");
-						rW.WriteLine("<TR><TD align=center colspan=2><H2>DTMF Memories</H2></TD></TR>");
+						rW.WriteLine("<TR><TD align=center colspan=2><H2>AutoPatch Memories</H2></TD></TR>");
 						rW.WriteLine("<TR><TD><B>Memory</B></TD><TD><B>DTMF String</B></TD></TR>");
 
-						int dtmfMemoryCount = (checkBox_RTCOption.Checked) ? 50 : 20;
-						for (int i = 1; i <= dtmfMemoryCount; i++)
+						for (int i = 1; i <= 200; i++)
 						{
-							var dtmfMemory = datFile.IniReadValue("DTMF", "DTMF(" + i + ")");
-							if (dtmfMemory != "" && dtmfMemory != "NONE STORED")
+							var autoDial = datFile.IniReadValue("AutoPatch", "AutoDial(" + i + ")");
+							if (autoDial.Length > 0)
 							{
 								rW.WriteLine("<TR><TD>" + i + "</TD>");
-								rW.WriteLine("<TD>" + datFile.IniReadValue("DTMF", "DTMF(" + i + ")") + "</TD></TR>");
+								rW.WriteLine("<TD>" + datFile.IniReadValue("AutoPatch", "AutoDial(" + i + ")") + "</TD></TR>");
 							}
 						}
 
-						rW.WriteLine("</TABLE><HR>");
+						rW.WriteLine("</TABLE>");
 					}
 
-					//Remote Base Memories
-					if (checkBox_RemoteBaseMemories.Checked)
+					rW.WriteLine("</TD><TD valign=top>");
+
+					//AutoPatch Toll Restrictions
+					if (checkBox_APTollRestrictions.Checked)
 					{
 						rW.WriteLine("<TABLE border=1 align=center>");
-						rW.WriteLine("<TR><TD align=center colspan=6><H2>Remote Base Memories</H2></TD></TR>");
-						rW.WriteLine("<TR><TD><B>Memory</B></TD><TD><B>Frequency</B></TD><TD><B>Offset</B></TD><TD><B>CTCSS</B></TD><TD><B>CTCSS Mode</B></TD><TD><B>Radio Mode</B></TD></TR>");
-						int remoteBaseMemories = (checkBox_RTCOption.Checked) ? 40 : 10;
-						for (int i = 1; i <= remoteBaseMemories; i++)
+						rW.WriteLine("<TR><TD align=center colspan=2><H2>AutoPatch Toll Restrictions</H2></TD></TR>");
+						rW.WriteLine("<TR><TD><B>Entry</B></TD><TD><B>Toll</B></TD></TR>");
+
+						for (int i = 1; i <= 100; i++)
 						{
-							var freqString = datFile.IniReadValue("Remote", "FreqString(" + i + ")");
-							if (freqString != "" && freqString != "0" && freqString != "NONE")
+							var apTollRestriction = datFile.IniReadValue("AutoPatch", "TollRestrict(" + i + ")");
+							if (apTollRestriction.Length > 0)
 							{
 								rW.WriteLine("<TR><TD>" + i + "</TD>");
-								rW.WriteLine("<TD>" + freqString.Substring(0, freqString.Length - 1) + "</TD>");
-								rW.WriteLine("<TD>" + ParseRemoteOffset(freqString.Substring(freqString.Length - 1, 1)) + "</TD>");
-								rW.WriteLine("<TD>" + datFile.IniReadValue("Remote", "CTCSS(" + i + ")") + "</TD>");
-								rW.WriteLine("<TD>" + ParseCtcssMode(datFile.IniReadValue("Remote", "CTCSSMode(" + i + ")")) + "</TD>");
-								rW.WriteLine("<TD>" + ParseRadioMode(datFile.IniReadValue("Remote", "RadioMode(" + i + ")")) + "</TD></TR>");
+								rW.WriteLine("<TD>" + datFile.IniReadValue("AutoPatch", "TollRestrict(" + i + ")") + "</TD></TR>");
 							}
 						}
-						rW.WriteLine("</TABLE><HR>");
+
+						rW.WriteLine("</TABLE>");
 					}
 
-					//AutoPatch Settings
-					if (checkBox_APSettings.Checked)
-					{
-						rW.WriteLine("<TABLE border=1 aling=center");
-						rW.WriteLine("<TR><TD align=center colspan=2><H2>AutoPatch Settings</H2></TD></TR>");
-						rW.WriteLine("<TR><TD><B>Prefix:</B> " + ((checkBox_APPrefix.Checked) ? _autoPatch.Prefix : "Not Displayed") +
-						            "</TD>");
-						rW.WriteLine("<TD><B>Answer Code:</B> " +
-						            ((checkBox_APAnswerCode.Checked) ? _autoPatch.AnswerCode : "Not Displayed") + "</TD></TR>");
-						rW.WriteLine("<TR><TD><B>Ring Count:</B> " + _autoPatch.RingCount + "</TD>");
-						rW.WriteLine("<TD><B>Timeout:</B> " + _autoPatch.TimeOut + "</TD></TR>");
-						rW.WriteLine("<TR><TD><B>Allowed Ports:</B> " + _autoPatch.Ports + "</TD>");
-						rW.WriteLine("<TD><B>Patch Mute:</B> " + _autoPatch.PatchMute + "</TD></TR>");
-						
-						rW.WriteLine("<TR><TD valign=top>");
-
-						//AutoPatch Memories
-						if (checkBox_APMemories.Checked)
-						{
-							rW.WriteLine("<TABLE border=1 align=center>");
-							rW.WriteLine("<TR><TD align=center colspan=2><H2>AutoPatch Memories</H2></TD></TR>");
-							rW.WriteLine("<TR><TD><B>Memory</B></TD><TD><B>DTMF String</B></TD></TR>");
-
-							for (int i = 1; i <= 200; i++)
-							{
-								var autoDial = datFile.IniReadValue("AutoPatch", "AutoDial(" + i + ")");
-								if (autoDial.Length > 0)
-								{
-									rW.WriteLine("<TR><TD>" + i + "</TD>");
-									rW.WriteLine("<TD>" + datFile.IniReadValue("AutoPatch", "AutoDial(" + i + ")") + "</TD></TR>");
-								}
-							}
-
-							rW.WriteLine("</TABLE>");
-						}
-
-						rW.WriteLine("</TD><TD valign=top>");
-
-						//AutoPatch Toll Restrictions
-						if (checkBox_APTollRestrictions.Checked)
-						{
-							rW.WriteLine("<TABLE border=1 align=center>");
-							rW.WriteLine("<TR><TD align=center colspan=2><H2>AutoPatch Toll Restrictions</H2></TD></TR>");
-							rW.WriteLine("<TR><TD><B>Entry</B></TD><TD><B>Toll</B></TD></TR>");
-
-							for (int i = 1; i <= 100; i++)
-							{
-								var apTollRestriction = datFile.IniReadValue("AutoPatch", "TollRestrict(" + i + ")");
-								if (apTollRestriction.Length > 0)
-								{
-									rW.WriteLine("<TR><TD>" + i + "</TD>");
-									rW.WriteLine("<TD>" + datFile.IniReadValue("AutoPatch", "TollRestrict(" + i + ")") + "</TD></TR>");
-								}
-							}
-
-							rW.WriteLine("</TABLE>");
-						}
-
-						rW.WriteLine("</TD></TR>");
-						rW.WriteLine("</TABLE><HR>");
-					}
-
-					rW.WriteLine("F/W Target Version: " + comboBox_FwVersion.SelectedItem + "<BR>");
-					rW.WriteLine("This file was generated by Data Assistant V2 written by James M. Bolding - KC5TDG: bolwire@cableone.net<br>");
-                			rW.WriteLine("Modifed by Robert P. Norris - AK5U: ak5u@arrl.net");
-                			rW.WriteLine("Please join the Data Assistant Group at: <a href=https://groups.google.com/forum/#!forum/rc210_data_assistant>https://groups.google.com/forum/#!forum/rc210_data_assistant</a>");
-
-					var dr = MessageBox.Show(
-						string.Format("Your report has been created at:\n\n{0}\n\nWould you like to open it now?", _reportFilename),
-						@"Report created",
-						MessageBoxButtons.YesNo,
-						MessageBoxIcon.Information
-						);
-				
-					if (dr == DialogResult.Yes) Process.Start(_reportFilename);
+					rW.WriteLine("</TD></TR>");
+					rW.WriteLine("</TABLE><HR>");
 				}
+
+				rW.WriteLine("F/W Target Version: " + comboBox_FwVersion.SelectedItem + "<BR>");
+				rW.WriteLine("This file was generated by Data Assistant V2 written by James M. Bolding - KC5TDG: bolwire@cableone.net<br>");
+				rW.WriteLine("Please join the Data Assistant Group at: <a href=https://groups.google.com/forum/#!forum/rc210_data_assistant>https://groups.google.com/forum/#!forum/rc210_data_assistant</a>");
+
+				var dr = MessageBox.Show(
+					string.Format("Your report has been created at:\n\n{0}\n\nWould you like to open it now?", _reportFilename),
+					@"Report created",
+					MessageBoxButtons.YesNo,
+					MessageBoxIcon.Information
+					);
+				
+				if (dr == DialogResult.Yes) Process.Start(_reportFilename);
 			}
 		}
-        
-        	#endregion Generate Report
 
-        	#region Load AutoPatch
 
-        	private void Load_AutoPatch()
+		#endregion Generate Report
+
+		#region Load AutoPatch
+
+		private void Load_AutoPatch()
 		{
 			IniFile datFile = new IniFile(_datFilename);
 
@@ -1196,7 +1196,6 @@ namespace RC210_DataAssistant_V2
 					RepeaterMode = (datFile.IniReadValue("PortSwitches", string.Format("FDup({0})", i)) == "0") ? "Disabled" : "Enabled",
 					SpeechOverride = (datFile.IniReadValue("PortSwitches", string.Format("SpeechOverride({0})", i)) == "0") ? "Disabled" : "Enabled",
 					SpeechIdOverride = (datFile.IniReadValue("PortSwitches", string.Format("SpeechIDOverride({0})", i)) == "0") ? "Disabled" : "Enabled",
-					
 					//AccessMode = datFile.IniReadValue("PortSwitches", string.Format("P{0}MessageNum(3)", i)),
 					DtmfEnable = (datFile.IniReadValue("PortSwitches", string.Format("DTMFEnable({0})", i)) == "0") ? "Disabled" : "Enabled",
 					DtmfRequireTone = (datFile.IniReadValue("PortSwitches", string.Format("DTMFNeedPL({0})", i)) == "0") ? "Disabled" : "Enabled",
@@ -1206,19 +1205,20 @@ namespace RC210_DataAssistant_V2
 					KerchunkFilter = (datFile.IniReadValue("PortSwitches", string.Format("Kerchunk({0})", i)) == "0") ? "Disabled" : "Enabled",
 
 				};
-                
-                		if (fwVersion < 7.02)                       //Added this code to handle HangTimer
-                		{                                           //changed in v7.00
-                    			portItem.HangTimer1 = datFile.IniReadValue("Timers", string.Format("HangTime1({0})", i));
-                		}
-                		else
-                		{
-                    			portItem.HangTimer1 = datFile.IniReadValue("Timers", string.Format("HangTime1({0})", i));
-                    			portItem.HangTimer2 = datFile.IniReadValue("Timers", string.Format("HangTime2({0})", i));
-                    			portItem.HangTimer3 = datFile.IniReadValue("Timers", string.Format("HangTime3({0})", i));
-                		}
 
-                		if (portName != string.Empty)
+				if (fwVersion < 7.00)
+				{
+					portItem.HangTimer1 = datFile.IniReadValue("Timers", string.Format("HangTime({0})", i));
+				}
+				else
+				{
+					portItem.HangTimer1 = datFile.IniReadValue("Timers", string.Format("HangTime1({0})", i));
+					portItem.HangTimer2 = datFile.IniReadValue("Timers", string.Format("HangTime2({0})", i));
+					portItem.HangTimer3 = datFile.IniReadValue("Timers", string.Format("HangTime3({0})", i));
+				}
+
+
+				if (portName != string.Empty)
 					portItem.PortName = portName;
 
 				_ports.Add(i, portItem);
@@ -1299,46 +1299,46 @@ namespace RC210_DataAssistant_V2
 			}
 		}
 
-        	private void Load_ExtendedMacros()          //Supports change with v7.39
-        	{
-            		IniFile datFile = new IniFile(_datFilename);
+        private void Load_ExtendedMacros()
+        {
+            IniFile datFile = new IniFile(_datFilename);
 
-            		_extendedMacros.Clear();
+            _extendedMacros.Clear();
 
-            		for (int i = 1; i <= 15; i++)
-            		{
-                		string extendedMacro = datFile.IniReadValue("Macros", string.Format("ExtendedMacro({0})", i));
-                		string extendedMacroCode = datFile.IniReadValue("Macros", string.Format("ExtendedMacroCode({0})", i));
-                		string allowedPorts = datFile.IniReadValue("Macros", string.Format("PortToAllow({0})", i + 90));
+            for (int i = 1; i <= 15; i++)
+            {
+                string extendedMacro = datFile.IniReadValue("Macros", string.Format("ExtendedMacro({0})", i));
+                string extendedMacroCode = datFile.IniReadValue("Macros", string.Format("ExtendedMacroCode({0})", i));
+                string allowedPorts = datFile.IniReadValue("Macros", string.Format("PortToAllow({0})", i + 90));
 
-                		Macro extendedMacroItem = new Macro
-                		{
-                    			MacroNumber = i + 90,
-                    			//MacroCodes = extendedMacro,
-                   			AccessCode = extendedMacroCode,
-                    			ParsedMacro = _macroLibrary.ParseMacro(comboBox_FwVersion.SelectedItem.ToString(), extendedMacro),
-                    			AllowedPorts = allowedPorts
-                		};
+                Macro extendedMacroItem = new Macro
+                {
+                    MacroNumber = i + 90,
+                    //MacroCodes = extendedMacro,
+                    AccessCode = extendedMacroCode,
+                    ParsedMacro = _macroLibrary.ParseMacro(comboBox_FwVersion.SelectedItem.ToString(), extendedMacro),
+                    AllowedPorts = allowedPorts
+                };
 
-                		char[] splitChar = { ' ' };
-                		string[] macroCodes = extendedMacro.Split(splitChar);
+                char[] splitChar = { ' ' };
+                string[] macroCodes = extendedMacro.Split(splitChar);
 
-                		foreach (string code in macroCodes)
-                		{
-                    			extendedMacroItem.MacroCodes = extendedMacroItem.MacroCodes + " " + string.Format("<a title=\"{0}\">{1}</a>", _macroLibrary.ParseMacro(comboBox_FwVersion.SelectedItem.ToString(), code), code);
-                		}
+                foreach (string code in macroCodes)
+                {
+                    extendedMacroItem.MacroCodes = extendedMacroItem.MacroCodes + " " + string.Format("<a title=\"{0}\">{1}</a>", _macroLibrary.ParseMacro(comboBox_FwVersion.SelectedItem.ToString(), code), code);
+                }
 
-                		extendedMacroItem.MacroCodes = extendedMacroItem.MacroCodes.Substring(1);
+                extendedMacroItem.MacroCodes = extendedMacroItem.MacroCodes.Substring(1);
 
-                		_extendedMacros.Add(i, extendedMacroItem);
-           		}
-        	}
+                _extendedMacros.Add(i, extendedMacroItem);
+            }
+        }
 
-        	#endregion Load Macros/ShortMacros/ExtendedMacros
+        #endregion Load Macros/ShortMacros/ExtendedMacros
 
-        	#region Load Message Macros
+        #region Load Message Macros
 
-        	private void Load_MessageMacros()
+        private void Load_MessageMacros()
 		{
 			IniFile datFile = new IniFile(_datFilename);
 
@@ -1358,7 +1358,7 @@ namespace RC210_DataAssistant_V2
 
 		#region ToolStripMenu Even Handlers
 
-		private void SaveToolStripMenuItem_Click(object sender, EventArgs e)
+		private void saveToolStripMenuItem_Click(object sender, EventArgs e)
 		{
 			var result = MessageBox.Show(@"This will overwrite any existing options, are you sure ?",
 				@"Warning - Overwrite Options", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
@@ -1369,7 +1369,7 @@ namespace RC210_DataAssistant_V2
 			Settings.Default.Save();
 		}
 		
-		private void ResetToolStripMenuItem_Click(object sender, EventArgs e)
+		private void resetToolStripMenuItem_Click(object sender, EventArgs e)
 		{
 			var result = MessageBox.Show(@"This is a global reset of options that cannot be undone, are you sure ?",
 				@"Warning - Options Reset", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
@@ -1380,7 +1380,7 @@ namespace RC210_DataAssistant_V2
 			Settings.Default.Reset();
 		}
 
-		private void RecallToolStripMenuItem_Click(object sender, EventArgs e)
+		private void recallToolStripMenuItem_Click(object sender, EventArgs e)
 		{
 			var result = MessageBox.Show(@"This will repopulate the options to match the saved options, are you sure ?",
 				@"Warning - Overwrite Options", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
@@ -1391,7 +1391,7 @@ namespace RC210_DataAssistant_V2
 			Settings.Default.Reload();
 		}
 
-		private void OpenToolStripMenuItem_Click(object sender, EventArgs e)
+		private void openToolStripMenuItem_Click(object sender, EventArgs e)
 		{
 			viewReportToolStripMenuItem.Enabled = openReportFolderToolStripMenuItem.Enabled = false;
 			OpenFileDialog resultOpenFileDialog = new OpenFileDialog
@@ -1410,7 +1410,7 @@ namespace RC210_DataAssistant_V2
 			generateReportToolStripMenuItem1.Enabled = true;
 		}
 
-		private void CloseToolStripMenuItem_Click(object sender, EventArgs e)
+		private void closeToolStripMenuItem_Click(object sender, EventArgs e)
 		{
 			generateReportToolStripMenuItem1.Enabled = false;
 			viewReportToolStripMenuItem.Enabled = openReportFolderToolStripMenuItem.Enabled = false;
@@ -1419,7 +1419,7 @@ namespace RC210_DataAssistant_V2
 			Text = @"RC210 Data Assistant V2";
 		}
 
-		private void Port1ToolStripMenuItem_Click(object sender, EventArgs e)
+		private void port1ToolStripMenuItem_Click(object sender, EventArgs e)
 		{
 			string value = Settings.Default.Port1Name;
 			var result = InputBox(@"Port 1 name", "Port 1 name:", ref value);
@@ -1431,7 +1431,7 @@ namespace RC210_DataAssistant_V2
 			groupBox_Port1.Text = @"Port 1 - " + value;
 		}
 
-		private void Port2ToolStripMenuItem_Click(object sender, EventArgs e)
+		private void port2ToolStripMenuItem_Click(object sender, EventArgs e)
 		{
 			string value = Settings.Default.Port2Name;
 			var result = InputBox(@"Port 2 name", "Port 2 name:", ref value);
@@ -1443,7 +1443,7 @@ namespace RC210_DataAssistant_V2
 			groupBox_Port2.Text = @"Port 2 - " + value;
 		}
 
-		private void Port3ToolStripMenuItem_Click(object sender, EventArgs e)
+		private void port3ToolStripMenuItem_Click(object sender, EventArgs e)
 		{
 			string value = Settings.Default.Port3Name;
 			var result = InputBox(@"Port 3 name", "Port 3 name:", ref value);
@@ -1455,19 +1455,19 @@ namespace RC210_DataAssistant_V2
 			groupBox_Port3.Text = @"Port 3 - " + value;
 		}
 
-		private void AboutToolStripMenuItem_Click(object sender, EventArgs e)
+		private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
 		{
 			FormAbout aboutDialog = new FormAbout();
 			aboutDialog.ShowDialog();
 		}
 
-		private void GenerateReportToolStripMenuItem_Click(object sender, EventArgs e)
+		private void generateReportToolStripMenuItem_Click(object sender, EventArgs e)
 		{
 			Generate_Report();
 			viewReportToolStripMenuItem.Enabled = openReportFolderToolStripMenuItem.Enabled = true;
 		}
 
-		private void ViewReportToolStripMenuItem_Click(object sender, EventArgs e)
+		private void viewReportToolStripMenuItem_Click(object sender, EventArgs e)
 		{
 			if (!File.Exists(_reportFilename))
 			{
@@ -1480,7 +1480,7 @@ namespace RC210_DataAssistant_V2
 			Process.Start(_reportFilename);
 		}
 
-		private void OpenReportFolderToolStripMenuItem_Click(object sender, EventArgs e)
+		private void openReportFolderToolStripMenuItem_Click(object sender, EventArgs e)
 		{
 			if (_reportFilename != null)
 				return;
@@ -1489,14 +1489,14 @@ namespace RC210_DataAssistant_V2
 				Process.Start(Path.GetDirectoryName(_reportFilename));
 		}
 
-		private void VersionToolStripMenuItem_Click(object sender, EventArgs e)
+		private void versionToolStripMenuItem_Click(object sender, EventArgs e)
 		{
 			MessageBox.Show(
 				string.Format("Macro Definitions\n\nLocal file: {0}\nRemote file: {1}", _localXmlVersion, _remoteXmlVersion),
 				@"Macro Definitions", MessageBoxButtons.OK, MessageBoxIcon.Information);
 		}
 
-		private void UpdateToolStripMenuItem_Click(object sender, EventArgs e)
+		private void updateToolStripMenuItem_Click(object sender, EventArgs e)
 		{
 			//FetchDefXml(true);
 			UpdateXml();
@@ -1550,9 +1550,9 @@ namespace RC210_DataAssistant_V2
 
 		#endregion InputBox
 
-		private void XMLFilePathToolStripMenuItem_Click(object sender, EventArgs e)
+		private void xMLFilePathToolStripMenuItem_Click(object sender, EventArgs e)
 		{
-			string filepath = AppDomain.CurrentDomain.BaseDirectory + "xml\\";			
+			string filepath = AppDomain.CurrentDomain.BaseDirectory + "xml\\";
 			MessageBox.Show("I look for .xml files at the following location:\n\n" + filepath);
 		}
 	}

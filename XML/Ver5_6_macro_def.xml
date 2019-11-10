@@ -989,35 +989,35 @@
   <macro id="605" versions="5.360" description="Call Macro 5" />
   <macro id="605" versions="6.000 6.040" description="Speak Current Remote Base Freq and Offset" />
   <macro id="606" versions="5.360" description="Call Macro 6" />
-  <macro id="606" versions="6.040" description="Start General Timer 4" />
+  <macro id="606" versions="6.044" description="Start General Timer 4" />
   <macro id="607" versions="5.360" description="Call Macro 7" />
-  <macro id="607" versions="6.040" description="Start General Timer 5" />
+  <macro id="607" versions="6.044" description="Start General Timer 5" />
   <macro id="608" versions="5.360" description="Call Macro 8" />
-  <macro id="608" versions="6.040" description="Start General Timer 6" />
+  <macro id="608" versions="6.044" description="Start General Timer 6" />
   <macro id="609" versions="5.360" description="Call Macro 9" />
-  <macro id="609" versions="6.040" description="Stop General Timer 4" />
+  <macro id="609" versions="6.044" description="Stop General Timer 4" />
   <macro id="610" versions="5.360" description="Call Macro 10" />
-  <macro id="610" versions="6.040" description="Stop General Timer 5" />
+  <macro id="610" versions="6.044" description="Stop General Timer 5" />
   <macro id="611" versions="5.360" description="Call Macro 11" />
-  <macro id="611" versions="6.040" description="Stop General Timer 6" />
+  <macro id="611" versions="6.044" description="Stop General Timer 6" />
   <macro id="612" versions="5.360" description="Call Macro 12" />
-  <macro id="612" versions="6.040" description="Disable Port 1 Inactivity Timer" />
+  <macro id="612" versions="6.045" description="Disable Port 1 Inactivity Timer" />
   <macro id="613" versions="5.360" description="Call Macro 13" />
-  <macro id="613" versions="6.040" description="Disable Port 2 Inactivity Timer" />
+  <macro id="613" versions="6.045" description="Disable Port 2 Inactivity Timer" />
   <macro id="614" versions="5.360" description="Call Macro 14" />
-  <macro id="614" versions="6.040" description="Disable Port 3 Inactivity Timer" />
+  <macro id="614" versions="6.045" description="Disable Port 3 Inactivity Timer" />
   <macro id="615" versions="5.360" description="Call Macro 15" />
-  <macro id="615" versions="6.040" description="Enable Port 1 Inactivity Timer to Programmed Value" />
+  <macro id="615" versions="6.045" description="Enable Port 1 Inactivity Timer to Programmed Value" />
   <macro id="616" versions="5.360" description="Call Macro 16" />
-  <macro id="616" versions="6.040" description="Enable Port 2 Inactivity Timer to Programmed Value" />
+  <macro id="616" versions="6.045" description="Enable Port 2 Inactivity Timer to Programmed Value" />
   <macro id="617" versions="5.360" description="Call Macro 17" />
-  <macro id="617" versions="6.040" description="Enable Port 3 Inactivity Timer to Programmed Value" />
+  <macro id="617" versions="6.045" description="Enable Port 3 Inactivity Timer to Programmed Value" />
   <macro id="618" versions="5.360" description="Call Macro 18" />
-  <macro id="618" versions="6.040" description="1 Second Execution Delay" />
+  <macro id="618" versions="6.045" description="1 Second Execution Delay" />
   <macro id="619" versions="5.360" description="Call Macro 19" />
-  <macro id="619" versions="6.040" description="2 Second Execution Delay" />
+  <macro id="619" versions="6.045" description="2 Second Execution Delay" />
   <macro id="620" versions="5.360" description="Call Macro 20" />
-  <macro id="620" versions="6.040" description="4 Second Execution Delay" />
+  <macro id="620" versions="6.045" description="4 Second Execution Delay" />
   <macro id="621" versions="5.360" description="Call Macro 21" />
   <macro id="622" versions="5.360" description="Call Macro 22" />
   <macro id="623" versions="5.360" description="Call Macro 23" />

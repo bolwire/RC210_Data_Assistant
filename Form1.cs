@@ -31,8 +31,11 @@ namespace RC210_DataAssistant_V2
 		{
 			public string PortName;
 			public string PortCode;
-			public string HangTimer;
+			public string HangTimer1;							// 3 Hangtimers per with ver 7.00 and newer
+			public string HangTimer2;							// 3 Hangtimers per with ver 7.00 and newer
+			public string HangTimer3;							// 3 Hangtimers per with ver 7.00 and newer
 			public string TimeoutTimer;
+			public string TOTResetTimer;
 			public string InitialIdTimer;
 			public string PendingIdTimer;
 			public string InactivityTimer;
@@ -46,6 +49,9 @@ namespace RC210_DataAssistant_V2
 			public string VoiceId1;
 			public string VoiceId2;
 			public string VoiceId3;
+			public string PendingId1;							//Added at ver 7.36
+			public string PendingId2;							//Added at ver 7.36
+			public string PendingId3;							//Added at ver 7.36
 			public string Cwid1;
 			public string Cwid2;
 			public string TailMessage;
@@ -61,6 +67,7 @@ namespace RC210_DataAssistant_V2
 			public string RepeaterMode;
 			public string SpeechOverride;
 			public string SpeechIdOverride;
+
 			//public string AccessMode;
 			public string DtmfEnable;
 			public string DtmfRequireTone;
@@ -92,7 +99,7 @@ namespace RC210_DataAssistant_V2
 
 		private readonly string _localXmlDocumentFile = AppDomain.CurrentDomain.BaseDirectory + "macro_def.xml";
 		private readonly string _localXmlDocumentOverRideFile = AppDomain.CurrentDomain.BaseDirectory + "macro_def_override.xml";
-		
+
 		private double _remoteXmlVersion;
 		private double _localXmlVersion;
 
@@ -105,6 +112,7 @@ namespace RC210_DataAssistant_V2
 		private readonly Dictionary<int, Port> _ports = new Dictionary<int, Port>();
 		private readonly Dictionary<int, Macro> _macros = new Dictionary<int, Macro>();
 		private readonly Dictionary<int, Macro> _shortMacros = new Dictionary<int, Macro>();
+		private readonly Dictionary<int, Macro> _extendedMacros = new Dictionary<int, Macro>();		//Added by ver 7.39
 		private readonly Dictionary<int, string> _messageMacros = new Dictionary<int, string>();
 
 		#endregion Private Members
@@ -181,7 +189,6 @@ namespace RC210_DataAssistant_V2
 									e.Message), @"Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
 							return;
 						}
-
 					}
 
 					if (_remoteXmlVersion > _localXmlVersion)
@@ -237,7 +244,6 @@ namespace RC210_DataAssistant_V2
 
 		}
 
-		
 		private void FetchDefXml()
 		{
 			string filepath = AppDomain.CurrentDomain.BaseDirectory + "xml\\";
@@ -276,7 +282,7 @@ namespace RC210_DataAssistant_V2
 				return;
 			}
 
-			//Load the regulat macro definitions
+			//Load the regular macro definitions
 			_localXmlDocument.Load(file);
 
 			foreach (XmlNode node in _localXmlDocument.ChildNodes)
@@ -312,21 +318,467 @@ namespace RC210_DataAssistant_V2
 		{
 			if (_datFilename == string.Empty || !File.Exists(_datFilename))
 				return;
-			Load_Ports();
+
 			Load_MessageMacros();
 			Load_Macros();
 			Load_ShortMacros();
+			Load_ExtendedMacros();
 			Load_AutoPatch();
 		}
-		
+
 		#endregion Load .dat file
+
+		#region Load AutoPatch
+
+		private void Load_AutoPatch()
+		{
+			IniFile datFile = new IniFile(_datFilename);
+
+			_autoPatch.Prefix = datFile.IniReadValue("Autopatch", "APPrefix");
+			_autoPatch.AnswerCode = datFile.IniReadValue("Autopatch", "AnswerCode");
+			_autoPatch.RingCount =datFile.IniReadValue("Autopatch", "RingNumber");
+			_autoPatch.TimeOut = datFile.IniReadValue("Autopatch", "APTimeOut");
+			_autoPatch.Ports = datFile.IniReadValue("Autopatch", "EnablePatch");
+			_autoPatch.PatchMute = datFile.IniReadValue("Autopatch", "PatchMute");
+
+			_autoPatch.AutoDial.Clear();
+
+			for (int i = 1; i <= 200; i++)
+			{
+				_autoPatch.AutoDial.Add(i,datFile.IniReadValue("Autopatch", string.Format("AutoDial({0})", i)));
+			}
+
+			_autoPatch.TollRestriction.Clear();
+
+			for (int i = 1; i <= 200; i++)
+			{
+				_autoPatch.TollRestriction.Add(i, datFile.IniReadValue("Autopatch", string.Format("TollRestrict({0})", i)));
+			}
+		}
+
+		#endregion Load AutoPatch
+
+		#region Load Ports
+
+		private void Load_Ports()
+		{
+			IniFile datFile = new IniFile(_datFilename);
+
+			_ports.Clear();
+
+			for (int i = 1; i <= 3; i++)
+			{
+				string portName = string.Empty;
+
+				if (i == 1)
+					portName = Settings.Default.Port1Name;
+				if (i == 2)
+					portName = Settings.Default.Port2Name;
+				if (i == 3)
+					portName = Settings.Default.Port3Name;
+
+				Port portItem = new Port
+				{
+					PortCode = datFile.IniReadValue("Unlock", string.Format("CurrentPortUnlock({0})", i)),
+					TimeoutTimer = datFile.IniReadValue("Timers", string.Format("TimeOut({0})", i)),
+					TOTResetTimer = datFile.IniReadValue("Timers", string.Format("TOTResetTimer({0})", i)),
+					InitialIdTimer = datFile.IniReadValue("Timers", string.Format("IIDTime({0})", i)),
+					PendingIdTimer = datFile.IniReadValue("Timers", string.Format("PIDTime({0})", i)),
+					InactivityTimer = datFile.IniReadValue("Timers", string.Format("InActiveTime({0})", i)),
+					InactivityTimerMacro = datFile.IniReadValue("Timers", string.Format("InActivityMacro({0})", i)),
+					DtmfMuteTimer = datFile.IniReadValue("Timers", string.Format("DTMFTime({0})", i)),
+					EncoderTimer = datFile.IniReadValue("Timers", string.Format("CTCSSTime({0})", i)),
+					KerchunkTimer = datFile.IniReadValue("Timers", string.Format("KerchunkTime({0})", i)),
+					PendingIdSpeechTimer = datFile.IniReadValue("Timers", string.Format("IDSpeakTime({0})", i)),
+					TailMessageTimer = datFile.IniReadValue("Timers", string.Format("AnnounceTime({0})", i)),
+					AuxAudioTimer = datFile.IniReadValue("Timers", string.Format("AuxTime({0})", i)),
+					VoiceId1 = datFile.IniReadValue("ID", string.Format("VoiceID1({0})", i)),
+					VoiceId2 = datFile.IniReadValue("ID", string.Format("VoiceID2({0})", i)),
+					VoiceId3 = datFile.IniReadValue("ID", string.Format("VoiceID3({0})", i)),
+					Cwid1 = datFile.IniReadValue("ID", string.Format("CWID1({0})", i)),
+					Cwid2 = datFile.IniReadValue("ID", string.Format("CWID2({0})", i)),
+					TailMessage = datFile.IniReadValue("PortSwitches", string.Format("TailMessageNum({0})", i)),
+					TailMessageCounter = datFile.IniReadValue("PortSwitches", string.Format("TailCounter({0})", i)),
+					TailMessage1Macro = datFile.IniReadValue("PortSwitches", string.Format("P{0}MessageNum(1)", i)),
+					TailMessage2Macro = datFile.IniReadValue("PortSwitches", string.Format("P{0}MessageNum(2)", i)),
+					TailMessage3Macro = datFile.IniReadValue("PortSwitches", string.Format("P{0}MessageNum(3)", i)),
+
+					//Switches
+					TransmitterEnable = (datFile.IniReadValue("PortSwitches", string.Format("TxEnable({0})", i)) == "0") ? "Disabled" : "Enabled",
+					ReceiverEnable = (datFile.IniReadValue("PortSwitches", string.Format("RxEnable({0})", i)) == "0") ? "Disabled" : "Enabled",
+					DisableInactivityTimer = (datFile.IniReadValue("PortSwitches", string.Format("DisableTimeout({0})", i)) == "0") ? "Disabled" : "Enabled",
+					RepeaterMode = (datFile.IniReadValue("PortSwitches", string.Format("FDup({0})", i)) == "0") ? "Disabled" : "Enabled",
+					SpeechOverride = (datFile.IniReadValue("PortSwitches", string.Format("SpeechOverride({0})", i)) == "0") ? "Disabled" : "Enabled",
+					SpeechIdOverride = (datFile.IniReadValue("PortSwitches", string.Format("SpeechIDOverride({0})", i)) == "0") ? "Disabled" : "Enabled",
+					//AccessMode = datFile.IniReadValue("PortSwitches", string.Format("P{0}MessageNum(3)", i)),
+					DtmfEnable = (datFile.IniReadValue("PortSwitches", string.Format("DTMFEnable({0})", i)) == "0") ? "Disabled" : "Enabled",
+					DtmfRequireTone = (datFile.IniReadValue("PortSwitches", string.Format("DTMFNeedPL({0})", i)) == "0") ? "Disabled" : "Enabled",
+					DtmfMute = (datFile.IniReadValue("PortSwitches", string.Format("DTMFMute({0})", i)) == "0") ? "Disabled" : "Enabled",
+					DtmfCoverTone = (datFile.IniReadValue("PortSwitches", string.Format("DTMFCovertone({0})", i)) == "0") ? "Disabled" : "Enabled",
+					MonitorMix = (datFile.IniReadValue("PortSwitches", string.Format("MonMix({0})", i)) == "0") ? "Disabled" : "Enabled",
+					KerchunkFilter = (datFile.IniReadValue("PortSwitches", string.Format("Kerchunk({0})", i)) == "0") ? "Disabled" : "Enabled",
+
+				};
+
+				if (fwVewrsion < 7.00)
+				(
+					portItem.HangTimer1  = datFile.IniReadValue("Timers", string.Format("HangTime({0})", i));
+				)
+				else
+				(
+					portItem.HangTimer1  = datFile.IniReadValue("Timers", string.Format("HangTime1({0})", i));
+					portItem.HangTimer2  = datFile.IniReadValue("Timers", string.Format("HangTime2({0})", i));
+					portItem.HangTimer3  = datFile.IniReadValue("Timers", string.Format("HangTime3({0})", i));
+				)
+
+				if (portName != string.Empty)
+					portItem.PortName = portName;
+
+				_ports.Add(i, portItem);
+			}
+		}
+
+		#endregion Load Ports
+
+		#region Load Macros/ShortMacros/ExtendedMacros
+
+		private void Load_Macros()
+		{
+			IniFile datFile = new IniFile(_datFilename);
+
+			_macros.Clear();
+
+			for (int i = 1; i <= 40; i++)
+			{
+				string macro = datFile.IniReadValue("Macros", string.Format("Macro({0})", i));
+				string macroCode = datFile.IniReadValue("Macros", string.Format("MacroCode({0})", i));
+				string allowedPorts = datFile.IniReadValue("Macros", string.Format("PortToAllow({0})", i));
+
+				Macro macroItem = new Macro
+				{
+					MacroNumber = i,
+					//MacroCodes = macro,
+					AccessCode = macroCode,
+					ParsedMacro = _macroLibrary.ParseMacro(comboBox_FwVersion.SelectedItem.ToString(), macro),
+					AllowedPorts = allowedPorts
+				};
+
+				char[] splitChar = {' '};
+				string[] macroCodes = macro.Split(splitChar);
+
+				foreach (string code in macroCodes)
+				{
+					macroItem.MacroCodes = macroItem.MacroCodes + " " + string.Format("<a title=\"{0}\">{1}</a>", _macroLibrary.ParseMacro(comboBox_FwVersion.SelectedItem.ToString(), code), code);
+				}
+
+				macroItem.MacroCodes = macroItem.MacroCodes.Substring(1);
+
+				_macros.Add(i,macroItem);
+			}
+		}
+
+		private void Load_ShortMacros()
+		{
+			IniFile datFile = new IniFile(_datFilename);
+
+			_shortMacros.Clear();
+
+			for (int i = 1; i <= 50; i++)
+			{
+				string shortMacro = datFile.IniReadValue("Macros", string.Format("ShortMacro({0})", i));
+				string shortMacroCode = datFile.IniReadValue("Macros", string.Format("ShortMacroCode({0})", i));
+				string allowedPorts = datFile.IniReadValue("Macros", string.Format("PortToAllow({0})", i + 40));
+
+				Macro shortMacroItem = new Macro
+				{
+					MacroNumber = i + 40,
+					//MacroCodes = shortMacro,
+					AccessCode = shortMacroCode,
+					ParsedMacro = _macroLibrary.ParseMacro(comboBox_FwVersion.SelectedItem.ToString(), shortMacro),
+					AllowedPorts = allowedPorts
+				};
+
+				char[] splitChar = { ' ' };
+				string[] macroCodes = shortMacro.Split(splitChar);
+
+				foreach (string code in macroCodes)
+				{
+					shortMacroItem.MacroCodes = shortMacroItem.MacroCodes + " " + string.Format("<a title=\"{0}\">{1}</a>", _macroLibrary.ParseMacro(comboBox_FwVersion.SelectedItem.ToString(), code), code);
+				}
+
+				shortMacroItem.MacroCodes = shortMacroItem.MacroCodes.Substring(1);
+
+				_shortMacros.Add(i, shortMacroItem);
+			}
+		}
+
+		private void Load_ExtendedMacros()
+    {
+        IniFile datFile = new IniFile(_datFilename);
+
+        _extendedMacros.Clear();
+
+        for (int i = 1; i <= 15; i++)
+        {
+            string extendedMacro = datFile.IniReadValue("Macros", string.Format("ExtendedMacro({0})", i));
+            string extendedMacroCode = datFile.IniReadValue("Macros", string.Format("ExtendedMacroCode({0})", i));
+            string allowedPorts = datFile.IniReadValue("Macros", string.Format("PortToAllow({0})", i + 90));
+
+            Macro extendedMacroItem = new Macro
+            {
+                MacroNumber = i + 90,
+                //MacroCodes = extendedMacro,
+                AccessCode = extendedMacroCode,
+                ParsedMacro = _macroLibrary.ParseMacro(comboBox_FwVersion.SelectedItem.ToString(), extendedMacro),
+                AllowedPorts = allowedPorts
+            };
+
+            char[] splitChar = { ' ' };
+            string[] macroCodes = extendedMacro.Split(splitChar);
+
+            foreach (string code in macroCodes)
+            {
+                extendedMacroItem.MacroCodes = extendedMacroItem.MacroCodes + " " + string.Format("<a title=\"{0}\">{1}</a>", _macroLibrary.ParseMacro(comboBox_FwVersion.SelectedItem.ToString(), code), code);
+            }
+
+            extendedMacroItem.MacroCodes = extendedMacroItem.MacroCodes.Substring(1);
+
+            _extendedMacros.Add(i, extendedMacroItem);
+        }
+    }
+
+		#endregion Load Macros/ShortMacros/ExtendedMacros
+
+		#region Load Message Macros
+
+		private void Load_MessageMacros()
+		{
+			IniFile datFile = new IniFile(_datFilename);
+
+			_messageMacros.Clear();
+
+			int messageMacroCount = checkBox_RTCOption.Checked ? 70 : 40;
+
+			for (int i = 1; i <= messageMacroCount; i++)
+			{
+				_messageMacros.Add(i,datFile.IniReadValue("MessageMacros", string.Format("MessageMacro({0})",i)));
+			}
+		}
+
+		#endregion Load Message Macros
+
+		#region ToolStripMenu Even Handlers
+
+		private void saveToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			var result = MessageBox.Show(@"This will overwrite any existing options, are you sure ?",
+				@"Warning - Overwrite Options", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+
+			if (result != DialogResult.Yes)
+				return;
+
+			Settings.Default.Save();
+		}
+
+		private void resetToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			var result = MessageBox.Show(@"This is a global reset of options that cannot be undone, are you sure ?",
+				@"Warning - Options Reset", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+
+			if (result != DialogResult.Yes)
+				return;
+
+			Settings.Default.Reset();
+		}
+
+		private void recallToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			var result = MessageBox.Show(@"This will repopulate the options to match the saved options, are you sure ?",
+				@"Warning - Overwrite Options", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+			if (result != DialogResult.Yes)
+				return;
+
+			Settings.Default.Reload();
+		}
+
+		private void openToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			viewReportToolStripMenuItem.Enabled = openReportFolderToolStripMenuItem.Enabled = false;
+			OpenFileDialog resultOpenFileDialog = new OpenFileDialog
+			{
+				Filter = @"RC210 dat file (*.dat)|*.dat"
+			};
+
+			if (_datFilename != string.Empty)
+				resultOpenFileDialog.InitialDirectory = Path.GetDirectoryName(_datFilename);
+
+			if (resultOpenFileDialog.ShowDialog() != DialogResult.OK)
+				return;
+
+			_datFilename = resultOpenFileDialog.FileName;
+			Text = @"RC210 Data Assistant V2 - " + Path.GetFileName(_datFilename);
+			generateReportToolStripMenuItem1.Enabled = true;
+		}
+
+		private void closeToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			generateReportToolStripMenuItem1.Enabled = false;
+			viewReportToolStripMenuItem.Enabled = openReportFolderToolStripMenuItem.Enabled = false;
+
+			_datFilename = string.Empty;
+			Text = @"RC210 Data Assistant V2";
+		}
+
+		private void port1ToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			string value = Settings.Default.Port1Name;
+			var result = InputBox(@"Port 1 name", "Port 1 name:", ref value);
+
+			if (result != DialogResult.OK)
+				return;
+
+			Settings.Default.Port1Name = value;
+			groupBox_Port1.Text = @"Port 1 - " + value;
+		}
+
+		private void port2ToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			string value = Settings.Default.Port2Name;
+			var result = InputBox(@"Port 2 name", "Port 2 name:", ref value);
+
+			if (result != DialogResult.OK)
+				return;
+
+			Settings.Default.Port2Name = value;
+			groupBox_Port2.Text = @"Port 2 - " + value;
+		}
+
+		private void port3ToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			string value = Settings.Default.Port3Name;
+			var result = InputBox(@"Port 3 name", "Port 3 name:", ref value);
+
+			if (result != DialogResult.OK)
+				return;
+
+			Settings.Default.Port3Name = value;
+			groupBox_Port3.Text = @"Port 3 - " + value;
+		}
+
+		private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			FormAbout aboutDialog = new FormAbout();
+			aboutDialog.ShowDialog();
+		}
+
+		private void generateReportToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			Generate_Report();
+			viewReportToolStripMenuItem.Enabled = openReportFolderToolStripMenuItem.Enabled = true;
+		}
+
+		private void viewReportToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			if (!File.Exists(_reportFilename))
+			{
+				MessageBox.Show(
+					string.Format("Report not found at path:\n\n{0}\n\nPlease verify that you have already generated the report.", _reportFilename), @"Report not found", MessageBoxButtons.OK,
+					MessageBoxIcon.Exclamation);
+				return;
+			}
+
+			Process.Start(_reportFilename);
+		}
+
+		private void openReportFolderToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			if (_reportFilename != null)
+				return;
+
+			if (Directory.Exists(Path.GetDirectoryName(_reportFilename)))
+				Process.Start(Path.GetDirectoryName(_reportFilename));
+		}
+
+		private void versionToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			MessageBox.Show(
+				string.Format("Macro Definitions\n\nLocal file: {0}\nRemote file: {1}", _localXmlVersion, _remoteXmlVersion),
+				@"Macro Definitions", MessageBoxButtons.OK, MessageBoxIcon.Information);
+		}
+
+		private void updateToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			//FetchDefXml(true);
+				UpdateXml();
+		}
+
+		private void xMLFilePathToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+				string filepath = AppDomain.CurrentDomain.BaseDirectory + "xml\\";
+				MessageBox.Show("I look for .xml files at the following location:\n\n" + filepath);
+		}
+
+		#endregion ToolStripMenu Even Handlers
+
+		#region InputBox
+
+		public static DialogResult InputBox(string title, string promptText, ref string value)
+		{
+			Form form = new Form();
+			Label label = new Label();
+			TextBox textBox = new TextBox();
+			Button buttonOk = new Button();
+			Button buttonCancel = new Button();
+
+			form.Text = title;
+			label.Text = promptText;
+			textBox.Text = value;
+
+			buttonOk.Text = @"OK";
+			buttonCancel.Text = @"Cancel";
+			buttonOk.DialogResult = DialogResult.OK;
+			buttonCancel.DialogResult = DialogResult.Cancel;
+
+			label.SetBounds(9, 20, 372, 13);
+			textBox.SetBounds(12, 36, 372, 20);
+			buttonOk.SetBounds(228, 72, 75, 23);
+			buttonCancel.SetBounds(309, 72, 75, 23);
+
+			label.AutoSize = true;
+			textBox.Anchor = textBox.Anchor | AnchorStyles.Right;
+			buttonOk.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
+			buttonCancel.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
+
+			form.ClientSize = new Size(396, 107);
+			form.Controls.AddRange(new Control[] { label, textBox, buttonOk, buttonCancel });
+			form.ClientSize = new Size(Math.Max(300, label.Right + 10), form.ClientSize.Height);
+			form.FormBorderStyle = FormBorderStyle.FixedDialog;
+			form.StartPosition = FormStartPosition.CenterScreen;
+			form.MinimizeBox = false;
+			form.MaximizeBox = false;
+			form.AcceptButton = buttonOk;
+			form.CancelButton = buttonCancel;
+
+			DialogResult dialogResult = form.ShowDialog();
+			value = textBox.Text;
+			return dialogResult;
+		}
+
+		#endregion InputBox
 
 		#region Generate Report
 
 		private void Generate_Report()
 		{
+			double fwVersion = Convert.ToDouble(comboBox_FwVersion.SelectedItem);
+      Load_Ports(fwVersion);
+
 			if (!File.Exists(_datFilename))
-				return;
+			{
+        MessageBox.Show(@"Unable to locate .dat file: " + _datFilename);
+        return;
+      }
 
 			SaveFileDialog result = new SaveFileDialog
 			{
@@ -344,7 +796,7 @@ namespace RC210_DataAssistant_V2
 
 			IniFile datFile = new IniFile(_datFilename);
 
-			//Create the file. 
+			//Create the file.
 			using (StreamWriter rW = new StreamWriter(_reportFilename))
 			{
 				//Date Header
@@ -398,6 +850,10 @@ namespace RC210_DataAssistant_V2
 						rW.WriteLine("<TR><TD><B>Voice ID 1:</B></TD><TD>" + _ports[1].VoiceId1 + "</TD></TR>");
 						rW.WriteLine("<TR><TD><B>Voice ID 2:</B></TD><TD>" + _ports[1].VoiceId2 + "</TD></TR>");
 						rW.WriteLine("<TR><TD><B>Voice ID 3:</B></TD><TD>" + _ports[1].VoiceId3 + "</TD></TR>");
+						rW.WriteLine("<TR>");
+            rW.WriteLine("<TR><TD><B>Pending ID 1:</B></TD><TD>" + _ports[1].PendingId1 + "</TD></TR>");
+            rW.WriteLine("<TR><TD><B>Pending ID 2:</B></TD><TD>" + _ports[1].PendingId2 + "</TD></TR>");
+            rW.WriteLine("<TR><TD><B>Pending ID 3:</B></TD><TD>" + _ports[1].PendingId3 + "</TD></TR>");
 						rW.WriteLine("</TABLE>");
 					}
 
@@ -439,8 +895,20 @@ namespace RC210_DataAssistant_V2
 					if (checkBox_P1Timers.Checked)
 					{
 						rW.WriteLine("<TABLE border=0>");
-						rW.WriteLine("<TR><TD><B>Hang:</B></TD><TD>" + _ports[1].HangTimer + "</TD></TR>");
+
+						if (fwVersion < 7.00)       //Added 3 hangtimers per port with v7.00
+            {
+                rW.WriteLine("<TR><TD><B>Hang:</B></TD><TD>" + _ports[1].HangTimer1 + "</TD></TR>");
+            }
+            else
+            {
+                rW.WriteLine("<TR><TD><B>Hang 1:</B></TD><TD>" + _ports[1].HangTimer1 + "</TD></TR>");
+                rW.WriteLine("<TR><TD><B>Hang 2:</B></TD><TD>" + _ports[1].HangTimer2 + "</TD></TR>");
+                rW.WriteLine("<TR><TD><B>Hang 3:</B></TD><TD>" + _ports[1].HangTimer3 + "</TD></TR>");
+            };
+
 						rW.WriteLine("<TR><TD><B>Timeout:</B></TD><TD>" + _ports[1].TimeoutTimer + "</TD></TR>");
+						rW.WriteLine("<TR><TD><B>TOT Reset:</B></TD><TD>" + _ports[1].TOTResetTimer + "</TD></TR>");
 						rW.WriteLine("<TR><TD><B>Initial ID:</B></TD><TD>" + _ports[1].InitialIdTimer + "</TD></TR>");
 						rW.WriteLine("<TR><TD><B>Pending ID:</B></TD><TD>" + _ports[1].PendingIdTimer + "</TD></TR>");
 						rW.WriteLine("<TR><TD><B>Pending Speech ID:</B></TD><TD>" + _ports[1].PendingIdSpeechTimer + "</TD></TR>");
@@ -451,7 +919,7 @@ namespace RC210_DataAssistant_V2
 						rW.WriteLine("<TR><TD><B>AUX Audio:</B></TD><TD>" + _ports[1].AuxAudioTimer + "</TD></TR>");
 						rW.WriteLine("</TABLE>");
 					}
-					
+
 					rW.WriteLine("</TD><TD>");
 
 					//Switches
@@ -501,6 +969,10 @@ namespace RC210_DataAssistant_V2
 						rW.WriteLine("<TR><TD><B>Voice ID 1:</B></TD><TD>" + _ports[2].VoiceId1 + "</TD></TR>");
 						rW.WriteLine("<TR><TD><B>Voice ID 2:</B></TD><TD>" + _ports[2].VoiceId2 + "</TD></TR>");
 						rW.WriteLine("<TR><TD><B>Voice ID 3:</B></TD><TD>" + _ports[2].VoiceId3 + "</TD></TR>");
+						rW.WriteLine("<TR>");
+						rW.WriteLine("<TR><TD><B>Pending ID 1:</B></TD><TD>" + _ports[2].PendingId1 + "</TD></TR>");
+						rW.WriteLine("<TR><TD><B>Pending ID 2:</B></TD><TD>" + _ports[2].PendingId2 + "</TD></TR>");
+						rW.WriteLine("<TR><TD><B>Pending ID 3:</B></TD><TD>" + _ports[2].PendingId3 + "</TD></TR>");
 						rW.WriteLine("</TABLE>");
 					}
 
@@ -542,8 +1014,20 @@ namespace RC210_DataAssistant_V2
 					if (checkBox_P2Timers.Checked)
 					{
 						rW.WriteLine("<TABLE border=0>");
-						rW.WriteLine("<TR><TD><B>Hang:</B></TD><TD>" + _ports[2].HangTimer + "</TD></TR>");
+
+						if (fwVersion < 7.00)       //Added 3 hangtimers per port with v7.00
+	          {
+	              rW.WriteLine("<TR><TD><B>Hang:</B></TD><TD>" + _ports[2].HangTimer1 + "</TD></TR>");
+	          }
+	          else
+	          {
+	              rW.WriteLine("<TR><TD><B>Hang 1:</B></TD><TD>" + _ports[2].HangTimer1 + "</TD></TR>");
+	              rW.WriteLine("<TR><TD><B>Hang 2:</B></TD><TD>" + _ports[2].HangTimer2 + "</TD></TR>");
+	              rW.WriteLine("<TR><TD><B>Hang 3:</B></TD><TD>" + _ports[2].HangTimer3 + "</TD></TR>");
+	          }
+
 						rW.WriteLine("<TR><TD><B>Timeout:</B></TD><TD>" + _ports[2].TimeoutTimer + "</TD></TR>");
+						rW.WriteLine("<TR><TD><B>TOT Reset:</B></TD><TD>" + _ports[2].TOTResetTimer + "</TD></TR>");
 						rW.WriteLine("<TR><TD><B>Initial ID:</B></TD><TD>" + _ports[2].InitialIdTimer + "</TD></TR>");
 						rW.WriteLine("<TR><TD><B>Pending ID:</B></TD><TD>" + _ports[2].PendingIdTimer + "</TD></TR>");
 						rW.WriteLine("<TR><TD><B>Pending Speech ID:</B></TD><TD>" + _ports[2].PendingIdSpeechTimer + "</TD></TR>");
@@ -588,8 +1072,7 @@ namespace RC210_DataAssistant_V2
 					string port3Header = _ports[3].PortName != string.Empty ? "Port 3 - " + _ports[3].PortName : "Port 3";
 					rW.WriteLine("<CENTER><TABLE border=1 cellpadding=5>");
 					rW.WriteLine("<TR><TD align=center colspan=6><H2>" + port3Header + "</H2></TD></TR>");
-					rW.WriteLine(
-						"<TR><TD><B>Unlock Code</B></TD><TD><B>Voice IDs</B></TD><TD><B>CW IDs</B></TD><TD><B>Tail Messages</B></TD><TD><B>Timers</B></TD><TD><B>Switches</B></TD></TR>");
+					rW.WriteLine("<TR><TD><B>Unlock Code</B></TD><TD><B>Voice IDs</B></TD><TD><B>CW IDs</B></TD><TD><B>Tail Messages</B></TD><TD><B>Timers</B></TD><TD><B>Switches</B></TD></TR>");
 					rW.WriteLine("<TR>");
 
 					//Unlock Code
@@ -605,6 +1088,10 @@ namespace RC210_DataAssistant_V2
 						rW.WriteLine("<TR><TD><B>Voice ID 1:</B></TD><TD>" + _ports[3].VoiceId1 + "</TD></TR>");
 						rW.WriteLine("<TR><TD><B>Voice ID 2:</B></TD><TD>" + _ports[3].VoiceId2 + "</TD></TR>");
 						rW.WriteLine("<TR><TD><B>Voice ID 3:</B></TD><TD>" + _ports[3].VoiceId3 + "</TD></TR>");
+						rW.WriteLine("<TR>");
+						rW.WriteLine("<TR><TD><B>Pending ID 1:</B></TD><TD>" + _ports[3].PendingId1 + "</TD></TR>");
+						rW.WriteLine("<TR><TD><B>Pending ID 2:</B></TD><TD>" + _ports[3].PendingId2 + "</TD></TR>");
+						rW.WriteLine("<TR><TD><B>Pending ID 3:</B></TD><TD>" + _ports[3].PendingId3 + "</TD></TR>");
 						rW.WriteLine("</TABLE>");
 					}
 
@@ -629,8 +1116,7 @@ namespace RC210_DataAssistant_V2
 					if (checkBox_P3TailMessages.Checked)
 					{
 						rW.WriteLine("<TABLE border=0>");
-						rW.WriteLine("<TR><TD><B>Message:</B></TD><TD>" +
-						             ((_ports[3].TailMessage == "0") ? "Disabled" : _ports[3].TailMessage) + "</TD></TR>");
+						rW.WriteLine("<TR><TD><B>Message:</B></TD><TD>" + ((_ports[3].TailMessage == "0") ? "Disabled" : _ports[3].TailMessage) + "</TD></TR>");
 						rW.WriteLine("<TR><TD><B>Counter:</B></TD><TD>" + _ports[3].TailMessageCounter + "</TD></TR>");
 						rW.WriteLine("<TR><TD><B>Timer:</B></TD><TD>" + _ports[3].TailMessageTimer + "</TD></TR>");
 						rW.WriteLine("<TR><TD><B>Message 1:</B></TD><TD>" + _ports[3].TailMessage1Macro + "</TD></TR>");
@@ -647,13 +1133,24 @@ namespace RC210_DataAssistant_V2
 					if (checkBox_P3Timers.Checked)
 					{
 						rW.WriteLine("<TABLE border=0>");
-						rW.WriteLine("<TR><TD><B>Hang:</B></TD><TD>" + _ports[3].HangTimer + "</TD></TR>");
+
+						if (fwVersion < 7.00)       //Added 3 hangtimers per port with v7.00
+	          {
+	             	rW.WriteLine("<TR><TD><B>Hang:</B></TD><TD>" + _ports[3].HangTimer1 + "</TD></TR>");
+	          }
+	          else
+	          {
+	             	rW.WriteLine("<TR><TD><B>Hang 1:</B></TD><TD>" + _ports[3].HangTimer1 + "</TD></TR>");
+	             	rW.WriteLine("<TR><TD><B>Hang 2:</B></TD><TD>" + _ports[3].HangTimer2 + "</TD></TR>");
+	              rW.WriteLine("<TR><TD><B>Hang 3:</B></TD><TD>" + _ports[3].HangTimer3 + "</TD></TR>");
+	          }
+
 						rW.WriteLine("<TR><TD><B>Timeout:</B></TD><TD>" + _ports[3].TimeoutTimer + "</TD></TR>");
+						rW.WriteLine("<TR><TD><B>TOT Reset:</B></TD><TD>" + _ports[3].TOTResetTimer + "</TD></TR>");
 						rW.WriteLine("<TR><TD><B>Initial ID:</B></TD><TD>" + _ports[3].InitialIdTimer + "</TD></TR>");
 						rW.WriteLine("<TR><TD><B>Pending ID:</B></TD><TD>" + _ports[3].PendingIdTimer + "</TD></TR>");
 						rW.WriteLine("<TR><TD><B>Pending Speech ID:</B></TD><TD>" + _ports[3].PendingIdSpeechTimer + "</TD></TR>");
-						rW.WriteLine("<TR><TD><B>Inactivity (Macro):</B></TD><TD>" + _ports[3].InactivityTimer + " (" +
-						             _ports[3].InactivityTimerMacro + ")</TD></TR>");
+						rW.WriteLine("<TR><TD><B>Inactivity (Macro):</B></TD><TD>" + _ports[3].InactivityTimer + " (" + _ports[3].InactivityTimerMacro + ")</TD></TR>");
 						rW.WriteLine("<TR><TD><B>DTMF Mute:</B></TD><TD>" + _ports[3].DtmfMuteTimer + "</TD></TR>");
 						rW.WriteLine("<TR><TD><B>Encoder:</B></TD><TD>" + _ports[3].EncoderTimer + "</TD></TR>");
 						rW.WriteLine("<TR><TD><B>Kerchunck:</B></TD><TD>" + _ports[3].KerchunkTimer + "</TD></TR>");
@@ -707,12 +1204,26 @@ namespace RC210_DataAssistant_V2
 						rW.WriteLine("</TD></TR>");
 					}
 
-
 					//ShortMacros
 
 					foreach (KeyValuePair<int, Macro> macro in _shortMacros)
 					{
 						rW.WriteLine("<TR><TD valign=top>" + (macro.Key + 40).ToString(CultureInfo.InvariantCulture) + "</TD>");
+						rW.WriteLine("<TD valign=top>" + macro.Value.AccessCode + "</TD>");
+						rW.WriteLine("<TD valign=top>" + macro.Value.AllowedPorts + "</TD>");
+						//rW.WriteLine("<TD>" + ((checkBox_MacroCodes.Checked) ? macro.Value.MacroCodes : macro.Value.ParsedMacro) + "</TD></TR>");
+						rW.WriteLine("<TD>");
+						rW.WriteLine(((checkBox_Macros.Checked) ? macro.Value.ParsedMacro : ""));
+						rW.WriteLine((checkBox_Macros.Checked && checkBox_MacroCodes.Checked) ? "<HR>" : "");
+						rW.WriteLine(((checkBox_MacroCodes.Checked) ? macro.Value.MacroCodes : ""));
+						rW.WriteLine("</TD></TR>");
+					}
+
+					//ExtendedMacros
+
+					foreach (KeyValuePair<int, Macro> macro in _extendedMacros)
+					{
+						rW.WriteLine("<TR><TD valign=top>" + (macro.Key + 90).ToString(CultureInfo.InvariantCulture) + "</TD>");
 						rW.WriteLine("<TD valign=top>" + macro.Value.AccessCode + "</TD>");
 						rW.WriteLine("<TD valign=top>" + macro.Value.AllowedPorts + "</TD>");
 						//rW.WriteLine("<TD>" + ((checkBox_MacroCodes.Checked) ? macro.Value.MacroCodes : macro.Value.ParsedMacro) + "</TD></TR>");
@@ -729,31 +1240,77 @@ namespace RC210_DataAssistant_V2
 				//Setpoints
 				if (checkBox_SetpointsScheduler.Checked)
 				{
-					rW.WriteLine("<TABLE border=1 align=center width=75%>");
-					rW.WriteLine("<TR><TD align=center colspan=7><H2>Scheduler Setpoints</H2></TD></TR>");
-					rW.WriteLine("<TR><TD><B>Setpoint #</B></TD><TD><B>Day of week</B></TD><TD><B>Monthly</B></TD><TD><B>Week of month</B>(if monthly)</TD><TD><B>Start Hour</B></TD><TD><B>Start Minutes</B></TD><TD><B>Macro to run</B></TD></TR>");
+						rW.WriteLine("<TABLE border=1 align=center width=75%>");
 
-					for (int i = 1; i <= 20; i++)
-					{
-						rW.WriteLine("<TR><TD>" + i + "</TD>");
-						rW.WriteLine("<TD>" + ParseDow(datFile.IniReadValue("Scheduler", "DOW(" + i + ")")) + "</TD>");
-						rW.WriteLine("<TD>" + ParseMonthly(datFile.IniReadValue("Scheduler", "Monthly(" + i + ")")) + "</TD>");
-						rW.WriteLine("<TD>" + datFile.IniReadValue("Scheduler", "Week(" + i + ")") + "</TD>");
-						rW.WriteLine("<TD>" + ParseHours(datFile.IniReadValue("Scheduler", "Hours(" + i + ")")) + "</TD>");
-						rW.WriteLine("<TD>" + datFile.IniReadValue("Scheduler", "Minutes(" + i + ")") + "</TD>");
-							rW.WriteLine("<TD>" + datFile.IniReadValue("Scheduler", "MacroToRun(" + i + ")") + "</TD></TR>");
+						if (fwVersion < 7.32)       //Reinstated Month of Year with v7.32
+          	{
+							rW.WriteLine("<TR><TD align=center colspan=7><H2>Scheduler Setpoints</H2></TD></TR>");
+							rW.WriteLine("<TR><TD><B>Setpoint #</B></TD><TD><B>Day of week</B></TD><TD><B>Monthly</B></TD><TD><B>Week of month</B>(if monthly)</TD><TD><B>Start Hour</B></TD><TD><B>Start Minutes</B></TD><TD><B>Macro to run</B></TD></TR>");
+						}
+				 		else
+					 	{
+							 rW.WriteLine("<TR><TD align=center colspan=8><H2>Scheduler Setpoints</H2></TD></TR>");
+							 rW.WriteLine("<TR><TD><B>Setpoint #</B></TD><TD><B>Day of week</B></TD><TD><B>Month To Run</B></TD><TD><B>Monthly</B></TD><TD><B>Week of month</B>(if monthly)</TD><TD><B>Start Hour</B></TD><TD><B>Start Minutes</B></TD><TD><B>Macro to run</B></TD></TR>");
+					 	}
 
-						//if they want to
-						var macroNum = Convert.ToInt32(datFile.IniReadValue("Scheduler", "MacroToRun(" + i + ")"));
-						rW.WriteLine("<TR><TD colspan=7>");
+					 	if (fwVersion < 7.36)       //Added 20 additiional SetPoints with v7.36
+					 	{
+							for (int i = 1; i <= 20; i++)
+							{
+								rW.WriteLine("<TR><TD>" + i + "</TD>");
+								rW.WriteLine("<TD>" + ParseDow(datFile.IniReadValue("Scheduler", "DOW(" + i + ")")) + "</TD>");
 
-						rW.WriteLine(macroNum < 41 ? _macros[macroNum].ParsedMacro + "<HR>" + _macros[macroNum].MacroCodes : _shortMacros[macroNum - 40].ParsedMacro + "<HR>" + _shortMacros[macroNum - 40].MacroCodes);
+								if (fwVersion > 7.00)
+            		{
+              		rW.WriteLine("<TD>" + datFile.IniReadValue("Scheduler", "MonthToRun(" + i + ")") + "</TD>");
+            		}
 
-						rW.WriteLine("</TD></TR>");
-					}
+								rW.WriteLine("<TD>" + ParseMonthly(datFile.IniReadValue("Scheduler", "Monthly(" + i + ")")) + "</TD>");
+								rW.WriteLine("<TD>" + datFile.IniReadValue("Scheduler", "Week(" + i + ")") + "</TD>");
+								rW.WriteLine("<TD>" + ParseHours(datFile.IniReadValue("Scheduler", "Hours(" + i + ")")) + "</TD>");
+								rW.WriteLine("<TD>" + datFile.IniReadValue("Scheduler", "Minutes(" + i + ")") + "</TD>");
+								rW.WriteLine("<TD>" + datFile.IniReadValue("Scheduler", "MacroToRun(" + i + ")") + "</TD></TR>");
 
-					rW.WriteLine("</TABLE><HR>");
-				}
+								//if they want to
+								var macroNum = Convert.ToInt32(datFile.IniReadValue("Scheduler", "MacroToRun(" + i + ")"));
+								rW.WriteLine("<TR><TD colspan=7>");
+
+								rW.WriteLine(macroNum < 41 ? _macros[macroNum].ParsedMacro + "<HR>" + _macros[macroNum].MacroCodes : _shortMacros[macroNum - 40].ParsedMacro + "<HR>" + _shortMacros[macroNum - 40].MacroCodes);
+
+								rW.WriteLine("</TD></TR>");
+							}
+
+							rW.WriteLine("</TABLE><HR>");
+						}
+						else
+						{
+							for (int i = 1; i <= 40; i++)
+							{
+						 		rW.WriteLine("<TR><TD>" + i + "</TD>");
+						 		rW.WriteLine("<TD>" + ParseDow(datFile.IniReadValue("Scheduler", "DOW(" + i + ")")) + "</TD>");
+
+						 		if (fwVersion > 7.00)
+						 		{
+								 	rW.WriteLine("<TD>" + datFile.IniReadValue("Scheduler", "MonthToRun(" + i + ")") + "</TD>");
+						 		}
+
+						 		rW.WriteLine("<TD>" + ParseMonthly(datFile.IniReadValue("Scheduler", "Monthly(" + i + ")")) + "</TD>");
+						 		rW.WriteLine("<TD>" + datFile.IniReadValue("Scheduler", "Week(" + i + ")") + "</TD>");
+						 		rW.WriteLine("<TD>" + ParseHours(datFile.IniReadValue("Scheduler", "Hours(" + i + ")")) + "</TD>");
+						 		rW.WriteLine("<TD>" + datFile.IniReadValue("Scheduler", "Minutes(" + i + ")") + "</TD>");
+						 		rW.WriteLine("<TD>" + datFile.IniReadValue("Scheduler", "MacroToRun(" + i + ")") + "</TD></TR>");
+
+						 		//if they want to
+						 		var macroNum = Convert.ToInt32(datFile.IniReadValue("Scheduler", "MacroToRun(" + i + ")"));
+						 		rW.WriteLine("<TR><TD colspan=7>");
+
+						 		rW.WriteLine(macroNum < 41 ? _macros[macroNum].ParsedMacro + "<HR>" + _macros[macroNum].MacroCodes : _shortMacros[macroNum - 40].ParsedMacro + "<HR>" + _shortMacros[macroNum - 40].MacroCodes);
+						 		rW.WriteLine("</TD></TR>");
+							}
+
+							rW.WriteLine("</TABLE><HR>");
+				 		}
+		 		}
 
 				//CT MSG Macros
 				if (checkBox_CTMessageMacros.Checked)
@@ -762,47 +1319,27 @@ namespace RC210_DataAssistant_V2
 					rW.WriteLine("<TR><TD align=center colspan=4><H2>Courtesty Tone Message Macros</H2></TD></TR>");
 					rW.WriteLine("<TR><TD><B>Port</B></TD><TD><B>Tone</B></TD><TD><B>Message Macro</B></TD><TD><B>Macro Contents</B></TD></TR>");
 
-					double fwVersion = Convert.ToDouble(comboBox_FwVersion.SelectedItem);
+					for (int i = 1; i <= 3; i++)
+        	{
+						for (int j = 1; j <= 10; j++)
+            {
+            		var tone1 = datFile.IniReadValue("Courtesy", "P" + i + "Tone1(" + j + ")");
 
-                    			if (fwVersion == 7.02)
-                    			{
-                        			int i = 1;
+            		if ((Convert.ToInt32(tone1) > 40) || (Convert.ToInt32(tone1) == 0))
+            			continue;
 
-                        			for (int j = 1; j <= 10; j++)
-                       				{
-                            				var tone1 = datFile.IniReadValue("Courtesy", "P" + i + "Tone1(" + j + ")");
+            		rW.WriteLine("<TR><TD>" + i + "</TD>");
+            		rW.WriteLine("<TD>" + j + "</TD>");
+            		rW.WriteLine("<TD>" + tone1 + "</TD>");
+            		rW.WriteLine("<TD>" + datFile.IniReadValue("MessageMacros", "MessageMacro(" + tone1 + ")") + "</TD></TR>");
+            }
 
-                            				if ((Convert.ToInt32(tone1) > 40) || (Convert.ToInt32(tone1) == 0))
-                                			continue;
+						if (fwVewrsion >= 7.02)	//From ver 7.02 there is a single pool of Courtesy Tones @ P1Tone 1 - P1Tone10
+							break;
 
-                            					rW.WriteLine("<TR><TD>" + i + "</TD>");
-                            					rW.WriteLine("<TD>" + j + "</TD>");
-                            					rW.WriteLine("<TD>" + tone1 + "</TD>");
-                            					rW.WriteLine("<TD>" + datFile.IniReadValue("MessageMacros", "MessageMacro(" + tone1 + ")") + "</TD></TR>");
-                        			}
-
-                        			rW.WriteLine("</TABLE><HR>");
-                    			}
-                    			else
-
-						for (int i = 1; i <= 3; i++)
-						{
-							for (int j = 1; j <= 10; j++)
-							{
-								var tone1 = datFile.IniReadValue("Courtesy", "P" + i + "Tone1(" + j + ")");
-								
-								if ((Convert.ToInt32(tone1) > 40) || (Convert.ToInt32(tone1) == 0))
-								continue;
-
-								rW.WriteLine("<TR><TD>" + i + "</TD>");
-								rW.WriteLine("<TD>" + j + "</TD>");
-								rW.WriteLine("<TD>" + tone1 + "</TD>");
-								rW.WriteLine("<TD>" + datFile.IniReadValue("MessageMacros", "MessageMacro(" + tone1 + ")") + "</TD></TR>");
-							}
-						}
-
-						rW.WriteLine("</TABLE><HR>");
-				}
+					rW.WriteLine("</TABLE><HR>");
+          }
+      	}
 
 				//Messages
 				if (checkBox_MessageMacros.Checked)
@@ -822,7 +1359,7 @@ namespace RC210_DataAssistant_V2
 							rW.WriteLine("<TD>" + messageMacro +"</TD></TR>");
 						}
 					}
-					
+
 					rW.WriteLine("</TABLE><HR>");
 				}
 
@@ -841,7 +1378,7 @@ namespace RC210_DataAssistant_V2
 							rW.WriteLine("<TR><TD>" + i + "</TD>");
 							rW.WriteLine("<TD>" + generalTimer + "</TD>");
 							rW.WriteLine("<TD>" + datFile.IniReadValue("Alarms", "GeneralTimerMacro(" + i + ")") + "</TD></TR>");
-						}	
+						}
 					}
 
 					rW.WriteLine("</TABLE>");
@@ -966,7 +1503,7 @@ namespace RC210_DataAssistant_V2
 					rW.WriteLine("<TD><B>Timeout:</B> " + _autoPatch.TimeOut + "</TD></TR>");
 					rW.WriteLine("<TR><TD><B>Allowed Ports:</B> " + _autoPatch.Ports + "</TD>");
 					rW.WriteLine("<TD><B>Patch Mute:</B> " + _autoPatch.PatchMute + "</TD></TR>");
-						
+
 					rW.WriteLine("<TR><TD valign=top>");
 
 					//AutoPatch Memories
@@ -1025,410 +1562,14 @@ namespace RC210_DataAssistant_V2
 					MessageBoxButtons.YesNo,
 					MessageBoxIcon.Information
 					);
-				
+
 				if (dr == DialogResult.Yes) Process.Start(_reportFilename);
 			}
 		}
 
-
 		#endregion Generate Report
-
-		#region Load AutoPatch
-
-		private void Load_AutoPatch()
-		{
-			IniFile datFile = new IniFile(_datFilename);
-
-			_autoPatch.Prefix = datFile.IniReadValue("Autopatch", "APPrefix");
-			_autoPatch.AnswerCode = datFile.IniReadValue("Autopatch", "AnswerCode");
-			_autoPatch.RingCount =datFile.IniReadValue("Autopatch", "RingNumber");
-			_autoPatch.TimeOut = datFile.IniReadValue("Autopatch", "APTimeOut");
-			_autoPatch.Ports = datFile.IniReadValue("Autopatch", "EnablePatch");
-			_autoPatch.PatchMute = datFile.IniReadValue("Autopatch", "PatchMute");
-
-			_autoPatch.AutoDial.Clear();
-
-			for (int i = 1; i <= 200; i++)
-			{
-				_autoPatch.AutoDial.Add(i,datFile.IniReadValue("Autopatch", string.Format("AutoDial({0})", i)));
-			}
-
-			_autoPatch.TollRestriction.Clear();
-
-			for (int i = 1; i <= 200; i++)
-			{
-				_autoPatch.TollRestriction.Add(i, datFile.IniReadValue("Autopatch", string.Format("TollRestrict({0})", i)));
-			}
-		}
-
-		#endregion Load AutoPatch
-
-		#region Load Ports
-
-		private void Load_Ports()
-		{
-			IniFile datFile = new IniFile(_datFilename);
-
-			_ports.Clear();
-
-			for (int i = 1; i <= 3; i++)
-			{
-				string portName = string.Empty;
-				
-				if (i == 1)
-					portName = Settings.Default.Port1Name;
-				if (i == 2)
-					portName = Settings.Default.Port2Name;
-				if (i == 3)
-					portName = Settings.Default.Port3Name;
-
-				Port portItem = new Port
-				{
-					PortCode = datFile.IniReadValue("Unlock", string.Format("CurrentPortUnlock({0})", i)),
-					HangTimer  = datFile.IniReadValue("Timers", string.Format("HangTime({0})", i)),
-					TimeoutTimer = datFile.IniReadValue("Timers", string.Format("TimeOut({0})", i)),
-					InitialIdTimer = datFile.IniReadValue("Timers", string.Format("IIDTime({0})", i)),
-					PendingIdTimer = datFile.IniReadValue("Timers", string.Format("PIDTime({0})", i)),
-					InactivityTimer = datFile.IniReadValue("Timers", string.Format("InActiveTime({0})", i)),
-					InactivityTimerMacro = datFile.IniReadValue("Timers", string.Format("InActivityMacro({0})", i)),
-					DtmfMuteTimer = datFile.IniReadValue("Timers", string.Format("DTMFTime({0})", i)),
-					EncoderTimer = datFile.IniReadValue("Timers", string.Format("CTCSSTime({0})", i)),
-					KerchunkTimer = datFile.IniReadValue("Timers", string.Format("KerchunkTime({0})", i)),
-					PendingIdSpeechTimer = datFile.IniReadValue("Timers", string.Format("IDSpeakTime({0})", i)),
-					TailMessageTimer = datFile.IniReadValue("Timers", string.Format("AnnounceTime({0})", i)),
-					AuxAudioTimer = datFile.IniReadValue("Timers", string.Format("AuxTime({0})", i)),
-					VoiceId1 = datFile.IniReadValue("ID", string.Format("VoiceID1({0})", i)),
-					VoiceId2 = datFile.IniReadValue("ID", string.Format("VoiceID2({0})", i)),
-					VoiceId3 = datFile.IniReadValue("ID", string.Format("VoiceID3({0})", i)),
-					Cwid1 = datFile.IniReadValue("ID", string.Format("CWID1({0})", i)),
-					Cwid2 = datFile.IniReadValue("ID", string.Format("CWID2({0})", i)),
-					TailMessage = datFile.IniReadValue("PortSwitches", string.Format("TailMessageNum({0})", i)),
-					TailMessageCounter = datFile.IniReadValue("PortSwitches", string.Format("TailCounter({0})", i)),
-					TailMessage1Macro = datFile.IniReadValue("PortSwitches", string.Format("P{0}MessageNum(1)", i)),
-					TailMessage2Macro = datFile.IniReadValue("PortSwitches", string.Format("P{0}MessageNum(2)", i)),
-					TailMessage3Macro = datFile.IniReadValue("PortSwitches", string.Format("P{0}MessageNum(3)", i)),
-
-					//Switches
-					TransmitterEnable = (datFile.IniReadValue("PortSwitches", string.Format("TxEnable({0})", i)) == "0") ? "Disabled" : "Enabled",
-					ReceiverEnable = (datFile.IniReadValue("PortSwitches", string.Format("RxEnable({0})", i)) == "0") ? "Disabled" : "Enabled",
-					DisableInactivityTimer = (datFile.IniReadValue("PortSwitches", string.Format("DisableTimeout({0})", i)) == "0") ? "Disabled" : "Enabled",
-					RepeaterMode = (datFile.IniReadValue("PortSwitches", string.Format("FDup({0})", i)) == "0") ? "Disabled" : "Enabled",
-					SpeechOverride = (datFile.IniReadValue("PortSwitches", string.Format("SpeechOverride({0})", i)) == "0") ? "Disabled" : "Enabled",
-					SpeechIdOverride = (datFile.IniReadValue("PortSwitches", string.Format("SpeechIDOverride({0})", i)) == "0") ? "Disabled" : "Enabled",
-					//AccessMode = datFile.IniReadValue("PortSwitches", string.Format("P{0}MessageNum(3)", i)),
-					DtmfEnable = (datFile.IniReadValue("PortSwitches", string.Format("DTMFEnable({0})", i)) == "0") ? "Disabled" : "Enabled",
-					DtmfRequireTone = (datFile.IniReadValue("PortSwitches", string.Format("DTMFNeedPL({0})", i)) == "0") ? "Disabled" : "Enabled",
-					DtmfMute = (datFile.IniReadValue("PortSwitches", string.Format("DTMFMute({0})", i)) == "0") ? "Disabled" : "Enabled",
-					DtmfCoverTone = (datFile.IniReadValue("PortSwitches", string.Format("DTMFCovertone({0})", i)) == "0") ? "Disabled" : "Enabled",
-					MonitorMix = (datFile.IniReadValue("PortSwitches", string.Format("MonMix({0})", i)) == "0") ? "Disabled" : "Enabled",
-					KerchunkFilter = (datFile.IniReadValue("PortSwitches", string.Format("Kerchunk({0})", i)) == "0") ? "Disabled" : "Enabled",
-
-				};
-
-				if (portName != string.Empty)
-					portItem.PortName = portName;
-
-				_ports.Add(i, portItem);
-			}
-		}
-
-		#endregion Load Ports
-
-		#region Load Macros/ShortMacros
-
-		private void Load_Macros()
-		{
-			IniFile datFile = new IniFile(_datFilename);
-			
-			_macros.Clear();
-
-			for (int i = 1; i <= 40; i++)
-			{
-				string macro = datFile.IniReadValue("Macros", string.Format("Macro({0})", i));
-				string macroCode = datFile.IniReadValue("Macros", string.Format("MacroCode({0})", i));
-				string allowedPorts = datFile.IniReadValue("Macros", string.Format("PortToAllow({0})", i));
-
-				Macro macroItem = new Macro
-				{
-					MacroNumber = i,
-					//MacroCodes = macro,
-					AccessCode = macroCode,
-					ParsedMacro = _macroLibrary.ParseMacro(comboBox_FwVersion.SelectedItem.ToString(), macro),
-					AllowedPorts = allowedPorts
-				};
-
-				char[] splitChar = {' '};
-				string[] macroCodes = macro.Split(splitChar);
-
-				foreach (string code in macroCodes)
-				{
-					macroItem.MacroCodes = macroItem.MacroCodes + " " + string.Format("<a title=\"{0}\">{1}</a>", _macroLibrary.ParseMacro(comboBox_FwVersion.SelectedItem.ToString(), code), code);
-				}
-
-				macroItem.MacroCodes = macroItem.MacroCodes.Substring(1);
-
-				_macros.Add(i,macroItem);
-			}
-		}
-
-		private void Load_ShortMacros()
-		{
-			IniFile datFile = new IniFile(_datFilename);
-
-			_shortMacros.Clear();
-
-			for (int i = 1; i <= 50; i++)
-			{
-				string shortMacro = datFile.IniReadValue("Macros", string.Format("ShortMacro({0})", i));
-				string shortMacroCode = datFile.IniReadValue("Macros", string.Format("ShortMacroCode({0})", i));
-				string allowedPorts = datFile.IniReadValue("Macros", string.Format("PortToAllow({0})", i + 40));
-
-				Macro shortMacroItem = new Macro
-				{
-					MacroNumber = i + 40,
-					//MacroCodes = shortMacro,
-					AccessCode = shortMacroCode,
-					ParsedMacro = _macroLibrary.ParseMacro(comboBox_FwVersion.SelectedItem.ToString(), shortMacro),
-					AllowedPorts = allowedPorts
-				};
-
-				char[] splitChar = { ' ' };
-				string[] macroCodes = shortMacro.Split(splitChar);
-
-				foreach (string code in macroCodes)
-				{
-					shortMacroItem.MacroCodes = shortMacroItem.MacroCodes + " " + string.Format("<a title=\"{0}\">{1}</a>", _macroLibrary.ParseMacro(comboBox_FwVersion.SelectedItem.ToString(), code), code);
-				}
-
-				shortMacroItem.MacroCodes = shortMacroItem.MacroCodes.Substring(1);
-
-				_shortMacros.Add(i, shortMacroItem);
-			}
-		}
-
-		#endregion Load Macros/ShortMacros
-
-		#region Load Message Macros
-
-		private void Load_MessageMacros()
-		{
-			IniFile datFile = new IniFile(_datFilename);
-
-			_messageMacros.Clear();
-
-			int messageMacroCount = checkBox_RTCOption.Checked ? 70 : 40;
-
-			for (int i = 1; i <= messageMacroCount; i++)
-			{
-				_messageMacros.Add(i,datFile.IniReadValue("MessageMacros", string.Format("MessageMacro({0})",i)));
-			}
-		}
-
-		#endregion Load Message Macros
 
 		#endregion Private Methods
 
-		#region ToolStripMenu Even Handlers
-
-		private void saveToolStripMenuItem_Click(object sender, EventArgs e)
-		{
-			var result = MessageBox.Show(@"This will overwrite any existing options, are you sure ?",
-				@"Warning - Overwrite Options", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
-
-			if (result != DialogResult.Yes)
-				return;
-
-			Settings.Default.Save();
-		}
-		
-		private void resetToolStripMenuItem_Click(object sender, EventArgs e)
-		{
-			var result = MessageBox.Show(@"This is a global reset of options that cannot be undone, are you sure ?",
-				@"Warning - Options Reset", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
-
-			if (result != DialogResult.Yes)
-				return;
-
-			Settings.Default.Reset();
-		}
-
-		private void recallToolStripMenuItem_Click(object sender, EventArgs e)
-		{
-			var result = MessageBox.Show(@"This will repopulate the options to match the saved options, are you sure ?",
-				@"Warning - Overwrite Options", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-
-			if (result != DialogResult.Yes)
-				return;
-
-			Settings.Default.Reload();
-		}
-
-		private void openToolStripMenuItem_Click(object sender, EventArgs e)
-		{
-			viewReportToolStripMenuItem.Enabled = openReportFolderToolStripMenuItem.Enabled = false;
-			OpenFileDialog resultOpenFileDialog = new OpenFileDialog
-			{
-				Filter = @"RC210 dat file (*.dat)|*.dat"
-			};
-
-			if (_datFilename != string.Empty)
-				resultOpenFileDialog.InitialDirectory = Path.GetDirectoryName(_datFilename);
-
-			if (resultOpenFileDialog.ShowDialog() != DialogResult.OK)
-				return;
-
-			_datFilename = resultOpenFileDialog.FileName;
-			Text = @"RC210 Data Assistant V2 - " + Path.GetFileName(_datFilename);
-			generateReportToolStripMenuItem1.Enabled = true;
-		}
-
-		private void closeToolStripMenuItem_Click(object sender, EventArgs e)
-		{
-			generateReportToolStripMenuItem1.Enabled = false;
-			viewReportToolStripMenuItem.Enabled = openReportFolderToolStripMenuItem.Enabled = false;
-
-			_datFilename = string.Empty;
-			Text = @"RC210 Data Assistant V2";
-		}
-
-		private void port1ToolStripMenuItem_Click(object sender, EventArgs e)
-		{
-			string value = Settings.Default.Port1Name;
-			var result = InputBox(@"Port 1 name", "Port 1 name:", ref value);
-
-			if (result != DialogResult.OK)
-				return;
-
-			Settings.Default.Port1Name = value;
-			groupBox_Port1.Text = @"Port 1 - " + value;
-		}
-
-		private void port2ToolStripMenuItem_Click(object sender, EventArgs e)
-		{
-			string value = Settings.Default.Port2Name;
-			var result = InputBox(@"Port 2 name", "Port 2 name:", ref value);
-
-			if (result != DialogResult.OK)
-				return;
-			
-			Settings.Default.Port2Name = value;
-			groupBox_Port2.Text = @"Port 2 - " + value;
-		}
-
-		private void port3ToolStripMenuItem_Click(object sender, EventArgs e)
-		{
-			string value = Settings.Default.Port3Name;
-			var result = InputBox(@"Port 3 name", "Port 3 name:", ref value);
-
-			if (result != DialogResult.OK)
-				return;
-			
-			Settings.Default.Port3Name = value;
-			groupBox_Port3.Text = @"Port 3 - " + value;
-		}
-
-		private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
-		{
-			FormAbout aboutDialog = new FormAbout();
-			aboutDialog.ShowDialog();
-		}
-
-		private void generateReportToolStripMenuItem_Click(object sender, EventArgs e)
-		{
-			Generate_Report();
-			viewReportToolStripMenuItem.Enabled = openReportFolderToolStripMenuItem.Enabled = true;
-		}
-
-		private void viewReportToolStripMenuItem_Click(object sender, EventArgs e)
-		{
-			if (!File.Exists(_reportFilename))
-			{
-				MessageBox.Show(
-					string.Format("Report not found at path:\n\n{0}\n\nPlease verify that you have already generated the report.", _reportFilename), @"Report not found", MessageBoxButtons.OK,
-					MessageBoxIcon.Exclamation);
-				return;
-			}
-
-			Process.Start(_reportFilename);
-		}
-
-		private void openReportFolderToolStripMenuItem_Click(object sender, EventArgs e)
-		{
-			if (_reportFilename != null)
-				return;
-
-			if (Directory.Exists(Path.GetDirectoryName(_reportFilename)))
-				Process.Start(Path.GetDirectoryName(_reportFilename));
-		}
-
-		private void versionToolStripMenuItem_Click(object sender, EventArgs e)
-		{
-			MessageBox.Show(
-				string.Format("Macro Definitions\n\nLocal file: {0}\nRemote file: {1}", _localXmlVersion, _remoteXmlVersion),
-				@"Macro Definitions", MessageBoxButtons.OK, MessageBoxIcon.Information);
-		}
-
-		private void updateToolStripMenuItem_Click(object sender, EventArgs e)
-		{
-			//FetchDefXml(true);
-			UpdateXml();
-		}
-
-		#endregion ToolStripMenu Even Handlers
-
-		#region InputBox
-
-		public static DialogResult InputBox(string title, string promptText, ref string value)
-		{
-			Form form = new Form();
-			Label label = new Label();
-			TextBox textBox = new TextBox();
-			Button buttonOk = new Button();
-			Button buttonCancel = new Button();
-
-			form.Text = title;
-			label.Text = promptText;
-			textBox.Text = value;
-
-			buttonOk.Text = @"OK";
-			buttonCancel.Text = @"Cancel";
-			buttonOk.DialogResult = DialogResult.OK;
-			buttonCancel.DialogResult = DialogResult.Cancel;
-
-			label.SetBounds(9, 20, 372, 13);
-			textBox.SetBounds(12, 36, 372, 20);
-			buttonOk.SetBounds(228, 72, 75, 23);
-			buttonCancel.SetBounds(309, 72, 75, 23);
-
-			label.AutoSize = true;
-			textBox.Anchor = textBox.Anchor | AnchorStyles.Right;
-			buttonOk.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
-			buttonCancel.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
-
-			form.ClientSize = new Size(396, 107);
-			form.Controls.AddRange(new Control[] { label, textBox, buttonOk, buttonCancel });
-			form.ClientSize = new Size(Math.Max(300, label.Right + 10), form.ClientSize.Height);
-			form.FormBorderStyle = FormBorderStyle.FixedDialog;
-			form.StartPosition = FormStartPosition.CenterScreen;
-			form.MinimizeBox = false;
-			form.MaximizeBox = false;
-			form.AcceptButton = buttonOk;
-			form.CancelButton = buttonCancel;
-
-			DialogResult dialogResult = form.ShowDialog();
-			value = textBox.Text;
-			return dialogResult;
-		}
-
-		#endregion InputBox
-
-		private void xMLFilePathToolStripMenuItem_Click(object sender, EventArgs e)
-		{
-			string filepath = AppDomain.CurrentDomain.BaseDirectory + "xml\\";
-
-			MessageBox.Show("I look for .xml files at the following location:\n\n" + filepath);
-		}
-
-		
 	}
 }

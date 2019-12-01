@@ -49,6 +49,9 @@ namespace RC210_DataAssistant_V2
 			public string VoiceId1;
 			public string VoiceId2;
 			public string VoiceId3;
+			public string InitialId1;							//Added at ver 7.36
+			public string InitialId2;							//Added at ver 7.36
+			public string InitialId3;							//Added at ver 7.36
 			public string PendingId1;							//Added at ver 7.36
 			public string PendingId2;							//Added at ver 7.36
 			public string PendingId3;							//Added at ver 7.36
@@ -392,9 +395,6 @@ namespace RC210_DataAssistant_V2
 					PendingIdSpeechTimer = datFile.IniReadValue("Timers", string.Format("IDSpeakTime({0})", i)),
 					TailMessageTimer = datFile.IniReadValue("Timers", string.Format("AnnounceTime({0})", i)),
 					AuxAudioTimer = datFile.IniReadValue("Timers", string.Format("AuxTime({0})", i)),
-					VoiceId1 = datFile.IniReadValue("ID", string.Format("VoiceID1({0})", i)),
-					VoiceId2 = datFile.IniReadValue("ID", string.Format("VoiceID2({0})", i)),
-					VoiceId3 = datFile.IniReadValue("ID", string.Format("VoiceID3({0})", i)),
 					Cwid1 = datFile.IniReadValue("ID", string.Format("CWID1({0})", i)),
 					Cwid2 = datFile.IniReadValue("ID", string.Format("CWID2({0})", i)),
 					TailMessage = datFile.IniReadValue("PortSwitches", string.Format("TailMessageNum({0})", i)),
@@ -430,6 +430,22 @@ namespace RC210_DataAssistant_V2
 					portItem.HangTimer2  = datFile.IniReadValue("Timers", string.Format("HangTime2({0})", i));
 					portItem.HangTimer3  = datFile.IniReadValue("Timers", string.Format("HangTime3({0})", i));
 				)
+
+				if (fwVersion < 7.36)
+				{
+					portItem.VoiceId1 = datFile.IniReadValue("ID", string.Format("VoiceID1({0})", i));
+					portItem.VoiceId2 = datFile.IniReadValue("ID", string.Format("VoiceID2({0})", i));
+					portItem.VoiceId3 = datFile.IniReadValue("ID", string.Format("VoiceID3({0})", i));
+				}
+				else
+				{
+					portItem.InitialId1 = datFile.IniReadValue("ID", string.Format("InitialID1({0})", i));
+					portItem.InitialId2 = datFile.IniReadValue("ID", string.Format("InitialID2({0})", i));
+					portItem.InitialId3 = datFile.IniReadValue("ID", string.Format("InitialID3({0})", i));
+					portItem.PendingId1 = datFile.IniReadValue("ID", string.Format("PendingID1({0})", i));
+					portItem.PendingId2 = datFile.IniReadValue("ID", string.Format("PendingID2({0})", i));
+					portItem.PendingId3 = datFile.IniReadValue("ID", string.Format("PendingID3({0})", i));
+				}
 
 				if (portName != string.Empty)
 					portItem.PortName = portName;
@@ -846,15 +862,25 @@ namespace RC210_DataAssistant_V2
 
 					if (checkBox_P1IDs.Checked)
 					{
-						rW.WriteLine("<TABLE border=0>");
-						rW.WriteLine("<TR><TD><B>Voice ID 1:</B></TD><TD>" + _ports[1].VoiceId1 + "</TD></TR>");
-						rW.WriteLine("<TR><TD><B>Voice ID 2:</B></TD><TD>" + _ports[1].VoiceId2 + "</TD></TR>");
-						rW.WriteLine("<TR><TD><B>Voice ID 3:</B></TD><TD>" + _ports[1].VoiceId3 + "</TD></TR>");
-						rW.WriteLine("<TR>");
-            rW.WriteLine("<TR><TD><B>Pending ID 1:</B></TD><TD>" + _ports[1].PendingId1 + "</TD></TR>");
-            rW.WriteLine("<TR><TD><B>Pending ID 2:</B></TD><TD>" + _ports[1].PendingId2 + "</TD></TR>");
-            rW.WriteLine("<TR><TD><B>Pending ID 3:</B></TD><TD>" + _ports[1].PendingId3 + "</TD></TR>");
-						rW.WriteLine("</TABLE>");
+						if (fwVersion < 7.36)		//Voice IDs changed to Initial and Pending
+						{
+							rW.WriteLine("<TABLE border=0>");
+							rW.WriteLine("<TR><TD><B>Voice ID 1:</B></TD><TD>" + _ports[1].VoiceId1 + "</TD></TR>");
+							rW.WriteLine("<TR><TD><B>Voice ID 2:</B></TD><TD>" + _ports[1].VoiceId2 + "</TD></TR>");
+							rW.WriteLine("<TR><TD><B>Voice ID 3:</B></TD><TD>" + _ports[1].VoiceId3 + "</TD></TR>");
+							rW.WriteLine("</TABLE>");
+						}
+						else
+						{
+							rW.WriteLine("<TABLE border=0>");
+							rW.WriteLine("<TR><TD><B>Initial ID 1:</B></TD><TD>" + _ports[1].InitialId1 + "</TD></TR>");
+							rW.WriteLine("<TR><TD><B>Initial ID 2:</B></TD><TD>" + _ports[1].InitialId2 + "</TD></TR>");
+							rW.WriteLine("<TR><TD><B>Initial ID 3:</B></TD><TD>" + _ports[1].InitialId3 + "</TD></TR>");
+							rW.WriteLine("<TR><TD> </TD></TR>");
+            	rW.WriteLine("<TR><TD><B>Pending ID 1:</B></TD><TD>" + _ports[1].PendingId1 + "</TD></TR>");
+            	rW.WriteLine("<TR><TD><B>Pending ID 2:</B></TD><TD>" + _ports[1].PendingId2 + "</TD></TR>");
+            	rW.WriteLine("<TR><TD><B>Pending ID 3:</B></TD><TD>" + _ports[1].PendingId3 + "</TD></TR>");
+							rW.WriteLine("</TABLE>");
 					}
 
 					rW.WriteLine("</TD>");
@@ -965,15 +991,25 @@ namespace RC210_DataAssistant_V2
 
 					if (checkBox_P2IDs.Checked)
 					{
-						rW.WriteLine("<TABLE border=0>");
-						rW.WriteLine("<TR><TD><B>Voice ID 1:</B></TD><TD>" + _ports[2].VoiceId1 + "</TD></TR>");
-						rW.WriteLine("<TR><TD><B>Voice ID 2:</B></TD><TD>" + _ports[2].VoiceId2 + "</TD></TR>");
-						rW.WriteLine("<TR><TD><B>Voice ID 3:</B></TD><TD>" + _ports[2].VoiceId3 + "</TD></TR>");
-						rW.WriteLine("<TR>");
-						rW.WriteLine("<TR><TD><B>Pending ID 1:</B></TD><TD>" + _ports[2].PendingId1 + "</TD></TR>");
-						rW.WriteLine("<TR><TD><B>Pending ID 2:</B></TD><TD>" + _ports[2].PendingId2 + "</TD></TR>");
-						rW.WriteLine("<TR><TD><B>Pending ID 3:</B></TD><TD>" + _ports[2].PendingId3 + "</TD></TR>");
-						rW.WriteLine("</TABLE>");
+						if (fwVersion < 7.36)		//Voice IDs changed to Initial and Pending
+						{
+							rW.WriteLine("<TABLE border=0>");
+							rW.WriteLine("<TR><TD><B>Voice ID 1:</B></TD><TD>" + _ports[2].VoiceId1 + "</TD></TR>");
+							rW.WriteLine("<TR><TD><B>Voice ID 2:</B></TD><TD>" + _ports[2].VoiceId2 + "</TD></TR>");
+							rW.WriteLine("<TR><TD><B>Voice ID 3:</B></TD><TD>" + _ports[2].VoiceId3 + "</TD></TR>");
+							rW.WriteLine("</TABLE>");
+						}
+						else
+						{
+							rW.WriteLine("<TABLE border=0>");
+							rW.WriteLine("<TR><TD><B>Initial ID 1:</B></TD><TD>" + _ports[2].InitialId1 + "</TD></TR>");
+							rW.WriteLine("<TR><TD><B>Initial ID 2:</B></TD><TD>" + _ports[2].InitialId2 + "</TD></TR>");
+							rW.WriteLine("<TR><TD><B>Initial ID 3:</B></TD><TD>" + _ports[2].InitialId3 + "</TD></TR>");
+							rW.WriteLine("<TR><TD> </TD></TR>");
+							rW.WriteLine("<TR><TD><B>Pending ID 1:</B></TD><TD>" + _ports[2].PendingId1 + "</TD></TR>");
+							rW.WriteLine("<TR><TD><B>Pending ID 2:</B></TD><TD>" + _ports[2].PendingId2 + "</TD></TR>");
+							rW.WriteLine("<TR><TD><B>Pending ID 3:</B></TD><TD>" + _ports[2].PendingId3 + "</TD></TR>");
+							rW.WriteLine("</TABLE>");
 					}
 
 					rW.WriteLine("</TD>");
@@ -1084,15 +1120,25 @@ namespace RC210_DataAssistant_V2
 
 					if (checkBox_P3IDs.Checked)
 					{
-						rW.WriteLine("<TABLE border=0>");
-						rW.WriteLine("<TR><TD><B>Voice ID 1:</B></TD><TD>" + _ports[3].VoiceId1 + "</TD></TR>");
-						rW.WriteLine("<TR><TD><B>Voice ID 2:</B></TD><TD>" + _ports[3].VoiceId2 + "</TD></TR>");
-						rW.WriteLine("<TR><TD><B>Voice ID 3:</B></TD><TD>" + _ports[3].VoiceId3 + "</TD></TR>");
-						rW.WriteLine("<TR>");
-						rW.WriteLine("<TR><TD><B>Pending ID 1:</B></TD><TD>" + _ports[3].PendingId1 + "</TD></TR>");
-						rW.WriteLine("<TR><TD><B>Pending ID 2:</B></TD><TD>" + _ports[3].PendingId2 + "</TD></TR>");
-						rW.WriteLine("<TR><TD><B>Pending ID 3:</B></TD><TD>" + _ports[3].PendingId3 + "</TD></TR>");
-						rW.WriteLine("</TABLE>");
+						if (fwVersion < 7.36)		//Voice IDs changed to Initial and Pending
+						{
+							rW.WriteLine("<TABLE border=0>");
+							rW.WriteLine("<TR><TD><B>Voice ID 1:</B></TD><TD>" + _ports[3].VoiceId1 + "</TD></TR>");
+							rW.WriteLine("<TR><TD><B>Voice ID 2:</B></TD><TD>" + _ports[3].VoiceId2 + "</TD></TR>");
+							rW.WriteLine("<TR><TD><B>Voice ID 3:</B></TD><TD>" + _ports[3].VoiceId3 + "</TD></TR>");
+							rW.WriteLine("</TABLE>");
+						}
+						else
+						{
+							rW.WriteLine("<TABLE border=0>");
+							rW.WriteLine("<TR><TD><B>Initial ID 1:</B></TD><TD>" + _ports[3].InitialId1 + "</TD></TR>");
+							rW.WriteLine("<TR><TD><B>Initial ID 2:</B></TD><TD>" + _ports[3].InitialId2 + "</TD></TR>");
+							rW.WriteLine("<TR><TD><B>Initial ID 3:</B></TD><TD>" + _ports[3].InitialId3 + "</TD></TR>");
+							rW.WriteLine("<TR><TD> </TD></TR>");
+            	rW.WriteLine("<TR><TD><B>Pending ID 1:</B></TD><TD>" + _ports[3].PendingId1 + "</TD></TR>");
+            	rW.WriteLine("<TR><TD><B>Pending ID 2:</B></TD><TD>" + _ports[3].PendingId2 + "</TD></TR>");
+            	rW.WriteLine("<TR><TD><B>Pending ID 3:</B></TD><TD>" + _ports[3].PendingId3 + "</TD></TR>");
+							rW.WriteLine("</TABLE>");
 					}
 
 					rW.WriteLine("</TD>");

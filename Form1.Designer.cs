@@ -848,7 +848,7 @@
 			this.checkBox_RTCOption.Checked = global::RC210_DataAssistant_V2.Properties.Settings.Default.RTCOption;
 			this.checkBox_RTCOption.CheckState = System.Windows.Forms.CheckState.Checked;
 			this.checkBox_RTCOption.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::RC210_DataAssistant_V2.Properties.Settings.Default, "RTCOption", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-			this.checkBox_RTCOption.Enabled = false;
+			this.checkBox_RTCOption.Enabled = true;
 			this.checkBox_RTCOption.Location = new System.Drawing.Point(192, 21);
 			this.checkBox_RTCOption.Name = "checkBox_RTCOption";
 			this.checkBox_RTCOption.Size = new System.Drawing.Size(133, 17);
